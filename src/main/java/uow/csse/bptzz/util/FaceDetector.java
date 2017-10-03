@@ -7,6 +7,7 @@ import org.opencv.core.Point;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 
 
@@ -21,23 +22,25 @@ public class FaceDetector {
 
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         System.out.println("\nRunning FaceDetector");
+        CascadeClassifier faceDetector = new CascadeClassifier("/Users/Kevin/Documents/Workspace/Java/611PRO/data/haarcascades/haarcascade_frontalface_alt.xml");
+        System.out.println("1");
 
-        CascadeClassifier faceDetector = new CascadeClassifier(FaceDetector.class.getResource("haarcascade_frontalface_alt.xml").getPath());
-        Mat image = Imgcodecs.imread(FaceDetector.class.getResource("1.JPG").getPath());
+        Mat image = Imgcodecs.imread("/Users/Kevin/Documents/Workspace/Java/611PRO/0.JPEG");
+
+        System.out.println("2");
 
         MatOfRect faceDetections = new MatOfRect();
         faceDetector.detectMultiScale(image, faceDetections);
 
         System.out.println(String.format("Detected %s faces", faceDetections.toArray().length));
 
-        /*
+
         for (Rect rect : faceDetections.toArray()) {
-            Core.rectangle(image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height),
+            Imgproc.rectangle(image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height),
                     new Scalar(0, 255, 0));
         }
 
-*/
-        String filename = "ouput.png";
+        String filename = "/Users/Kevin/Documents/Workspace/Java/611PRO/ouput.png";
         System.out.println(String.format("Writing %s", filename));
         Imgcodecs.imwrite(filename, image);
 

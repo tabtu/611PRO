@@ -1,0 +1,17 @@
+1. IntelliJ-IDEA 2017.2
+	Download Address: https://www.jetbrains.com/idea/download
+	Use Ultimate Edition.
+	Tips: Using Uwindsor email to active the IDE for student permit.
+
+2. Maven. 
+	Pick up one to setup Maven.Apache.
+	https://maven.apache.org/guides/getting-started/windows-prerequisites.html
+	https://www.mkyong.com/maven/how-to-install-maven-in-windows/
+	http://bitbybitblog.com/install-maven-mac/
+	https://wilsonmar.github.io/maven-on-macos/
+	http://www.jianshu.com/p/191685a33786
+	https://www.youtube.com/watch?v=ghIvOYDs0BM
+
+3. OpenCV
+	import OpenCV.jar
+	link OpenCV.dll as native library
