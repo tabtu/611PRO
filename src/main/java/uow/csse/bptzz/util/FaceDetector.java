@@ -23,7 +23,7 @@ public class FaceDetector {
         System.out.println("\nRunning FaceDetector");
 
         CascadeClassifier faceDetector = new CascadeClassifier(FaceDetector.class.getResource("haarcascade_frontalface_alt.xml").getPath());
-        Mat image = Imgcodecs.imread(FaceDetector.class.getResource("shekhar.JPG").getPath());
+        Mat image = Imgcodecs.imread(FaceDetector.class.getResource("1.JPG").getPath());
 
         MatOfRect faceDetections = new MatOfRect();
         faceDetector.detectMultiScale(image, faceDetections);
