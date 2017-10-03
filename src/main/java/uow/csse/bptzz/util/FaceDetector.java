@@ -25,7 +25,7 @@ public class FaceDetector {
         CascadeClassifier faceDetector = new CascadeClassifier("/Users/Kevin/Documents/Workspace/Java/611PRO/data/haarcascades/haarcascade_frontalface_alt.xml");
         System.out.println("1");
 
-        Mat image = Imgcodecs.imread("/Users/Kevin/Documents/Workspace/Java/611PRO/0.JPEG");
+        Mat image = Imgcodecs.imread("/Users/Kevin/Downloads/0.JPEG");
 
         System.out.println("2");
 

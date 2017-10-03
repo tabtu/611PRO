@@ -1,36 +1,77 @@
 package uow.csse.bptzz.model;
 
 import java.io.Serializable;
+import java.util.Date;
+
+import javax.validation.constraints.Past;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * Created by Tab Tu
- * Updated Oct.3 2017 05:45
+ * User Model
+ *
+ * @author 	Lian
+ * @date	2016年5月18日
+ * @since	1.0
  */
-public class User  implements Serializable  {
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String _Username;
-    public String get_Username() {
-        return _Username;
-    }
-    public void set_Username(String usr) {
-        _Username = usr;
+    private int id;
+    @NotEmpty
+    private String username;
+    @NotEmpty
+    private String password;
+    @NotEmpty
+    private String name;
+    @Past
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date birth;
+
+    public int getId() {
+        return id;
     }
 
-    private String _Password;
-    public void set_Password(String _Password) {
-        this._Password = _Password;
-    }
-    public String get_Password() {
-        return _Password;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    private String _Name;
-    public String get_Name() {
-        return _Name;
+    public String getUsername() {
+        return username;
     }
-    public void set_Name(String _Name) {
-        this._Name = _Name;
+
+    public void setUsername(String username) { this.username = username; }
+
+    public String getPassword() { return password; }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getBirth() {
+        return birth;
+    }
+
+    public void setBirth(Date birth) {
+        this.birth = birth;
+    }
+
+    @Override
+    public String toString() {
+        return "User [id=" + id +
+                ", username=" + username +
+                ", password=" + password +
+                ", name=" + name +
+                ", birth=" + birth + "]";
     }
 }

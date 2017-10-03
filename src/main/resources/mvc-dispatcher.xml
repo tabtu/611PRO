@@ -11,17 +11,24 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
 
-
   <!--启用spring的一些annotation -->
   <context:annotation-config/>
 
   <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
-  <context:component-scan base-package="uow.csse.bptzz.controller">
-    <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+  <context:component-scan base-package="uow.csse.bptzz.controller" />
+
+  <!-- 防止SpringMVC和SpringIOC对同一个对象的管理重合 -->
+  <context:component-scan base-package="uow.csse.bptzz.integrate">
+    <!-- 扫描@Controller和@ControllerAdvice注解 -->
+    <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
   </context:component-scan>
 
   <!--HandlerMapping 无需配置，springmvc可以默认启动-->
-  <mvc:default-servlet-handler />
+  <mvc:default-servlet-handler/>
+
+  <!-- 配置注解驱动 可以将request参数与绑定到controller参数上 -->
+  <mvc:annotation-driven/>
 
   <!--静态资源映射-->
   <!--本项目把静态资源放在了WEB-INF的statics目录下，资源映射如下-->
@@ -29,12 +36,9 @@
   <mvc:resources mapping="/js/**" location="/WEB-INF/statics/js/"/>
   <mvc:resources mapping="/image/**" location="/WEB-INF/statics/images/"/>
 
-  <!-- 配置注解驱动 可以将request参数与绑定到controller参数上 -->
-  <mvc:annotation-driven/>
-
   <!-- 对模型视图名称的解析，即在模型视图名称添加前后缀(如果最后一个还是表示文件夹,则最后的斜杠不要漏了) 使用JSP-->
   <!-- 默认的视图解析器 在上边的解析错误时使用 (默认使用html)- -->
-  <bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+  <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
     <property name="prefix" value="/WEB-INF/views/"/>
     <property name="suffix" value=".jsp"/>
@@ -46,4 +50,27 @@
     <property name="defaultEncoding" value="UTF-8"/>
     <property name="resolveLazily" value="true"/>
   </bean>
+
+  <!-- Method3: configure SimpleMappingExceptionResolver -->
+  <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+    <property name="exceptionMappings">
+      <props>
+        <prop key="java.lang.ArithmeticException">error</prop>
+      </props>
+    </property>
+  </bean>
+
+  <!-- configure the local resource -->
+  <bean id="messageREsource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basename" value="local" />
+  </bean>
+
+  <!-- interceptor setting -->
+  <mvc:interceptors>
+    <mvc:interceptor>
+      <mvc:mapping path="/mvc/**" />
+      <bean class="uow.csse.bptzz.interceptor.MyInterceptor" />
+    </mvc:interceptor>
+  </mvc:interceptors>
+
 </beans>
