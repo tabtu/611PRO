@@ -1,5 +1,6 @@
 package uow.csse.bptzz.util;
 
+
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfRect;
@@ -9,6 +10,7 @@ import org.opencv.core.Scalar;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
+import org.opencv.videoio.VideoCapture;
 
 public class CVTest {
     public static void main(String[] args) {
@@ -16,9 +18,11 @@ public class CVTest {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         System.out.println("\nRunning FaceDetector");
         CascadeClassifier faceDetector = new CascadeClassifier("/Users/Kevin/Documents/Workspace/Java/611PRO/data/haarcascades/haarcascade_frontalface_alt.xml");
-        System.out.println("1");
-
-        Mat image = Imgcodecs.imread("/Users/Kevin/Downloads/0.JPEG");
-        Imgcodecs.imwrite("test.jpg", image);
+        //VideoCapture vc = new VideoCapture(0);
+        //System.out.println("The camera is open: " + vc.isOpened());
+        Mat image = Imgcodecs.imread("0.JPG");
+        System.out.println(image.toString());
+        System.out.println(image.height());
+        Imgcodecs.imwrite("1.jpg", image);
     }
 }

@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import uow.csse.bptzz.model.User;
 
 /**
- * 控制器: 表单的验证--使用Hibernate-validate
- * Controller: From Vaild. Used in Hibernate-validate
+ * Controller: Form Vaild. Used in Hibernate-validate
  *
  * @author 	Tab Tu
  * @date	Oct.3 2017

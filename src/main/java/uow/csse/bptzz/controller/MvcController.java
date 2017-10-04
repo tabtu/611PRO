@@ -23,6 +23,7 @@ import uow.csse.bptzz.model.Person;
 
 /**
  * Mvc Controller
+ * Examples about using each method to achieve functions.
  *
  * @author 	Tab Tu
  * @date	Oct.3 2017
@@ -33,9 +34,11 @@ import uow.csse.bptzz.model.Person;
 public class MvcController {
 
     /**
+     * Test Function. HelloWorld
+     *
      * @url: http://localhost:8080/mvc/hello
      *
-     * @return
+     * @return String hello
      */
     @RequestMapping("/hello")
     public String hello() {
@@ -43,8 +46,8 @@ public class MvcController {
     }
 
     /**
-     * 自动匹配参数: match automatically
-     * @url: http://localhost:8080/mvc/person?name=lian&age=2.4
+     * match automatically
+     * @url: http://localhost:8080/mvc/person?name=Tab&age=20
      *
      * @param name
      * @param age
@@ -57,10 +60,10 @@ public class MvcController {
     }
 
     /**
-     * 自动装箱: boxing automatically
-     * @url: http://localhost:8080/mvc/person1?name=lian&age=2
-     * 		http://localhost:8080/mvc/person1?name=lian&age=2.0
-     * @attention: 当参数类型不匹配时, 不会自动装箱
+     * boxing automatically
+     * @url:    http://localhost:8080/mvc/person1?name=tab&age=20
+     * 		    http://localhost:8080/mvc/person1?name=ab&age=20.0
+     * @attention: It will not box automatically when params do not match.
      *
      * @param p
      * @return
@@ -72,11 +75,10 @@ public class MvcController {
     }
 
     /**
-     * 使用InitBinder来处理Date类型的参数
      * the parameter was coverted in initBinder
-     * @url:	http://localhost:8080/mvc/date?date=2016-05-17
-     * 		http://localhost:8080/mvc/date?date=2016-05
-     * 		http://localhost:8080/mvc/date?date=2016-05-17 15:00:00
+     * @url:	http://localhost:8080/mvc/date?date=2017-10-04
+     * 		    http://localhost:8080/mvc/date?date=2017-10
+     * 		    http://localhost:8080/mvc/date?date=2017-10-04 15:00:00
      *
      * @param date
      * @return
@@ -99,24 +101,23 @@ public class MvcController {
     }
 
     /**
-     * 向前台传递参数: pass the parameters to front-end
+     * pass the parameters to front-end
+     * Front-End can get 'p' from Request. Using HttpServletRequest.setAttribute() can send message to Front-End also.
      * 前台可在Request域中取到"p", 另外, 使用HttpServletRequest.setAttribute()方法也可以实现向前台传递参数
      * @url:	http://localhost:8080/mvc/show
-     *
      * @param map
      * @return
      */
     @RequestMapping("/show")
-    public String showPerson(Model model) {
+    public void showPerson(Model model) {
         Person p = new Person();
         p.setAge(20);
-        p.setName("lian");
+        p.setName("Tab");
         model.addAttribute("p", p);
-        return "show";
     }
 
     /**
-     * 使用Ajax调用: pass the parameters to front-en using ajax
+     * pass the parameters to front-en using ajax
      * url:	http://localhost:8080/mvc/page/ajax
      *
      * @param name
@@ -124,12 +125,12 @@ public class MvcController {
      */
     @RequestMapping(value = "/getPerson", method = RequestMethod.POST)
     public void getPerson(String name, PrintWriter pw) {
-        // 也可以使用HttpServletResponse.getWriter()来获取PrintWriter
+        // HttpServletResponse.getWriter()  // to get PrintWriter
         pw.write("hello, " + name);
     }
 
     /**
-     * 在Controller中使用redirect方式处理请求
+     * use redirect to deal request
      * @url:	http://localhost:8080/mvc/redirect
      *
      * @return
@@ -140,16 +141,15 @@ public class MvcController {
     }
 
     /**
-     * 文件上传
+     * upload file
      * @url	http://localhost:8080/mvc/page/upload
-     * TODO	target/upload/
+     * TODO	file will be uploaded into folder /upload
      *
      * @param request
-     * @return
      * @throws IOException
      */
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public String upload(HttpServletRequest request) throws IOException {
+    public void upload(HttpServletRequest request) throws IOException {
         MultipartHttpServletRequest mreq = (MultipartHttpServletRequest) request;
         MultipartFile file = mreq.getFile("file");
         String fileName = file.getOriginalFilename();
@@ -159,12 +159,10 @@ public class MvcController {
         fos.write(file.getBytes());
         fos.flush();
         fos.close();
-
-        return "hello";
     }
 
     /**
-     * 页面跳转接口
+     * jump to page
      * url:	http://localhost:8080/mvc/page/{page}
      *
      * @param page

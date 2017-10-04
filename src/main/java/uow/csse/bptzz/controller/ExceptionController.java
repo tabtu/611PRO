@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Controller.控制器: 处理局部异常(Controller内)
+ * Handle Exception in Controller.
  *
  * @author 	Tab Tu
  * @date	Oct.3 2017

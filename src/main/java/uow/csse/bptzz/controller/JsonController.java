@@ -23,7 +23,7 @@ public class JsonController {
     public User get() {
         User user = new User();
         user.setId(1);
-        user.setName("jayjay");
+        user.setName("tttttttt");
         user.setBirth(new Date());
         return user;
     }

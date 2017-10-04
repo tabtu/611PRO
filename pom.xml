@@ -5,14 +5,21 @@
   <artifactId>FaceLogin</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>demo1 Maven Webapp</name>
+  <name>MyMavenWebapp</name>
   <url>http://maven.apache.org</url>
+
+  <repositories>
+    <repository>
+      <id>mvn-repo</id>
+      <url>http://maven.nlpcn.org/</url>
+    </repository>
+  </repositories>
 
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.3.1</version>
       <scope>test</scope>
     </dependency>
 
@@ -20,7 +27,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>4.2.5.RELEASE</version>
+      <version>4.3.11.RELEASE</version>
     </dependency>
 
     <!-- simple adoption -->
@@ -34,12 +41,12 @@
     <dependency>
       <groupId>commons-fileupload</groupId>
       <artifactId>commons-fileupload</artifactId>
-      <version>1.3.1</version>
+      <version>1.3.3</version>
     </dependency>
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
-      <version>2.4</version>
+      <version>2.5</version>
     </dependency>
 
     <!-- Servlet Api -->
@@ -59,29 +66,29 @@
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-annotations</artifactId>
-      <version>2.2.1</version>
+      <version>2.9.1</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
-      <version>2.2.1</version>
+      <version>2.9.1</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <version>2.2.1</version>
+      <version>2.9.1</version>
     </dependency>
 
     <!-- Hibernate-validate support -->
     <dependency>
       <groupId>com.fasterxml</groupId>
       <artifactId>classmate</artifactId>
-      <version>1.0.0</version>
+      <version>1.3.4</version>
     </dependency>
     <dependency>
       <groupId>org.jboss.logging</groupId>
       <artifactId>jboss-logging</artifactId>
-      <version>3.1.3.GA</version>
+      <version>3.3.1.Final</version>
     </dependency>
     <dependency>
       <groupId>javax.validation</groupId>
@@ -91,12 +98,12 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator</artifactId>
-      <version>5.1.3.Final</version>
+      <version>5.4.1.Final</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator-annotation-processor</artifactId>
-      <version>5.1.3.Final</version>
+      <version>5.4.1.Final</version>
     </dependency>
   </dependencies>
 
@@ -105,7 +112,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.20</version>
+        <version>2.20.1</version>
         <configuration>
           <argLine>-Djava.library.path=${project.basedir}/libs/</argLine>
         </configuration>

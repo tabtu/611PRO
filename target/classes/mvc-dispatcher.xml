@@ -19,7 +19,7 @@
 
   <!-- 防止SpringMVC和SpringIOC对同一个对象的管理重合 -->
   <context:component-scan base-package="uow.csse.bptzz.integrate">
-    <!-- 扫描@Controller和@ControllerAdvice注解 -->
+    <!-- SCAN @Controller and @ControllerAdvice -->
     <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
   </context:component-scan>

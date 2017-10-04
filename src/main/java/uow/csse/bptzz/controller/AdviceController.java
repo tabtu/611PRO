@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * 控制器: 处理全局异常(所有Controller)
+ * Handle All Exception (Root Controller)
  *
  * @author 	Tab Tu
  * @date	2016年5月17日

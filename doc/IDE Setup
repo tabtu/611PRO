@@ -13,5 +13,8 @@
 	https://www.youtube.com/watch?v=ghIvOYDs0BM
 
 3. OpenCV
-	import OpenCV.jar
-	link OpenCV.dll as native library
+	There are two files in dictionary ‘lib’ that should be included in the project.
+		1. opencv-330.jar
+		2. libopev_java330.dylib (in OSX) or lib330.dll (in WINDOWS)
+	The OpenCV which we used, is version 3.3.0. 
+	Here is the link shows how to setup OpenCV3.x on local systems. http://opencv-java-tutorials.readthedocs.io/en/latest/01-installing-opencv-for-java.html#install-opencv-3-x-under-macos
