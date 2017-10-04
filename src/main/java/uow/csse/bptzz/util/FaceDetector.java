@@ -16,6 +16,7 @@ import org.opencv.objdetect.CascadeClassifier;
  * Updated by Tab Tu, Oct.2 2017
  * Des: test using OpenCV 3.2 jar package to detect faces on pictures.
  */
+
 public class FaceDetector {
 
     public static void main(String[] args) {
