@@ -23,20 +23,20 @@ public class FaceDetector {
 
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         System.out.println("\nRunning FaceDetector");
-        CascadeClassifier faceDetector = new CascadeClassifier("/Users/Kevin/Downloads/611PRO/611PRO/data/haarcascades/haarcascade_frontalface_alt.xml");
-        Mat image = Imgcodecs.imread("tt.JPG");
+        CascadeClassifier faceDetector = new CascadeClassifier("/Users/Kevin/Documents/Workspace/Java/611PRO/data/haarcascades/haarcascade_frontalface_alt.xml");
+        Mat image = Imgcodecs.imread("1.jpeg");
         MatOfRect faceDetections = new MatOfRect();
         faceDetector.detectMultiScale(image, faceDetections);
 
         System.out.println(String.format("Detected %s faces", faceDetections.toArray().length));
 
-        //Mat gray = new Mat();
+        Mat gray = new Mat();
         //Imgproc.cvtColor(image, gray, Imgproc.COLOR_RGB2GRAY);
         //Imgcodecs.imwrite("gray.png", image);
 
         for (Rect rect : faceDetections.toArray()) {
             //Imgproc.circle(image,new Point(rect.x, rect.y),5,new Scalar(255,0,0),2);
-            Imgproc.rectangle(image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255, 0), 5);
+            Imgproc.rectangle(gray, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255, 0), 5);
 
         }
 

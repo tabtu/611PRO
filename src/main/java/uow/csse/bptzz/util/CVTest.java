@@ -17,12 +17,12 @@ public class CVTest {
 
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         System.out.println("\nRunning FaceDetector");
-        CascadeClassifier faceDetector = new CascadeClassifier("~/Downloads/611PRO/611PRO/data/haarcascades/haarcascade_frontalface_alt.xml");
+        CascadeClassifier faceDetector = new CascadeClassifier("/Users/Kevin/Documents/Workspace/Java/611PRO/data/haarcascades/haarcascade_frontalface_alt.xml");
         //VideoCapture vc = new VideoCapture(0);
         //System.out.println("The camera is open: " + vc.isOpened());
-        Mat image = Imgcodecs.imread("1.png");
+        Mat image = Imgcodecs.imread("0.JPG");
         System.out.println(image.toString());
         System.out.println(image.height());
-        Imgcodecs.imwrite("0.jpg", image);
+        Imgcodecs.imwrite("1.jpg", image);
     }
 }
