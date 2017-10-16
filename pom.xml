@@ -15,7 +15,9 @@
     </repository>
   </repositories>
 
+
   <dependencies>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -28,6 +30,26 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
       <version>4.3.11.RELEASE</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>1.5.7.RELEASE</version>
+    </dependency>
+
+    <!-- Spring Boot data JPA -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+      <version>1.5.7.RELEASE</version>
+    </dependency>
+
+    <!-- Use MySQL Connector-J -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>6.0.6</version>
     </dependency>
 
     <!-- simple adoption -->
@@ -98,12 +120,22 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator</artifactId>
-      <version>5.4.1.Final</version>
+      <version>6.0.2.Final</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator-annotation-processor</artifactId>
       <version>5.4.1.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>com.springsource</groupId>
+      <artifactId>org.quartz</artifactId>
+      <version>1.6.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-parent</artifactId>
+      <version>3.1.1.RELEASE</version>
     </dependency>
   </dependencies>
 
