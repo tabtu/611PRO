@@ -19,12 +19,28 @@ import org.opencv.objdetect.CascadeClassifier;
 
 public class FaceDetector {
 
+    public static double compareface(Mat img1, Mat img2) {
+        return 0;
+    }
+
+    public static Mat detectface(Mat img) {
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        CascadeClassifier faceDetector = new CascadeClassifier("/Users/Kevin/Documents/workspace/java/611PRO/data/haarcascades/haarcascade_frontalface_alt.xml");
+        MatOfRect faceDetections = new MatOfRect();
+        faceDetector.detectMultiScale(img, faceDetections);
+        Imgproc.cvtColor(img, img, Imgproc.COLOR_RGB2GRAY);
+        for (Rect rect : faceDetections.toArray()) {
+            Imgproc.rectangle(img, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255, 0), 5);
+        }
+        return img;
+    }
+
     public static void main(String[] args) {
 
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         System.out.println("\nRunning FaceDetector");
-        CascadeClassifier faceDetector = new CascadeClassifier("/Users/Kevin/Downloads/611PRO/611PRO/data/haarcascades/haarcascade_frontalface_alt.xml");
-        Mat image = Imgcodecs.imread("tt.JPG");
+        CascadeClassifier faceDetector = new CascadeClassifier("/Users/Kevin/Documents/workspace/java/611PRO/data/haarcascades/haarcascade_frontalface_alt.xml");
+        Mat image = Imgcodecs.imread("tt.jpg");
         MatOfRect faceDetections = new MatOfRect();
         faceDetector.detectMultiScale(image, faceDetections);
 
