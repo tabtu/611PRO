@@ -33,6 +33,11 @@ import uow.csse.bptzz.model.Person;
 @RequestMapping("/mvc")
 public class MvcController {
 
+    @RequestMapping("/m")
+    public String game() {
+        return "game";
+    }
+
     /**
      * Test Function. HelloWorld
      *
