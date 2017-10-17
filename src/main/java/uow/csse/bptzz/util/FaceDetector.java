@@ -40,7 +40,7 @@ public class FaceDetector {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         System.out.println("\nRunning FaceDetector");
         CascadeClassifier faceDetector = new CascadeClassifier("/Users/Kevin/Documents/workspace/java/611PRO/data/haarcascades/haarcascade_frontalface_alt.xml");
-        Mat image = Imgcodecs.imread("tt.jpg");
+        Mat image = Imgcodecs.imread("tt.JPG");
         MatOfRect faceDetections = new MatOfRect();
         faceDetector.detectMultiScale(image, faceDetections);
 

@@ -24,4 +24,14 @@ public class MainController {
         return "login";
     }
 
+    @RequestMapping("/h")
+    public String capture() {
+        return "h5capture";
+    }
+
+    @RequestMapping("/hello")
+    public String hello() {
+        return "hello";
+    }
+
 }

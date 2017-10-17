@@ -7,9 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @SpringBootApplication
-public class FaceLoginApplication {
+public class DemoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FaceLoginApplication.class, args);
+        SpringApplication.run(DemoApplication.class, args);
     }
 }
