@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <title>Spring Security Example </title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="row" style="margin-top:20px">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <input type="button" title="Open Camera" value="open camera" onclick="getMedia();" /><br />
+            <video height="120px" autoplay="autoplay"></video><hr />
+            <input type="button" title="Take Photo" value="take photo" onclick="getPhoto();" /><br />
+            <canvas id="canvas1" height="120px" ></canvas><hr />
+            <input type="button" title="Get Video" value="get video" onclick="getVedio();" /><br />
+            <canvas id="canvas2" height="120px"></canvas>
+
+            <script type="text/javascript">
+                var video = document.querySelector('video');
+                var audio, audioType;
+
+                var canvas1 = document.getElementById('canvas1');
+                var context1 = canvas1.getContext('2d');
+
+                var canvas2 = document.getElementById('canvas2');
+                var context2 = canvas2.getContext('2d');
+
+                navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+                window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
+
+                var exArray = [];  // device id
+                MediaStreamTrack.getSources(function (sourceInfos) {
+                    for (var i = 0; i != sourceInfos.length; ++i) {
+                        var sourceInfo = sourceInfos[i];  // Sound Source
+                        if (sourceInfo.kind === 'video') {
+                            exArray.push(sourceInfo.id);
+                        }
+                    }
+                });
+            </script>
+            <script type="text/javascript" th:src="@{/js/webcap.js}" src="/static/js/webcap.js"></script>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

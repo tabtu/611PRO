@@ -20,10 +20,10 @@ jQuery(function ($) {
         // Components
         slide_links: 'blank',    // Individual links for each slide (Options: false, 'num', 'name', 'blank')
         slides: [    // Slideshow Images
-            {image: '../../img/backgrounds/1.jpg'},
-            {image: '../../img/backgrounds/2.jpg'},
-            {image: '../../img/backgrounds/3.jpg'},
-            {image: '../../img/backgrounds/4.jpg'}
+            {image: 'https://tu6.myweb.cs.uwindsor.ca/img/bg/1.jpg'},
+            {image: 'https://tu6.myweb.cs.uwindsor.ca/img/bg/2.jpg'},
+            {image: 'https://tu6.myweb.cs.uwindsor.ca/img/bg/3.jpg'},
+            {image: 'https://tu6.myweb.cs.uwindsor.ca/img/bg/4.jpg'}
         ]
 
     });

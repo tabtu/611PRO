@@ -1,5 +1,9 @@
 package uow.csse.bptzz.service.impl;
 
+import uow.csse.bptzz.model.bptzz_User;
+import uow.csse.bptzz.repository.bptzz_UserRepo;
+import uow.csse.bptzz.utils.DateUtils;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -61,8 +65,10 @@ public class test {
 
     public static void main( String [ ] args ) {
 
-        testconn();
-        selectremotedata();
-        insertdata();
+        //testconn();
+        //selectremotedata();
+        //insertdata();
+
+
     }
 }
