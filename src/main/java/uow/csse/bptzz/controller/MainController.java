@@ -1,7 +1,7 @@
 package uow.csse.bptzz.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * Main Controller
@@ -10,28 +10,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @date	Oct.17 2017
  * @version	1.0
  */
+
 @Controller
-@RequestMapping
 public class MainController {
 
-    @RequestMapping("/m")
-    public String game() {
-        return "game";
+
+    @GetMapping("/")
+    public String home1() {
+        return "/home";
     }
 
-    @RequestMapping("/")
-    public String index() {
-        return "login";
+    @GetMapping("/home")
+    public String home() {
+        return "/home";
     }
 
-    @RequestMapping("/h")
-    public String capture() {
-        return "h5capture";
+    @GetMapping("/admin")
+    public String admin() {
+        return "/admin";
     }
 
-    @RequestMapping("/hello")
-    public String hello() {
-        return "hello";
+    @GetMapping("/user")
+    public String user() {
+        return "/user";
     }
 
+    @GetMapping("/about")
+    public String about() {
+        return "/about";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "/login";
+    }
+
+    @GetMapping("/403")
+    public String error403() {
+        return "/error/403";
+    }
 }
