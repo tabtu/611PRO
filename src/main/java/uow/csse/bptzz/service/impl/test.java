@@ -1,4 +1,4 @@
-package uow.csse.bptzz.service;
+package uow.csse.bptzz.service.impl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

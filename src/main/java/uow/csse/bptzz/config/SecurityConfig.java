@@ -11,7 +11,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 // http://docs.spring.io/spring-boot/docs/current/reference/html/howto-security.html
 // Switch off the Spring Boot security configuration
 //@EnableWebSecurity
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private AccessDeniedHandler accessDeniedHandler;
@@ -52,8 +52,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     /*
     //Spring Boot configured this already.
     @Override
-    public void configure(WebSecurity controller) throws Exception {
-        controller
+    public void configure(WebSecurity web) throws Exception {
+        web
                 .ignoring()
                 .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
     }*/

@@ -113,4 +113,5 @@ public class bptzz_User extends Entitys implements Serializable {
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
+
 }
