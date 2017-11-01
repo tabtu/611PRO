@@ -3,25 +3,9 @@ package uow.csse.bptzz.utils;
 import java.io.UnsupportedEncodingException;
 
 public class Base64 {
-	/**
-	 * Chunk size per RFC 2045 section 6.8.
-	 * 
-	 * <p>
-	 * The {@value} character limit does not count the trailing CRLF, but counts
-	 * all other characters, including any equal signs.
-	 * </p>
-	 * 
-	 * @see <a href="http://www.ietf.org/rfc/rfc2045.txt">RFC 2045 section
-	 *      6.8</a>
-	 */
+
 	static final int CHUNK_SIZE = 76;
 
-	/**
-	 * Chunk separator per RFC 2045 section 2.1.
-	 * 
-	 * @see <a href="http://www.ietf.org/rfc/rfc2045.txt">RFC 2045 section
-	 *      2.1</a>
-	 */
 	static final byte[] CHUNK_SEPARATOR = "\r\n".getBytes();
 
 	/**
@@ -111,11 +95,6 @@ public class Base64 {
 		} else {
 			return true;
 		}
-	}
-
-	public static void main(String[] args) {
-		String decodestr = new String(decode("MTE2LjQ2Mzg0NzU1MDg0".getBytes()));
-		System.out.println(decodestr);
 	}
 
 	/**

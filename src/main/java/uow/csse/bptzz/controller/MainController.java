@@ -55,6 +55,7 @@ public class MainController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(Model model, String error, String logout) {
+
         if (error != null)
             model.addAttribute("error", "Your username and password is invalid.");
 
@@ -74,7 +75,5 @@ public class MainController {
     public String firework() { return "/demo/firework"; }
 
     @GetMapping("/regist")
-    public String showregist() {
-        return "/register";
-    }
+    public String showregist() { return "/register"; }
 }

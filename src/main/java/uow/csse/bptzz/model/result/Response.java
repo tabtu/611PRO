@@ -1,10 +1,10 @@
 package uow.csse.bptzz.model.result;
 
 public class Response {
-	/** 返回信息码*/
+	/** Return Code **/
 	private String rspCode="000000";
-	/** 返回信息内容*/
-	private String rspMsg="操作成功";
+	/** Return Information **/
+	private String rspMsg="Success";
 
 	public Response() {
 	}

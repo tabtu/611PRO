@@ -1,33 +1,30 @@
 package uow.csse.bptzz.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import uow.csse.bptzz.config.Const;
-import uow.csse.bptzz.model.bptzz_Department;
 import uow.csse.bptzz.model.bptzz_User;
-import uow.csse.bptzz.repository.bptzz_DepartmentRepo;
+import uow.csse.bptzz.model.result.ExceptionMsg;
+import uow.csse.bptzz.model.result.Response;
 import uow.csse.bptzz.repository.bptzz_UserRepo;
-import uow.csse.bptzz.utils.DateUtils;
 import uow.csse.bptzz.utils.MD5Util;
+import uow.csse.bptzz.utils.DateUtils;
 
 //@Controller
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController {
 
     @Autowired
     private bptzz_UserRepo userRepository;
 
-    @Autowired
-    private bptzz_DepartmentRepo departmentRepository;
-
     @GetMapping("/test")
     public void test() {
-        /*
+
         bptzz_User user = new bptzz_User();
         user.setUsername("username");
         user.setPassword("password");
@@ -38,15 +35,19 @@ public class UserController {
         user.setValidataCode("");
         user.setIntroduction("");
         userRepository.save(user);
-        */
 
+/*
         bptzz_Department dp = new bptzz_Department();
         dp.setName("test");
         departmentRepository.save(dp);
-
+    */
     }
 
-    /*
+    @RequestMapping(value = "/regist", method = RequestMethod.GET)
+    public String show() {
+        return "/user/register";
+    }
+
     @RequestMapping(value = "/regist", method = RequestMethod.POST)
     public Response create(bptzz_User user) {
         try {
@@ -61,7 +62,7 @@ public class UserController {
             user.setPassword(getPwd(user.getPassword()));
             user.setCreateTime(DateUtils.getCurrentTime());
             user.setLastModifyTime(DateUtils.getCurrentTime());
-            user.setProfilePicture("img/favicon.png");
+            user.setProfilePicture("");
             user.setValidataCode("");
             user.setIntroduction("");
             userRepository.save(user);
@@ -83,5 +84,4 @@ public class UserController {
         }
         return null;
     }
-    */
 }

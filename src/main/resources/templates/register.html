@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+>
 <head>
-   <meta charset="utf-8"/>
-   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-   <meta name="description" content="Bootstrap Admin App + jQuery"/>
-   <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin"/>
-   <title>REGIST</title>
+   <title>Regeist</title>
+   <div th:replace="fragments/header :: header-css"/>
 </head>
 <body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
    <div class="wrapper">
       <div class="block-center mt-xl wd-xl">
          <div class="panel panel-dark panel-flat">
@@ -52,38 +54,42 @@
       </div>
    </div>
    <script type='text/javascript'>
-    Vue.http.options.emulateJSON = true; 
-        var registPage = new Vue({
-            el: '#registPage',
-            data: {
-                'email': '',
-                'password': '',
-                'userName':''
-            },
-            methods: {
-            	regist: function(event){
-            		var ok = $('#form').parsley().isValid({force: true});
-            		if(!ok){
-            			return;
-            		}
-            		var datas={
-            				 email: this.email,
-            				 passWord: this.password,
-            				 userName: this.userName
-	            			 };
-            	    this.$http.post('/user/regist',datas).then(function(response){
-            	    	 if(response.data.rspCode == '000000'){
-            	    		  window.open('/', '_self');
-            	    	 }else{
-            	    		 $("#errorMsg").html(response.data.rspMsg);
-           	    		  	 $("#errorMsg").show();
-            	    	 }
-                     }, function(response){
-                         console.log('error');
-                     })
-                }
-            }
-        })
-    </script>
+       Vue.http.options.emulateJSON = true;
+       var registPage = new Vue({
+           el: '#registPage',
+           data: {
+               'email': '',
+               'password': '',
+               'userName':''
+           },
+           methods: {
+               regist: function(event){
+                   var ok = $('#form').parsley().isValid({force: true});
+                   if(!ok){
+                       return;
+                   }
+                   var datas={
+                       email: this.email,
+                       passWord: this.password,
+                       userName: this.userName
+                   };
+                   this.$http.post('/user/regist',datas).then(function(response){
+                       if(response.data.rspCode == '000000'){
+                           window.open('/', '_self');
+                       }else{
+                           $("#errorMsg").html(response.data.rspMsg);
+                           $("#errorMsg").show();
+                       }
+                   }, function(response){
+                       console.log('error');
+                   })
+               }
+           }
+       })
+   </script>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
 </body>
 </html>

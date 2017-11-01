@@ -1,12 +1,10 @@
 package uow.csse.bptzz.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import uow.csse.bptzz.utils.DateUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
-
-import uow.csse.bptzz.utils.DateUtils;
 
 /**
  * Create the Entity
@@ -53,10 +51,12 @@ public class bptzz_User extends Entitys implements Serializable {
 
     private String validataCode;
 
+    /*
     //@OneToOne(mappedBy = "bptzz_Student", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_student")
     private bptzz_Student student;
+    */
 
     /**
      *
@@ -126,10 +126,10 @@ public class bptzz_User extends Entitys implements Serializable {
     public void setValidataCode(String validataCode) {
         this.validataCode = validataCode;
     }
-
+/*
     public bptzz_Student getStudent() { return student; }
     public void setStudent(bptzz_Student student) { this.student = student; }
-
+*/
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);

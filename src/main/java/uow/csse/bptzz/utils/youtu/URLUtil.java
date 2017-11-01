@@ -1,10 +1,10 @@
-package uow.csse.bptzz.utils;
+package uow.csse.bptzz.utils.youtu;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.apache.log4j.Logger;
-
+/*
 public class URLUtil {
 	
     private static Logger logger = Logger.getLogger(URLUtil.class);
@@ -62,3 +62,4 @@ public class URLUtil {
 	}
 
 }
+*/

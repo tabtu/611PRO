@@ -19,6 +19,7 @@ import java.io.Serializable;
  * Server: ca-cdbr-azure-central-a.cloudapp.net
  */
 
+/*
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "bptzz_department")
 public class bptzz_Department extends Entitys implements Serializable {
@@ -49,3 +50,4 @@ public class bptzz_Department extends Entitys implements Serializable {
         return ToStringBuilder.reflectionToString(this);
     }
 }
+*/

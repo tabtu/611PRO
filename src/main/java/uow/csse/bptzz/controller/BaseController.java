@@ -2,6 +2,8 @@ package uow.csse.bptzz.controller;
 
 import uow.csse.bptzz.config.Const;
 import uow.csse.bptzz.model.bptzz_User;
+import uow.csse.bptzz.model.result.ExceptionMsg;
+import uow.csse.bptzz.model.result.Response;
 import uow.csse.bptzz.utils.Des3EncryptionUtil;
 import uow.csse.bptzz.utils.MD5Util;
 
@@ -19,14 +21,12 @@ public class BaseController {
 
     protected Logger logger = Logger.getLogger(this.getClass());
 
-    /*
     protected Response result(ExceptionMsg msg){
     	return new Response(msg);
     }
     protected Response result(){
     	return new Response();
     }
-    */
 
     protected HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();

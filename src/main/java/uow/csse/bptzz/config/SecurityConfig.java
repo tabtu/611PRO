@@ -10,6 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.session.web.http.HeaderHttpSessionStrategy;
 import org.springframework.session.web.http.HttpSessionStrategy;
+//import uow.csse.bptzz.service.AuthenticationService;
+
+import javax.sql.DataSource;
 
 @Configuration
 // http://docs.spring.io/spring-boot/docs/current/reference/html/howto-security.html
@@ -25,6 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AccessDeniedHandler accessDeniedHandler;
 
+    //@Autowired
+    //AuthenticationService authenticationService;
+
     // roles admin allow to access /admin/**
     // roles user allow to access /user/**
     // custom 403 access denied handler
@@ -33,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/**", "/home", "/capture", "/about", "/game", "/capture", "/firework", "/regist", "/user/test").permitAll()
+                    .antMatchers("/home", "/capture", "/about", "/game", "/capture", "/firework").permitAll()
                     .antMatchers("/admin/**").hasAnyRole("ADMIN")
                     .antMatchers("/user/**").hasAnyRole("USER")
                     .anyRequest().authenticated()
@@ -54,11 +60,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                    .withUser("user").password("password").roles("USER")
+                .withUser("user").password("password").roles("USER")
                 .and()
-                    .withUser("admin").password("password").roles("ADMIN");
+                .withUser("admin").password("password").roles("ADMIN");
     }
-
 
     //Spring Boot configured this already.
     @Override
@@ -67,5 +72,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .ignoring()
                 .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
     }
-
 }

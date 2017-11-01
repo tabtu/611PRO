@@ -1,38 +1,27 @@
 package uow.csse.bptzz.utils;
 
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateUtils {
-	
-    private final static long minute = 60 * 1000;// 1分钟
-    private final static long hour = 60 * minute;// 1小时
-    private final static long day = 24 * hour;// 1天
-    private final static long month = 31 * day;// 月
-    private final static long year = 12 * month;// 年
-	
-	public final static String YYYYMMDDHHMMSS = "yyyyMMddHHmmssSSS";
-	
-    /**
-     * @return
-     * @author neo
-     * @date 2015-5-21
-     */
+
+    private final static long minute = 60 * 1000;// 1 Minute
+    private final static long hour = 60 * minute;// 1 Hour
+    private final static long day = 24 * hour;// 1 Day
+    private final static long month = 31 * day;// Month
+    private final static long year = 12 * month;// Year
+
+    public final static String YYYYMMDDHHMMSS = "yyyyMMddHHmmssSSS";
+
     public static String getDateSequence() {
         return new SimpleDateFormat(YYYYMMDDHHMMSS).format(new Date());
     }
 
+    public static long getCurrentTime() {
+        return System.currentTimeMillis();
+    }
 
-	/**
-	 * @author neo
-	 * @date 2016年8月10日
-	 * @return
-	 */
-	public static long getCurrentTime() {
-		return System.currentTimeMillis();
-	}
-	
-	
     public static String getTimeFormatText(Long date) {
         if (date == null) {
             return null;
@@ -41,32 +30,27 @@ public class DateUtils {
         long r = 0;
         if (diff > year) {
             r = (diff / year);
-            return r + "年前";
+            return r + "years ago";
         }
         if (diff > month) {
             r = (diff / month);
-            return r + "个月前";
+            return r + "months ago";
         }
         if (diff > day) {
             r = (diff / day);
-            return r + "天前";
+            return r + "days ago";
         }
         if (diff > hour) {
             r = (diff / hour);
-            return r + "个小时前";
+            return r + "hours ago";
         }
         if (diff > minute) {
             r = (diff / minute);
-            return r + "分钟前";
+            return r + "minutes ago";
         }
-        return "刚刚";
+        return "recently";
     }
 
-    /**
-     * 将时间戳转换成当天0点
-     * @param timestamp
-     * @return
-     */
     public static long getDayBegin(long timestamp) {
         String format = "yyyy-MM-DD";
         String toDayString = new SimpleDateFormat(format).format(new Date(timestamp));
@@ -80,10 +64,6 @@ public class DateUtils {
         return toDay.getTime();
     }
 
-    /**
-     * 获取一个月之前的时间戳
-     * @return
-     */
     public static long getLastMonthTime() {
         return getDayBegin(getCurrentTime())-86400000l*30;
     }

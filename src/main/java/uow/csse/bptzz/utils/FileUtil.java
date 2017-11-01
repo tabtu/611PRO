@@ -13,7 +13,7 @@ import java.io.FileOutputStream;
 public class FileUtil {
 
 	/**
-	 * 获取文件类型
+	 * Get File Type
 	 * @param fileName
 	 * @return
 	 */
@@ -31,7 +31,7 @@ public class FileUtil {
     }
 	
 	/**
-	 * 上传文件
+	 * Upload File
 	 * @param fileBytes
 	 * @param filePath
 	 * @param fileName

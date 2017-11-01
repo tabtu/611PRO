@@ -20,6 +20,7 @@ import java.util.Date;
  * Server: ca-cdbr-azure-central-a.cloudapp.net
  */
 
+/*
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "bptzz_student")
 public class bptzz_Student extends Entitys implements Serializable {
@@ -123,3 +124,4 @@ public class bptzz_Student extends Entitys implements Serializable {
         return ToStringBuilder.reflectionToString(this);
     }
 }
+*/
