@@ -39,7 +39,7 @@ public class Base64 {
 	static final int FOURBYTE = 4;
 
 	/**
-	 * Used to test the sign of a byte.
+	 * Used to FaceCompare the sign of a byte.
 	 */
 	static final int SIGN = -128;
 
@@ -102,7 +102,7 @@ public class Base64 {
 	 * within the Base64 alphabet.
 	 * 
 	 * @param arrayOctect
-	 *            byte array to test
+	 *            byte array to FaceCompare
 	 * @return true if all bytes are valid characters in the Base64 alphabet or
 	 *         if the byte array is empty; false, otherwise
 	 */

@@ -1,7 +1,7 @@
 package uow.csse.bptzz.controller;
 
 import uow.csse.bptzz.config.Const;
-import uow.csse.bptzz.model.bptzz_User;
+import uow.csse.bptzz.model.User;
 import uow.csse.bptzz.model.result.ExceptionMsg;
 import uow.csse.bptzz.model.result.Response;
 import uow.csse.bptzz.utils.Des3EncryptionUtil;
@@ -36,24 +36,24 @@ public class BaseController {
         return getRequest().getSession();
     }
     
-    protected bptzz_User getUser() {
-        return (bptzz_User) getSession().getAttribute(Const.LOGIN_SESSION_KEY);
+    protected User getUser() {
+        return (User) getSession().getAttribute(Const.LOGIN_SESSION_KEY);
     }
     
     protected Long getUserId() {
-    	Long id=0l;
-        bptzz_User user=getUser();
-    	if(user!=null){
-    		id=user.getId();
+    	Long id = 0l;
+        User user = getUser();
+    	if(user != null){
+    		id = user.getUser_id();
     	}
         return id;
     }
     
     protected String getUserName() {
-    	String userName="BPTZZ";
-        bptzz_User user=getUser();
-    	if(user!=null){
-    		userName=user.getUsername();
+    	String userName = "BPTZZ";
+        User user = getUser();
+    	if(user != null){
+    		userName = user.getUsername();
     	}
         return userName;
     }

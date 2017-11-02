@@ -1,4 +1,4 @@
-package uow.csse.bptzz.utils.test;
+package uow.csse.bptzz.demo;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -14,7 +14,7 @@ import org.opencv.objdetect.CascadeClassifier;
 /**
  * Created by Tab Tu, Oct.2 2017
  * Updated by Tab Tu, Oct.2 2017
- * Des: test using OpenCV 3.2 jar package to detect faces on pictures.
+ * Des: FaceCompare using OpenCV 3.2 jar package to detect faces on pictures.
  */
 
 public class FaceDetector {
@@ -40,7 +40,7 @@ public class FaceDetector {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         System.out.println("\nRunning FaceDetector");
         CascadeClassifier faceDetector = new CascadeClassifier("/Users/Kevin/Documents/workspace/java/611PRO/data/haarcascades/haarcascade_frontalface_alt.xml");
-        Mat image = Imgcodecs.imread("tt.JPG");
+        Mat image = Imgcodecs.imread("21.png");
         MatOfRect faceDetections = new MatOfRect();
         faceDetector.detectMultiScale(image, faceDetections);
 

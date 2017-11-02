@@ -72,7 +72,7 @@ CREATE TABLE `bptzz_Student` (
 
 
 -- ----------------------------
---  Table structure for `bptzz_User`
+--  Table structure for `User`
 -- ----------------------------
 DROP TABLE IF EXISTS `bptzz_User`;
 CREATE TABLE `bptzz_User` (

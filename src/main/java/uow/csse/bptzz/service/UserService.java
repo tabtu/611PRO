@@ -1,11 +1,9 @@
 package uow.csse.bptzz.service;
 
-import uow.csse.bptzz.model.bptzz_User;
+import uow.csse.bptzz.model.User;
 
-/*
 public interface UserService {
-    void save(bptzz_User user);
+    User findByUsername(String username);
 
-    bptzz_User findByUsername(String username);
+    void save(User user);
 }
-*/

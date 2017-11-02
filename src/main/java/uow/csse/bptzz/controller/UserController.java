@@ -7,10 +7,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import uow.csse.bptzz.config.Const;
-import uow.csse.bptzz.model.bptzz_User;
+import uow.csse.bptzz.model.User;
 import uow.csse.bptzz.model.result.ExceptionMsg;
 import uow.csse.bptzz.model.result.Response;
-import uow.csse.bptzz.repository.bptzz_UserRepo;
+import uow.csse.bptzz.repository.UserRepo;
+import uow.csse.bptzz.service.UserService;
 import uow.csse.bptzz.utils.MD5Util;
 import uow.csse.bptzz.utils.DateUtils;
 
@@ -20,15 +21,18 @@ import uow.csse.bptzz.utils.DateUtils;
 public class UserController extends BaseController {
 
     @Autowired
-    private bptzz_UserRepo userRepository;
+    private UserRepo userRepository;
+
+    @Autowired
+    private UserService us;
 
     @GetMapping("/test")
     public void test() {
 
-        bptzz_User user = new bptzz_User();
-        user.setUsername("username");
-        user.setPassword("password");
-        user.setEmail("e@mail.com");
+        User user = new User();
+        user.setUsername("tabtu");
+        user.setPassword("ttxy");
+        user.setEmail("i@tabtu.cn");
         user.setCreateTime(DateUtils.getCurrentTime());
         user.setLastModifyTime(DateUtils.getCurrentTime());
         user.setProfilePicture("");
@@ -36,9 +40,11 @@ public class UserController extends BaseController {
         user.setIntroduction("");
         userRepository.save(user);
 
+        us.save(user);
+
 /*
         bptzz_Department dp = new bptzz_Department();
-        dp.setName("test");
+        dp.setName("FaceCompare");
         departmentRepository.save(dp);
     */
     }
@@ -49,13 +55,13 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping(value = "/regist", method = RequestMethod.POST)
-    public Response create(bptzz_User user) {
+    public Response create(User user) {
         try {
-            bptzz_User registUser = userRepository.findByEmail(user.getEmail());
+            User registUser = userRepository.findByEmail(user.getEmail());
             if (null != registUser) {
                 return result(ExceptionMsg.EmailUsed);
             }
-            bptzz_User userNameUser = userRepository.findByUsername(user.getUsername());
+            User userNameUser = userRepository.findByUsername(user.getUsername());
             if (null != userNameUser) {
                 return result(ExceptionMsg.UserNameUsed);
             }
@@ -80,7 +86,7 @@ public class UserController extends BaseController {
             String pwd = MD5Util.encrypt(password + Const.PASSWORD_KEY);
             return pwd;
         } catch (Exception e) {
-            logger.error("密码加密异常：",e);
+            logger.error("Encode Password Error：",e);
         }
         return null;
     }

@@ -5,14 +5,16 @@ import uow.csse.bptzz.utils.DateUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Create the Entity
  *
  * @author 	Eason Pan
  * @date	2017-10-16
- * @update  Tab Tu on Oct.24 2017
- * @since	1.1
+ * @update  Tab Tu on Nov.1 2017
+ * @since	1.2
  *
  * Database: pro611db
  * Username: bfa57f3b0eddae
@@ -20,14 +22,13 @@ import java.io.Serializable;
  * Server: ca-cdbr-azure-central-a.cloudapp.net
  */
 
-@Entity // This tells Hibernate to make a table out of this class
+@Entity(name = "User")
 @Table(name = "bptzz_user")
-public class bptzz_User extends Entitys implements Serializable {
+public class User extends Entitys implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long user_id;
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -37,6 +38,9 @@ public class bptzz_User extends Entitys implements Serializable {
 
     @Column(nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false)
+    private boolean enabled;
 
     private String profilePicture;
 
@@ -51,6 +55,10 @@ public class bptzz_User extends Entitys implements Serializable {
 
     private String validataCode;
 
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(name = "bptzz_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+
     /*
     //@OneToOne(mappedBy = "bptzz_Student", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
     @OneToOne(cascade = CascadeType.ALL)
@@ -61,22 +69,36 @@ public class bptzz_User extends Entitys implements Serializable {
     /**
      *
      */
-    public bptzz_User() {
+    public User() {
         super();
     }
-    public bptzz_User(String userName, String passWord, String email) {
+
+    public User(String userName, String passWord, String email) {
         super();
         this.email = email;
         this.password = passWord;
         this.username = userName;
+        this.enabled = true;
         this.createTime = DateUtils.getCurrentTime();
         this.lastModifyTime = DateUtils.getCurrentTime();
     }
-    public Long getId() {
-        return id;
+
+    public User(String userName, String passWord, String email, Set<Role> userRole) {
+        super();
+        this.email = email;
+        this.password = passWord;
+        this.username = userName;
+        this.enabled = true;
+        this.createTime = DateUtils.getCurrentTime();
+        this.lastModifyTime = DateUtils.getCurrentTime();
+        this.roles = userRole;
     }
-    public void setId(Long id) {
-        this.id = id;
+
+    public Long getUser_id() {
+        return user_id;
+    }
+    public void setUser_id(Long id) {
+        this.user_id = id;
     }
     public String getUsername() {
         return username;
@@ -96,6 +118,8 @@ public class bptzz_User extends Entitys implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+    public boolean getEnabled() { return enabled; }
+    public void setEnabled(boolean enabled) { this.enabled = enabled; }
     public String getIntroduction() {
         return introduction;
     }
@@ -126,10 +150,18 @@ public class bptzz_User extends Entitys implements Serializable {
     public void setValidataCode(String validataCode) {
         this.validataCode = validataCode;
     }
-/*
+
+    public Set<Role> getRoles() {
+        return this.roles;
+    }
+    public void setRoles(Set<Role> role) {
+        this.roles = role;
+    }
+
+    /*
     public bptzz_Student getStudent() { return student; }
     public void setStudent(bptzz_Student student) { this.student = student; }
-*/
+    */
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
