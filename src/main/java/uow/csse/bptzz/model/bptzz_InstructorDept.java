@@ -3,6 +3,7 @@ package uow.csse.bptzz.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Create the Entity
@@ -17,27 +18,17 @@ import javax.persistence.Id;
  * Server: ca-cdbr-azure-central-a.cloudapp.net
  */
 /*
-@Entity // This tells Hibernate to make a table out of this class
+@Entity(name = "InstructorDept")
+@Table(name = "bptzz_instructordept")
 public class bptzz_InstructorDept {
     @Id
-    private String InstructorID;
+    private String instructor_ID;
     @Id
-    private String DeptID;
+    private Department department;
 
-    public String getInstructorID() {
-        return InstructorID;
-    }
-
-    public void setInstructorID(String instructorID) {
-        InstructorID = instructorID;
-    }
-
-    public String getDeptID() {
-        return DeptID;
-    }
-
-    public void setDeptID(String deptID) {
-        DeptID = deptID;
-    }
+    public String getInstructorID() { return instructor_ID; }
+    public void setInstructorID(String instructorID) { this.instructor_ID = instructorID; }
+    public Department getDepartment() { return department; }
+    public void setDepartment(Department dept) { this.department = dept; }
 }
 */

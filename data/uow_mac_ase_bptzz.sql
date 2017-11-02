@@ -108,7 +108,7 @@ CREATE TABLE `bptzz_Instructor` (
 
 
 -- ----------------------------
---  Table structure for `bptzz_Course`
+--  Table structure for `Course`
 -- ----------------------------
 DROP TABLE IF EXISTS `bptzz_Course`;
 CREATE TABLE `bptzz_Course` (
@@ -203,7 +203,7 @@ CREATE TABLE `bptzz_InstructorCourses` (
 
 
 -- ----------------------------
---  Table structure for `bptzz_Classroom`
+--  Table structure for `Classroom`
 -- ----------------------------
 DROP TABLE IF EXISTS `bptzz_Classroom`;
 CREATE TABLE `bptzz_Classroom` (

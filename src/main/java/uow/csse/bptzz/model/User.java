@@ -5,7 +5,6 @@ import uow.csse.bptzz.utils.DateUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -29,49 +28,30 @@ public class User extends Entitys implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long user_id;
-
     @Column(nullable = false, unique = true)
     private String username;
-
     @Column(nullable = false)
     private String password;
-
     @Column(nullable = false, unique = true)
     private String email;
-
     @Column(nullable = false)
     private boolean enabled;
-
     private String profilePicture;
-
     @Column(length = 65535,columnDefinition="Text")
     private String introduction;
-
     @Column(nullable = false)
     private Long createTime;
-
     @Column(nullable = false)
     private Long lastModifyTime;
-
     private String validataCode;
-
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(name = "bptzz_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
-
-    /*
-    //@OneToOne(mappedBy = "bptzz_Student", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name="user_student")
-    private bptzz_Student student;
-    */
+    private Student student;
 
-    /**
-     *
-     */
-    public User() {
-        super();
-    }
+    public User() { super(); }
 
     public User(String userName, String passWord, String email) {
         super();
@@ -94,73 +74,32 @@ public class User extends Entitys implements Serializable {
         this.roles = userRole;
     }
 
-    public Long getUser_id() {
-        return user_id;
-    }
-    public void setUser_id(Long id) {
-        this.user_id = id;
-    }
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public Long getUser_id() { return user_id; }
+    public void setUser_id(Long id) { this.user_id = id; }
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
     public boolean getEnabled() { return enabled; }
     public void setEnabled(boolean enabled) { this.enabled = enabled; }
-    public String getIntroduction() {
-        return introduction;
-    }
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction;
-    }
-    public Long getCreateTime() {
-        return createTime;
-    }
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
-    }
-    public Long getLastModifyTime() {
-        return lastModifyTime;
-    }
-    public void setLastModifyTime(Long lastModifyTime) {
-        this.lastModifyTime = lastModifyTime;
-    }
-    public String getProfilePicture() {
-        return profilePicture;
-    }
-    public void setProfilePicture(String profilePicture) {
-        this.profilePicture = profilePicture;
-    }
-    public String getValidataCode() {
-        return validataCode;
-    }
-    public void setValidataCode(String validataCode) {
-        this.validataCode = validataCode;
-    }
-
-    public Set<Role> getRoles() {
-        return this.roles;
-    }
-    public void setRoles(Set<Role> role) {
-        this.roles = role;
-    }
+    public String getIntroduction() { return introduction; }
+    public void setIntroduction(String introduction) { this.introduction = introduction; }
+    public Long getCreateTime() { return createTime; }
+    public void setCreateTime(Long createTime) { this.createTime = createTime; }
+    public Long getLastModifyTime() { return lastModifyTime; }
+    public void setLastModifyTime(Long lastModifyTime) { this.lastModifyTime = lastModifyTime; }
+    public String getProfilePicture() { return profilePicture; }
+    public void setProfilePicture(String profilePicture) { this.profilePicture = profilePicture; }
+    public String getValidataCode() { return validataCode; }
+    public void setValidataCode(String validataCode) { this.validataCode = validataCode; }
+    public Set<Role> getRoles() { return this.roles; }
+    public void setRoles(Set<Role> role) { this.roles = role; }
 
     /*
-    public bptzz_Student getStudent() { return student; }
-    public void setStudent(bptzz_Student student) { this.student = student; }
+    public Student getStudent() { return student; }
+    public void setStudent(Student student) { this.student = student; }
     */
     @Override
     public String toString() {

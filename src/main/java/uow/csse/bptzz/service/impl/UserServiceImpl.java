@@ -17,8 +17,7 @@ import java.util.HashSet;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepo userRepo;
-    @Autowired
-    private RoleRepo roleRepo;
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -26,6 +25,12 @@ public class UserServiceImpl implements UserService {
     public User findByUsername(String username) {
         return userRepo.findByUsername(username);
     }
+
+    @Override
+    public User findByUsernameOrEmail(String email, String username) { return userRepo.findByUsernameOrEmail(email, username); }
+
+    @Override
+    public User findByEmail(String email) { return userRepo.findByEmail(email); }
 
     @Override
     public void save(User user) {

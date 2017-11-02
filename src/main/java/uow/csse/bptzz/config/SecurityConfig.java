@@ -13,9 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.session.web.http.HeaderHttpSessionStrategy;
 import org.springframework.session.web.http.HttpSessionStrategy;
-//import uow.csse.bptzz.service.AuthenticationService;
-
-import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -37,9 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AccessDeniedHandler accessDeniedHandler;
 
-    //@Autowired
-    //AuthenticationService authenticationService;
-
     // roles admin allow to access /admin/**
     // roles user allow to access /user/**
     // custom 403 access denied handler
@@ -48,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/**", "/lg", "/home", "/capture", "/about", "/game", "/capture", "/firework").permitAll()
+                    .antMatchers("/**", "/home", "/capture", "/about", "/game", "/capture", "/firework").permitAll()
                     .antMatchers("/admin/**").hasAnyRole("ADMIN")
                     .antMatchers("/user/**").hasAnyRole("USER")
                     .anyRequest().authenticated()
@@ -70,16 +64,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
-
-        /*
         auth.inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER")
+                .withUser("tabtu").password("ttxy").roles("USER")
                 .and()
-                .withUser("admin").password("password").roles("ADMIN");
-                */
+                .withUser("ttxy").password("611pro").roles("ADMIN");
     }
 
-    //Spring Boot configured this already.
     @Override
     public void configure(WebSecurity web) throws Exception {
         web

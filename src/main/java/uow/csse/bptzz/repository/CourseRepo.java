@@ -1,10 +1,8 @@
 package uow.csse.bptzz.repository;
 
-/*
 import org.springframework.data.repository.CrudRepository;
-import uow.csse.bptzz.model.bptzz_Course;
+import uow.csse.bptzz.model.Course;
 
-public interface bptzz_CourseRepo extends CrudRepository<bptzz_Course, String> {
+public interface CourseRepo extends CrudRepository<Course, String> {
     //need to research for two primary keys input string
 }
-*/

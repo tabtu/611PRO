@@ -4,7 +4,6 @@ import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -33,26 +32,12 @@ public class Role extends Entitys implements Serializable {
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
-    public Role(String name) {
-        this.name = name;
-    }
+    public Role(String name) { this.name = name; }
 
-    public Long getRole_id() {
-        return role_id;
-    }
-    public void setRole_id(Long id) {
-        this.role_id = id;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public Set<User> getUsers() {
-        return users;
-    }
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
+    public Long getRole_id() { return role_id; }
+    public void setRole_id(Long id) { this.role_id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public Set<User> getUsers() { return users; }
+    public void setUsers(Set<User> users) { this.users = users; }
 }

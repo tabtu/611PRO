@@ -15,8 +15,5 @@ public class Entitys implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
-    }
-
+    public String toString() { return ToStringBuilder.reflectionToString(this); }
 }

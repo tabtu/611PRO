@@ -10,7 +10,6 @@ import uow.csse.bptzz.config.Const;
 import uow.csse.bptzz.model.User;
 import uow.csse.bptzz.model.result.ExceptionMsg;
 import uow.csse.bptzz.model.result.Response;
-import uow.csse.bptzz.repository.UserRepo;
 import uow.csse.bptzz.service.UserService;
 import uow.csse.bptzz.utils.MD5Util;
 import uow.csse.bptzz.utils.DateUtils;
@@ -21,32 +20,20 @@ import uow.csse.bptzz.utils.DateUtils;
 public class UserController extends BaseController {
 
     @Autowired
-    private UserRepo userRepository;
-
-    @Autowired
-    private UserService us;
+    private UserService usrserv;
 
     @GetMapping("/test")
     public void test() {
-
         User user = new User();
-        user.setUsername("tabtu");
-        user.setPassword("ttxy");
+        user.setUsername("test");
+        user.setPassword("123123123");
         user.setEmail("i@tabtu.cn");
         user.setCreateTime(DateUtils.getCurrentTime());
         user.setLastModifyTime(DateUtils.getCurrentTime());
         user.setProfilePicture("");
         user.setValidataCode("");
         user.setIntroduction("");
-        userRepository.save(user);
-
-        us.save(user);
-
-/*
-        bptzz_Department dp = new bptzz_Department();
-        dp.setName("FaceCompare");
-        departmentRepository.save(dp);
-    */
+        usrserv.save(user);
     }
 
     @RequestMapping(value = "/regist", method = RequestMethod.GET)
@@ -57,11 +44,11 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/regist", method = RequestMethod.POST)
     public Response create(User user) {
         try {
-            User registUser = userRepository.findByEmail(user.getEmail());
+            User registUser = usrserv.findByEmail(user.getEmail());
             if (null != registUser) {
                 return result(ExceptionMsg.EmailUsed);
             }
-            User userNameUser = userRepository.findByUsername(user.getUsername());
+            User userNameUser = usrserv.findByUsername(user.getUsername());
             if (null != userNameUser) {
                 return result(ExceptionMsg.UserNameUsed);
             }
@@ -71,10 +58,9 @@ public class UserController extends BaseController {
             user.setProfilePicture("");
             user.setValidataCode("");
             user.setIntroduction("");
-            userRepository.save(user);
+            usrserv.save(user);
             getSession().setAttribute(Const.LOGIN_SESSION_KEY, user);
         } catch (Exception e) {
-            // TODO: handle exception
             logger.error("create user failed, ", e);
             return result(ExceptionMsg.FAILED);
         }

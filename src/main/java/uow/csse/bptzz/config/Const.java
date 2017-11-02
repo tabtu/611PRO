@@ -9,11 +9,10 @@ public class Const {
 	
 	public static String BASE_PATH;
 	
-	public static String LOGIN_SESSION_KEY = "Favorites_user";
+	public static String LOGIN_SESSION_KEY = "bptzz_user";
 	
-	public static String PASSWORD_KEY = "@#$%^&*()OPG#$%^&*(HG";
-
-	public static String DES3_KEY = "9964DYByKL967c3308imytCB";
+	public static String PASSWORD_KEY = "*j2[#!&@HI@!(a5%t";
+	public static String DES3_KEY = "1z9Iwf97FJs3hW8xcD0Pw4so";
 	
 	public static String default_logo="img/logo.jpg";
 	
@@ -25,11 +24,6 @@ public class Const {
 
 	public static int COOKIE_TIMEOUT= 30*24*60*60;
 
-	
-	  @Autowired(required = true)
-	  public void setBasePath(@Value("${bptzz.base.path}")String basePath) {
-		  Const.BASE_PATH = basePath;
-	  }
-	
-	
+	@Autowired(required = true)
+	public void setBasePath(@Value("${bptzz.base.path}")String basePath) { Const.BASE_PATH = basePath; }
 }

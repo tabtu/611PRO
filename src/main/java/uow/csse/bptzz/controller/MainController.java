@@ -54,37 +54,28 @@ public class MainController {
         return "/error/403";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "/login";
-    }
-
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(Model model, String error, String logout) {
-
-        if (error != null)
+        if (error != null) {
             model.addAttribute("error", "Your username and password is invalid.");
-
-        if (logout != null)
+        }
+        if (logout != null) {
             model.addAttribute("message", "You have been logged out successfully.");
-
+        }
         return "home";
     }
 
-    @RequestMapping(value = "/lg", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView lg(@RequestParam(value = "error", required = false) String error,
-                              @RequestParam(value = "logout", required = false) String logout, HttpServletRequest request) {
-
+                           @RequestParam(value = "logout", required = false) String logout, HttpServletRequest request) {
         ModelAndView model = new ModelAndView();
         if (error != null) {
             model.addObject("error", getErrorMessage(request, "SPRING_SECURITY_LAST_EXCEPTION"));
         }
-
         if (logout != null) {
             model.addObject("msg", "You've been logged out successfully.");
         }
-        model.setViewName("login");
-
+        model.setViewName("/login");
         return model;
 
     }
