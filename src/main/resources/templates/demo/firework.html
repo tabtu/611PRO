@@ -1,0 +1,28 @@
+﻿<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/header :: header-css"/>
+
+    <link rel="stylesheet" th:href="@{/css/3dfw.css}"
+          href="/static/css/fw.css" />
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+    <canvas id="canvas"></canvas>
+    <div style="text-align:center;">
+    </div>
+
+    <script type="text/javascript" th:src="@{/js/fw.js}" src="/static/js/fw.js"></script>
+    <script>
+        initVars();
+        frame();
+    </script>
+
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

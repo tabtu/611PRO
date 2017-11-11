@@ -1,0 +1,23 @@
+1. IntelliJ-IDEA 2017.2
+	Download Address: https://www.jetbrains.com/idea/download
+	Use Ultimate Edition.
+	Tips: Using Uwindsor email to active the IDE for student permit.
+
+2. Maven. 
+	Pick up one to setup Maven.Apache.
+	https://maven.apache.org/guides/getting-started/windows-prerequisites.html
+	https://www.mkyong.com/maven/how-to-install-maven-in-windows/
+	http://bitbybitblog.com/install-maven-mac/
+	https://wilsonmar.github.io/maven-on-macos/
+	http://www.jianshu.com/p/191685a33786
+	https://www.youtube.com/watch?v=ghIvOYDs0BM
+
+3. OpenCV
+	There are two files in dictionary ‘lib’ that should be included in the project.
+		1. opencv-330.jar
+		2. libopev_java330.dylib (in OSX) or lib330.dll (in WINDOWS)
+	The OpenCV which we used, is version 3.3.0. 
+	Here is the link shows how to setup OpenCV3.x on local systems. http://opencv-java-tutorials.readthedocs.io/en/latest/01-installing-opencv-for-java.html#install-opencv-3-x-under-macos
+
+Tips:
+As a advice, I recommand to use brew tools for building working environment on OSX.
