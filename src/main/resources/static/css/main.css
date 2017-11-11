@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 h1{
 	color:#0000FF;
 }
@@ -8,4 +9,16 @@ h2{
 
 footer{
     margin-top:60px;
+=======
+h1{
+	color:#0000FF;
+}
+
+h2{
+	color:#FF0000;
+}
+
+footer{
+    margin-top:60px;
+>>>>>>> ac6acc2a503deb573e3dad915794cac843df14a7
 }
