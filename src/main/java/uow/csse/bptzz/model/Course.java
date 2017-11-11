@@ -25,8 +25,11 @@ import java.util.Set;
 public class Course {
     @Id
     private String course_id;
+    @Column(nullable = false)
     private String courseName;
+    @Column(nullable = false)
     private String term;
+    @Column(nullable = false)
     private int credits;
     private String textbook;
     private String refTextbook;
@@ -36,6 +39,8 @@ public class Course {
     private Department department;
     @ManyToMany(mappedBy = "courses")
     private Set<Student> students;
+    @OneToMany(mappedBy = "course")
+    private Set<Question> questions;
 
     public Course() {
     }
@@ -119,6 +124,15 @@ public class Course {
     public void setStudents(Set<Student> students) {
         this.students = students;
     }
+
+    public Set<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Set<Question> questions) {
+        this.questions = questions;
+    }
+
 
     @Override
     public String toString() { return ToStringBuilder.reflectionToString(this); }
