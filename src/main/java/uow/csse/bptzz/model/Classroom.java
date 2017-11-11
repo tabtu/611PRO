@@ -18,21 +18,21 @@ import javax.persistence.Table;
  * Server: ca-cdbr-azure-central-a.cloudapp.net
  */
 
-@Entity(name = "Classroom")
-@Table(name = "bptzz_classroom")
-public class Classroom {
-    @Id
-    private String classroom_ID;
-    private String location;
-    private int maxCapacity;
-    private int seatsLeft;
-
-    public String getClassroomID() { return classroom_ID; }
-    public void setClassroomID(String classroomID) { this.classroom_ID = classroomID; }
-    public String getLocation() { return location; }
-    public void setLocation(String location) { this.location = location; }
-    public int getMaxCapacity() { return maxCapacity; }
-    public void setMaxCapacity(int maxCapacity) { this.maxCapacity = maxCapacity; }
-    public int getSeatsLeft() { return seatsLeft; }
-    public void setSeatsLeft(int seatsLeft) { this.seatsLeft = seatsLeft; }
-}
+//@Entity(name = "Classroom")
+//@Table(name = "bptzz_classroom")
+//public class Classroom {
+//    @Id
+//    private String classroom_ID;
+//    private String location;
+//    private int maxCapacity;
+//    private int seatsLeft;
+//
+//    public String getClassroomID() { return classroom_ID; }
+//    public void setClassroomID(String classroomID) { this.classroom_ID = classroomID; }
+//    public String getLocation() { return location; }
+//    public void setLocation(String location) { this.location = location; }
+//    public int getMaxCapacity() { return maxCapacity; }
+//    public void setMaxCapacity(int maxCapacity) { this.maxCapacity = maxCapacity; }
+//    public int getSeatsLeft() { return seatsLeft; }
+//    public void setSeatsLeft(int seatsLeft) { this.seatsLeft = seatsLeft; }
+//}
