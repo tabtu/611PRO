@@ -31,6 +31,10 @@ public class Course {
     private String term;
     @Column(nullable = false)
     private int credits;
+    //used for searching
+    private int StartTime;  //using 24 hours format, 0-23, start from at the beginning of an hour, easy to process
+    private int EndTime;    //using 24 hours format, 0-23, EndTime > StartTime
+    private String Day;     //using multiple choice list, "MONDAY;TUESDAY;WEDNESDAY;THURSDAY;FRIDAY"
     private String textbook;
     private String refTextbook;
     private String courseLink;
@@ -83,6 +87,30 @@ public class Course {
 
     public void setCredits(int credits) {
         this.credits = credits;
+    }
+
+    public int getStartTime() {
+        return StartTime;
+    }
+
+    public void setStartTime(int startTime) {
+        StartTime = startTime;
+    }
+
+    public int getEndTime() {
+        return EndTime;
+    }
+
+    public void setEndTime(int endTime) {
+        EndTime = endTime;
+    }
+
+    public String getDay() {
+        return Day;
+    }
+
+    public void setDay(String day) {
+        Day = day;
     }
 
     public String getTextbook() {
