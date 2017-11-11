@@ -4,6 +4,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Create the Entity
@@ -28,13 +29,49 @@ public class Department extends Entitys implements Serializable {
     private Integer department_id;
     @Column(nullable = false, unique = true)
     private String name;
+    @OneToMany(mappedBy = "s_department")
+    private Set<Student> students;
+    @OneToMany(mappedBy = "c_department")
+    private Set<Course> courses;
 
-    public Department(String name) { this.name = name; }
+    public Department() {
+    }
 
-    public Integer getDepartment_id() { return department_id; }
-    public void setDepartment_id(Integer deptID) { this.department_id = deptID; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public Department(String name) {
+        this.name = name;
+    }
+
+    public Integer getDepartment_id() {
+        return department_id;
+    }
+
+    public void setDepartment_id(Integer department_id) {
+        this.department_id = department_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
+
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
+    }
 
     @Override
     public String toString() { return ToStringBuilder.reflectionToString(this); }

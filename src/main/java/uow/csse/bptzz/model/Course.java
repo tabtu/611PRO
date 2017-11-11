@@ -36,7 +36,7 @@ public class Course {
     private String courseLink;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="course_department")
-    private Department department;
+    private Department c_department;
     @ManyToMany(mappedBy = "courses")
     private Set<Student> students;
     @OneToMany(mappedBy = "course")
@@ -45,12 +45,12 @@ public class Course {
     public Course() {
     }
 
-    public Course(String course_id, String courseName, String term, int credits, Department department) {
+    public Course(String course_id, String courseName, String term, int credits, Department c_department) {
         this.course_id = course_id;
         this.courseName = courseName;
         this.term = term;
         this.credits = credits;
-        this.department = department;
+        this.c_department = c_department;
     }
 
     public String getCourse_id() {
@@ -109,12 +109,12 @@ public class Course {
         this.courseLink = courseLink;
     }
 
-    public Department getDepartment() {
-        return department;
+    public Department getC_department() {
+        return c_department;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setC_department(Department c_department) {
+        this.c_department = c_department;
     }
 
     public Set<Student> getStudents() {
@@ -132,7 +132,6 @@ public class Course {
     public void setQuestions(Set<Question> questions) {
         this.questions = questions;
     }
-
 
     @Override
     public String toString() { return ToStringBuilder.reflectionToString(this); }

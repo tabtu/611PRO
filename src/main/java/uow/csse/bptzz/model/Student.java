@@ -44,7 +44,7 @@ public class Student extends Entitys implements Serializable {
     private float overallGPA;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="student_department")
-    private Department department;
+    private Department s_department;
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(name = "bptzz_student_course", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
     private Set<Course> courses;
@@ -52,12 +52,12 @@ public class Student extends Entitys implements Serializable {
     public Student() {
     }
 
-    public Student(String firstname, String lastname, Boolean gender, Date dob, Department department) {
+    public Student(String firstname, String lastname, Boolean gender, Date dob, Department s_department) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.gender = gender;
         this.dob = dob;
-        this.department = department;
+        this.s_department = s_department;
     }
 
     public Long getStudent_id() {
@@ -140,12 +140,12 @@ public class Student extends Entitys implements Serializable {
         this.overallGPA = overallGPA;
     }
 
-    public Department getDepartment() {
-        return department;
+    public Department getS_department() {
+        return s_department;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setS_department(Department s_department) {
+        this.s_department = s_department;
     }
 
     public Set<Course> getCourses() {
