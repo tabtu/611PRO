@@ -40,4 +40,5 @@ public class Role extends Entitys implements Serializable {
     public void setName(String name) { this.name = name; }
     public Set<User> getUsers() { return users; }
     public void setUsers(Set<User> users) { this.users = users; }
+    
 }
