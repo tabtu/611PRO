@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Create the Entity
@@ -44,27 +45,116 @@ public class Student extends Entitys implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="student_department")
     private Department department;
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(name = "bptzz_student_course", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
+    private Set<Course> courses;
 
-    public Long getStudentid() { return student_id; }
-    public void setStudentid(Long studentid) { this.student_id = studentid; }
-    public String getFirstname() { return firstname; }
-    public void setFirstname(String firstName) { this.firstname = firstName; }
-    public String getLastname() { return lastname; }
-    public void setLastname(String lastName) { lastName = lastName; }
-    public Boolean getGender() { return gender; }
-    public void setGender(Boolean gender) { this.gender = gender; }
-    public Date getDob() { return dob; }
-    public void setDob(Date dob) { this.dob = dob; }
-    public String getAddress() { return address; }
-    public void setAddress(String address) { this.address = address; }
-    public String getHomepage() { return homepage; }
-    public void setHomepage(String homepage) { this.homepage = homepage; }
-    public int getYearenrolled() { return yearEnrolled; }
-    public void setYearenrolled(int yearenrolled) { this.yearEnrolled = yearenrolled; }
-    public float getOverallGPA() { return overallGPA; }
-    public void setOverallGPA(float overallGPA) { this.overallGPA = overallGPA; }
-    public Department getDepartment() { return department; }
-    public void setDeptid(Department department) { this.department = department; }
+    public Student() {
+    }
+
+    public Student(String firstname, String lastname, Boolean gender, Date dob, Department department) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.gender = gender;
+        this.dob = dob;
+        this.department = department;
+    }
+
+    public Long getStudent_id() {
+        return student_id;
+    }
+
+    public void setStudent_id(Long student_id) {
+        this.student_id = student_id;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getProfilepic() {
+        return profilepic;
+    }
+
+    public void setProfilepic(String profilepic) {
+        this.profilepic = profilepic;
+    }
+
+    public Boolean getGender() {
+        return gender;
+    }
+
+    public void setGender(Boolean gender) {
+        this.gender = gender;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getHomepage() {
+        return homepage;
+    }
+
+    public void setHomepage(String homepage) {
+        this.homepage = homepage;
+    }
+
+    public int getYearEnrolled() {
+        return yearEnrolled;
+    }
+
+    public void setYearEnrolled(int yearEnrolled) {
+        this.yearEnrolled = yearEnrolled;
+    }
+
+    public float getOverallGPA() {
+        return overallGPA;
+    }
+
+    public void setOverallGPA(float overallGPA) {
+        this.overallGPA = overallGPA;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
+    }
 
     @Override
     public String toString() { return ToStringBuilder.reflectionToString(this); }

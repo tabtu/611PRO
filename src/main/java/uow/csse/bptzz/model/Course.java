@@ -4,6 +4,7 @@ package uow.csse.bptzz.model;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Create the Entity
@@ -33,23 +34,91 @@ public class Course {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="course_department")
     private Department department;
+    @ManyToMany(mappedBy = "courses")
+    private Set<Student> students;
 
-    public String getCourse_id() { return course_id; }
-    public void setCourse_id(String courseID) { course_id = courseID; }
-    public String getCourseName() { return this.courseName; }
-    public void setCourseName(String courseName) { this.courseName = courseName; }
-    public String getTerm() { return term; }
-    public void setTerm(String term) { this.term = term; }
-    public int getCredits() { return credits; }
-    public void setCredits(int credits) { this.credits = credits; }
-    public String getTextbook() { return textbook; }
-    public void setTextbook(String textbook) { this.textbook = textbook; }
-    public String getRefTextbook() { return refTextbook; }
-    public void setRefTextbook(String refTextbook) { this.refTextbook = refTextbook; }
-    public String getCourseLink() { return courseLink; }
-    public void setCourseLink(String courseLink) { this.courseLink = courseLink; }
-    public Department getDepartment() { return department; }
-    public void setDepartment(Department department) { this.department = department; }
+    public Course() {
+    }
+
+    public Course(String course_id, String courseName, String term, int credits, Department department) {
+        this.course_id = course_id;
+        this.courseName = courseName;
+        this.term = term;
+        this.credits = credits;
+        this.department = department;
+    }
+
+    public String getCourse_id() {
+        return course_id;
+    }
+
+    public void setCourse_id(String course_id) {
+        this.course_id = course_id;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public String getTerm() {
+        return term;
+    }
+
+    public void setTerm(String term) {
+        this.term = term;
+    }
+
+    public int getCredits() {
+        return credits;
+    }
+
+    public void setCredits(int credits) {
+        this.credits = credits;
+    }
+
+    public String getTextbook() {
+        return textbook;
+    }
+
+    public void setTextbook(String textbook) {
+        this.textbook = textbook;
+    }
+
+    public String getRefTextbook() {
+        return refTextbook;
+    }
+
+    public void setRefTextbook(String refTextbook) {
+        this.refTextbook = refTextbook;
+    }
+
+    public String getCourseLink() {
+        return courseLink;
+    }
+
+    public void setCourseLink(String courseLink) {
+        this.courseLink = courseLink;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
 
     @Override
     public String toString() { return ToStringBuilder.reflectionToString(this); }

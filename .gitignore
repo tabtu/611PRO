@@ -3,3 +3,7 @@ out/
 *.class
 .idea/
 target/
+application.properties
+bptzz.iml
+mvnw
+mvnw.cmd
