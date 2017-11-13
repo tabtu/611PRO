@@ -24,21 +24,8 @@ public class UserController extends BaseController {
 
     @GetMapping("/test")
     public void test() {
-        User user = new User();
-        user.setUsername("test");
-        user.setPassword("123123123");
-        user.setEmail("i@tabtu.cn");
-        user.setCreateTime(DateUtils.getCurrentTime());
-        user.setLastModifyTime(DateUtils.getCurrentTime());
-        user.setProfilePicture("");
-        user.setValidataCode("");
-        user.setIntroduction("");
+        User user = new User("test", "123", "i@tabtu.cn");
         usrserv.save(user);
-    }
-
-    @RequestMapping(value = "/regist", method = RequestMethod.GET)
-    public String show() {
-        return "/user/register";
     }
 
     @RequestMapping(value = "/regist", method = RequestMethod.POST)

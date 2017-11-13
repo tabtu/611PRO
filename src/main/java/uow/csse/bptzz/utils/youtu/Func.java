@@ -328,6 +328,16 @@ public class Func {
 		return respose;
 	}
 
+	public JSONObject FaceCompare(byte[] image_a, byte[] image_b)
+			throws IOException, JSONException, KeyManagementException, NoSuchAlgorithmException {
+		JSONObject data = new JSONObject();
+		data.put("imageA", Base64Util.encode(image_a));
+		data.put("imageB", Base64Util.encode(image_b));
+		JSONObject respose =m_not_use_https?SendHttpRequest(data, "api/facecompare"):SendHttpsRequest(data, "api/facecompare");
+
+		return respose;
+	}
+
 	public JSONObject FaceCompareUrl(String urlA, String urlB)
 	throws IOException, JSONException, KeyManagementException, NoSuchAlgorithmException {
 
