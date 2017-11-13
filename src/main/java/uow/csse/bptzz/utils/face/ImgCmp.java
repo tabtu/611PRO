@@ -27,6 +27,7 @@ public class ImgCmp {
         try {
             JSONObject respose = faceYoutu.FaceCompare(source, target);
             result = (double) respose.get("similarity");
+            System.out.println("test push file to tabtu branch");
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
