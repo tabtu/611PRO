@@ -1,9 +1,29 @@
 .DS_Store
-out/
-*.class
-.idea/
 target/
-application.properties
-bptzz.iml
-mvnw
-mvnw.cmd
+!.mvn/wrapper/maven-wrapper.jar
+
+### dev setup ###
+application-dev.properties
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
