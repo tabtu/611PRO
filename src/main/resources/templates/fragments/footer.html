@@ -5,24 +5,46 @@
 <body>
 <div th:fragment="footer">
 
-    <div class="container">
+    <!--<div class="container">-->
 
         <footer>
         <!-- this is footer -->
-        &copy; 2017 i@tabtu.cn
-            <span sec:authorize="isAuthenticated()">
-                | Logged user: <span sec:authentication="name"></span> |
-                Roles: <span sec:authentication="principal.authorities"></span> |
-                <a th:href="@{/logout}">Sign Out</a>
-            </span>
+        <!--&copy; 2017 i@tabtu.cn-->
 
-            <script type="text/javascript"
-                    src="webjars/jquery/1.11.1/jquery.min.js"></script>
-            <script type="text/javascript"
-                    src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <!--<span sec:authorize="isAuthenticated()">-->
+                <!--| Logged user: <span sec:authentication="name"></span> |-->
+                <!--Roles: <span sec:authentication="principal.authorities"></span> |-->
+                <!--<a th:href="@{/logout}">Sign Out</a>-->
+            <!--</span>-->
+            <div class="bottommenu">
+                <div class="footer">
+                    <div class="copyright">
+                        &copy; Copy right 2017 | <a href="#">Privacy </a>| <a href="#">Policy</a>
+                    </div>
+                    <div class="atisda">
+                        Designed by <a th:href="@{https://www.linkedin.com/in/hang-zhou-a7824b139/}">Cecilia Zhou</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <script type="text/javascript" src="webjars/jquery/1.11.1/jquery.min.js"></script>
+            <script type="text/javascript" src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+            <script type="text/javascript" th:src="@{/js/isotope.js}"
+                    src="/static/js/isotope.js"></script>
+            <!--<script type="text/javascript" th:src="@{../../js/isotope.js}"></script>-->
+
+            <script type="text/javascript" th:src="@{/js/myscript.js}"
+                    src="/static/js/myscript.js"></script>
+            <script type="text/javascript" th:src="@{/js/bootstrap/bootstrap.js}"
+                    src="/static/js/bootstrap/bootstrap.js"></script>
+            <script type="text/javascript" th:src="@{/js/bootstrap/jquery.1.11.js}"
+                    src="/static/js/bootstrap/jquery.1.11.js"></script>
+            <script type="text/javascript" th:src="@{/js/bootstrap/jquery.js}"
+                    src="/static/js/bootstrap/jquery.js"></script>
         </footer>
-    </div>
-
+    <!--</div>-->
 </div>
 </body>
 </html>
