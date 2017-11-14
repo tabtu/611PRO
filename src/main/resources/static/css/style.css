@@ -10,7 +10,7 @@
 
 body {
     background: #f8f8f8;
-    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    font-family: "OpenSans Regular";
     text-align: center;
     color: #fff;
 }
@@ -23,6 +23,14 @@ h1 {
     font-size: 30px;
     font-weight: 700;
     text-shadow: 0 1px 4px rgba(0,0,0,.2);
+}
+
+h2 {
+    font-family: "OpenSans Regular"
+}
+
+p{
+    font-family: "OpenSans Regular"
 }
 
 form {
@@ -182,6 +190,3 @@ button:active {
 .connect a.twitter { background: url(../img/twitter.png) center center no-repeat; }
 
 .connect a:hover { background-position: center bottom; }
-
-
-
