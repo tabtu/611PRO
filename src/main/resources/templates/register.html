@@ -2,45 +2,53 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 >
 <head>
-   <title>Regeist</title>
+   <title>Regeister</title>
    <div th:replace="fragments/header :: header-css"/>
+   <link rel="stylesheet" th:href="@{/css/style.css}"
+         href="../../css/style.css"/>
+
+   <link rel="stylesheet" th:href="@{/css/media/css/bootstrap.css}" id="bscss" />
+   <link rel="stylesheet" th:href="@{/css/media/css/app.css}" id="maincss" />
+   <link rel="stylesheet" th:href="@{/css/media/css/theme-i.css}" id="maincss" />
 </head>
 <body>
 
-<div th:replace="fragments/header :: header"/>
+<!--<div th:replace="fragments/header :: header"/>-->
 
 <div class="container">
    <div class="wrapper">
       <div class="block-center mt-xl wd-xl">
          <div class="panel panel-dark panel-flat">
             <div class="panel-heading text-center">
-               <a href="/index">
-                  <img src="/static/img/facebook.png" alt="Image" class="block-center img-rounded"/></a>
+               <a th:href="@{/home}">
+                  <img th:src="@{/img/logo/logo3.png}" alt="logo" class="block-center img-rounded"/>
+               </a>
             </div>
             <div class="panel-body" id="registPage">
-               <p class="text-center pv">register</p>
-               <form id="form" data-parsley-validate="true" onsubmit="return false">
+               <p class="text-center pv">Registration</p>
+               <form id="form" method="post" action="@{/user/register}" th:action="@{/user/register}">
                   <div class="form-group has-feedback">
-                     <label for="signupInputEmail1" class="text-muted">email</label>
-                     <input id="signupInputEmail1" type="email" placeholder="Your Email Address" class="form-control" v-model="email"  data-parsley-required-message="Please Input Email" data-parsley-type-message="Please Input Correct Email Address" required="required"/>
+                     <!--<label for="signupInputEmail1" class="text-muted">email</label>-->
+                     <input type="email" id="signupInputEmail1" placeholder="Your Email Address" name="user.email" class="form-control" />
                      <span class="fa fa-envelope form-control-feedback text-muted"></span>
                   </div>
                   <div class="form-group has-feedback">
-                     <label for="signupInputEmail1" class="text-muted">username</label>
-                     <input id="signupInputEmail2" type="text" placeholder="Your Username" class="form-control" v-model="userName" data-parsley-required-message="Please Input Username" required="required"/>
+                     <!--<label for="signupInputEmail1" class="text-muted">username</label>-->
+                     <input type="text" id="signupInputEmail2" class="form-control" placeholder="Your Username" name="user.username" />
                      <span class="fa fa-user form-control-feedback text-muted"></span>
                   </div>
                   <div class="form-group has-feedback">
-                     <label for="signupInputPassword" class="text-muted">password</label>
-                     <input id="signupInputPassword" type="password" placeholder="Your Password" class="form-control" v-model="password" required="required" data-parsley-required-message="Please Input Password" pattern="/^(?![0-9]+$)(?![a-zA-Z]+$)(?![^0-9a-zA-Z]+$)\S{6,20}$/" data-parsley-pattern-message="Please Input 6-20 letters and numbers" />
+                     <!--<label for="signupInputPassword" class="text-muted">password</label>-->
+                     <input type="password" id="signupInputPassword" class="form-control" placeholder="Your Password" name="user.password"/>
                      <span class="fa fa-lock form-control-feedback text-muted"></span>
                   </div>
-                  <button v-on:click="regist" class="btn btn-block btn-primary mt-lg">Create Account</button>
+                   <input type="submit" class="btn btn-block btn-primary mt-lg" value="Creat Account"/>
+                  <!--<button v-on:click="register" class="btn btn-block btn-primary mt-lg">Create Account</button>-->
                </form>
                <p></p>
                <div id="errorMsg" class="alert alert-danger text-center" style="display:none;"></div>
                <p class="pt-lg text-center">Have Already Registed?</p>
-               <a href="/login" class="btn btn-block btn-default">Login</a>
+               <a th:href="@{/login}" class="btn btn-block btn-default">Login</a>
             </div>
          </div>
          <div class="p-lg text-center">
@@ -49,47 +57,47 @@
             <span>-</span>
             <span>2018</span>
             <br/>
-            <span>i@tabtu.cn</span>
+            <span>MAC 60-611 PROJECT</span>
          </div>
       </div>
    </div>
-   <script type='text/javascript'>
-       Vue.http.options.emulateJSON = true;
-       var registPage = new Vue({
-           el: '#registPage',
-           data: {
-               'email': '',
-               'password': '',
-               'userName':''
-           },
-           methods: {
-               regist: function(event){
-                   var ok = $('#form').parsley().isValid({force: true});
-                   if(!ok){
-                       return;
-                   }
-                   var datas={
-                       email: this.email,
-                       passWord: this.password,
-                       userName: this.userName
-                   };
-                   this.$http.post('/user/regist',datas).then(function(response){
-                       if(response.data.rspCode == '000000'){
-                           window.open('/', '_self');
-                       }else{
-                           $("#errorMsg").html(response.data.rspMsg);
-                           $("#errorMsg").show();
-                       }
-                   }, function(response){
-                       console.log('error');
-                   })
-               }
-           }
-       })
-   </script>
+   <!--<script type='text/javascript'>-->
+       <!--Vue.http.options.emulateJSON = true;-->
+       <!--var registPage = new Vue({-->
+           <!--el: '#registPage',-->
+           <!--data: {-->
+               <!--'email': '',-->
+               <!--'password': '',-->
+               <!--'userName':''-->
+           <!--},-->
+           <!--methods: {-->
+               <!--regist: function(event){-->
+                   <!--var ok = $('#form').parsley().isValid({force: true});-->
+                   <!--if(!ok){-->
+                       <!--return;-->
+                   <!--}-->
+                   <!--var datas={-->
+                       <!--email: this.email,-->
+                       <!--passWord: this.password,-->
+                       <!--userName: this.userName-->
+                   <!--};-->
+                   <!--this.$http.post('/user/register',datas).then(function(response){-->
+                       <!--if(response.data.rspCode == '000000'){-->
+                           <!--window.open('/', '_self');-->
+                       <!--}else{-->
+                           <!--$("#errorMsg").html(response.data.rspMsg);-->
+                           <!--$("#errorMsg").show();-->
+                       <!--}-->
+                   <!--}, function(response){-->
+                       <!--console.log('error');-->
+                   <!--})-->
+               <!--}-->
+           <!--}-->
+       <!--})-->
+   <!--</script>-->
 </div>
 
-<div th:replace="fragments/footer :: footer"/>
+<!--<div th:replace="fragments/footer :: footer"/>-->
 
 </body>
 </html>
