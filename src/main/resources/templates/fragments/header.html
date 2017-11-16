@@ -35,32 +35,18 @@
                 <li><a th:href="@{/home}">MAC 60-611 PROJECT</a></li>
             </ul>
             <ul class="logreg">
-                <li><a href="/login" th:unless="${user != null}">Login</a>
-                    <a href="/" th:if="${user != null}" th:text="${user.username}" class="userName"></a></li>
+                <li>
+                    <a href="/login" th:unless="${#httpServletRequest.remoteUser != null}">Login</a>
+                    <a href="/" th:if="${#httpServletRequest.remoteUser != null}" th:text="${#httpServletRequest.remoteUser}" class="username"></a>
+                </li>
                 <!--<li><a th:href="@{/login}">Login</a> </li>-->
-                <li><a th:href="@{/register}"><span class="register">Register</span></a>
-                    <a href="/logout" th:if="${user != null}" class="userName">Log Out</a></li>
+                <li>
+                    <a th:href="@{/register}" th:unless="${#httpServletRequest.remoteUser != null}"><span class="register">Register</span></a>
+                    <a href="/logout" th:if="${#httpServletRequest.remoteUser != null}" class="username">Logout</a>
+                </li>
             </ul>
         </div>
-        <!-- Navbar Up -->
     </div>
-    <!--<nav class="navbar navbar-inverse">-->
-        <!--<div class="container">-->
-            <!--<div class="navbar-header">-->
-                <!--<a class="navbar-brand" th:href="@{/}">BPTZZ</a>-->
-            <!--</div>-->
-            <!--<div id="navbar" class="collapse navbar-collapse">-->
-                <!--<ul class="nav navbar-nav">-->
-                    <!--<li class="active"><a th:href="@{/}">Home</a></li>-->
-                    <!--<li class="active"><a th:href="@{/login}">Login</a></li>-->
-                    <!--<li class="active"><a th:href="@{/capture}">Capture</a></li>-->
-                    <!--<li class="active"><a th:href="@{/firework}">3D Firework</a></li>-->
-                    <!--<li class="active"><a th:href="@{/game}">Game</a></li>-->
-                <!--</ul>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</nav>-->
 </div>
-
 </body>
 </html>
