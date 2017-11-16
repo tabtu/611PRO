@@ -22,13 +22,18 @@ public class UserController extends BaseController {
     @Autowired
     private UserService usrserv;
 
+    @GetMapping("/getuser")
+    public User getUser() {
+        return usrserv.findByUsername("tabtu");
+    }
+
     @GetMapping("/test")
     public void test() {
         User user = new User("test", "123", "i@tabtu.cn");
         usrserv.save(user);
     }
 
-    @RequestMapping(value = "/regist", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public Response create(User user) {
         try {
             User registUser = usrserv.findByEmail(user.getEmail());

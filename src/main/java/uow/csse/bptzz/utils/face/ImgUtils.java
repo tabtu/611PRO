@@ -12,11 +12,18 @@ import java.awt.image.DataBufferByte;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
+/**
+ * Image Type Transfer
+ * @Author Tab Tu
+ * @Created Oct.13 2017
+ * @Updated Nov.15 2017
+ * @Description Mat, byte[], BufferedImage
+ */
 public class ImgUtils {
     /**
      *
-     * @param img
-     * @param fileExtension (.JPG & .PNG)
+     * @param img Mat format image
+     * @param fileExtension file extension(.JPG & .PNG)
      * @return
      */
     public static byte[] Mat2Bytes(Mat img, String fileExtension) {
@@ -27,10 +34,10 @@ public class ImgUtils {
     }
 
     /**
-     * 将BufferedImage类型转换成Mat类型
+     * Transfer BufferedImage to Mat
      * @param bfImg
-     * @param imgType bufferedImage的类型 如 BufferedImage.TYPE_3BYTE_BGR
-     * @param matType 转换成mat的type 如 CvType.CV_8UC3
+     * @param imgType bufferedImage. eg: BufferedImage.TYPE_3BYTE_BGR
+     * @param matType Mat. eg: CvType.CV_8UC3
      * @return
      */
     public static Mat BuffedImage2Mat(BufferedImage bfImg, int imgType, int matType) {
@@ -54,8 +61,8 @@ public class ImgUtils {
 
     /**
      *
-     * @param img Mat对象
-     * @param fileExtension 文件扩展名(.JPG & .PNG)
+     * @param img Mat Object
+     * @param fileExtension file extension name (.JPG & .PNG)
      * @return
      */
     public static BufferedImage Mat2BuffedImage(Mat img, String fileExtension) {

@@ -6,7 +6,7 @@ function getMedia() {
                     'sourceId': exArray[1]  // get Camera.
                 }]
             },
-            'audio':true
+            'audio':false
         }, successFunc, errorFunc);
     }
     else {
