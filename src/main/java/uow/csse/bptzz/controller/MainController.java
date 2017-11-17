@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import uow.csse.bptzz.model.User;
+import uow.csse.bptzz.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,6 +25,9 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class MainController {
+
+    @Autowired
+    private UserService usrserv;
 
     @GetMapping("/")
     public String home0() {
@@ -67,7 +72,8 @@ public class MainController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView lg(@RequestParam(value = "error", required = false) String error,
-                           @RequestParam(value = "logout", required = false) String logout, HttpServletRequest request) {
+                           @RequestParam(value = "logout", required = false) String logout,
+                           HttpServletRequest request) {
         ModelAndView model = new ModelAndView();
         if (error != null) {
             model.addObject("error", getErrorMessage(request, "SPRING_SECURITY_LAST_EXCEPTION"));
@@ -80,17 +86,23 @@ public class MainController {
 
     }
 
+    @GetMapping("/register")
+    public String getRegister() {
+        return "/register";
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String postRegister(HttpServletRequest request) {
+        User usr = new User(request.getParameter("username"), request.getParameter("password"), request.getParameter("email"));
+        usrserv.save(usr);
+        return "/login";
+    }
+
     @GetMapping("/game")
     public String game() { return "/demo/game"; }
 
     @GetMapping("/capture")
     public String capture() { return "/demo/capture"; }
-
-    @GetMapping("/firework")
-    public String firework() { return "/demo/firework"; }
-
-    @GetMapping("/regist")
-    public String showregist() { return "/register"; }
 
     // customize the error message
     private String getErrorMessage(HttpServletRequest request, String key) {
@@ -107,5 +119,6 @@ public class MainController {
         }
 
         return error;
+
     }
 }
