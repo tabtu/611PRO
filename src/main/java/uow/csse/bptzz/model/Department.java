@@ -1,18 +1,16 @@
 package uow.csse.bptzz.model;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Create the Entity
  *
  * @author 	Eason Pan
  * @date	2017-10-8
- * @update  Tab Tu on Nov.1 2017
- * @since	1.1
+ * @update  Tab Tu on Nov.17 2017
+ * @since	1.2
  *
  * Database: pro611db
  * Username: bfa57f3b0eddae
@@ -30,9 +28,9 @@ public class Department extends Entitys implements Serializable {
     @Column(nullable = false, unique = true)
     private String name;
     @OneToMany(mappedBy = "s_department", cascade = CascadeType.ALL)
-    private Set<Student> students;
+    private List<Student> students;
     @OneToMany(mappedBy = "c_department", cascade = CascadeType.ALL)
-    private Set<Course> courses;
+    private List<Course> courses;
 
     public Department() {
     }
@@ -57,19 +55,19 @@ public class Department extends Entitys implements Serializable {
         this.name = name;
     }
 
-    public Set<Student> getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(Set<Student> students) {
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
 
-    public Set<Course> getCourses() {
+    public List<Course> getCourses() {
         return courses;
     }
 
-    public void setCourses(Set<Course> courses) {
+    public void setCourses(List<Course> courses) {
         this.courses = courses;
     }
 }

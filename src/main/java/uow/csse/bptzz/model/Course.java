@@ -1,10 +1,7 @@
 package uow.csse.bptzz.model;
 
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Create the Entity
@@ -38,13 +35,13 @@ public class Course {
     private String textbook;
     private String refTextbook;
     private String courseLink;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="course_department")
     private Department c_department;
     @ManyToMany(mappedBy = "courses", cascade = CascadeType.ALL)
-    private Set<Student> students;
+    private List<Student> students;
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
-    private Set<Question> questions;
+    private List<Question> questions;
 
     public Course() {
     }
@@ -145,19 +142,19 @@ public class Course {
         this.c_department = c_department;
     }
 
-    public Set<Student> getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(Set<Student> students) {
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
 
-    public Set<Question> getQuestions() {
+    public List<Question> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(Set<Question> questions) {
+    public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
 }
