@@ -155,7 +155,4 @@ public class Student extends Entitys implements Serializable {
     public void setCourses(Set<Course> courses) {
         this.courses = courses;
     }
-
-    @Override
-    public String toString() { return ToStringBuilder.reflectionToString(this); }
 }

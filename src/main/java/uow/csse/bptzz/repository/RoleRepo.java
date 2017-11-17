@@ -1,9 +1,10 @@
 package uow.csse.bptzz.repository;
 
 import org.springframework.data.repository.CrudRepository;
-import uow.csse.bptzz.model.Role;
+import org.springframework.stereotype.Repository;
 import uow.csse.bptzz.model.User;
 
+@Repository
 public interface RoleRepo extends CrudRepository<User, Long> {
 
 }

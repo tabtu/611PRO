@@ -7,12 +7,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import uow.csse.bptzz.config.Const;
+import uow.csse.bptzz.model.Course;
+import uow.csse.bptzz.model.Department;
+import uow.csse.bptzz.model.Question;
 import uow.csse.bptzz.model.User;
 import uow.csse.bptzz.model.result.ExceptionMsg;
 import uow.csse.bptzz.model.result.Response;
+import uow.csse.bptzz.repository.CourseRepo;
+import uow.csse.bptzz.repository.DepartmentRepo;
+import uow.csse.bptzz.repository.QuestionRepo;
+import uow.csse.bptzz.repository.UserRepo;
+import uow.csse.bptzz.service.CourseService;
+import uow.csse.bptzz.service.QuizService;
 import uow.csse.bptzz.service.UserService;
 import uow.csse.bptzz.utils.MD5Util;
 import uow.csse.bptzz.utils.DateUtils;
+
+import java.util.List;
 
 //@Controller
 @RestController
@@ -21,6 +32,24 @@ public class UserController extends BaseController {
 
     @Autowired
     private UserService usrserv;
+
+    @Autowired
+    private CourseService corsserv;
+
+    @Autowired
+    private QuizService quizserv;
+
+    @Autowired
+    private QuestionRepo qustrepo;
+
+    @Autowired
+    private CourseRepo corpo;
+
+    @Autowired
+    private DepartmentRepo deptrepo;
+
+    @Autowired
+    private UserRepo usrpo;
 
     @GetMapping("/getuser")
     public User getUser() {
@@ -31,6 +60,24 @@ public class UserController extends BaseController {
     public void test() {
         User user = new User("test", "123", "i@tabtu.cn");
         usrserv.save(user);
+    }
+
+    @GetMapping("/dpt-cors")
+    public String dptcors() {
+        return corsserv.findCourseByDepartmentId(1).size() + "";
+    }
+
+    @GetMapping("/getquestions")
+    public String getquestion() {
+        return usrpo.findByStudent_Gender(true).get(0).getUsername();
+        //return qustrepo.findByCourse_Course_id("CS1002").size() + "";
+    }
+
+    @GetMapping("/initdepartment")
+    public void initdepartment() {
+        Department dept = new Department("Business");
+
+        corsserv.saveDepartment(dept);
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)

@@ -2,8 +2,6 @@ package uow.csse.bptzz.service;
 
 import uow.csse.bptzz.model.User;
 
-import java.util.List;
-
 public interface UserService {
     User findByUsername(String username);
 

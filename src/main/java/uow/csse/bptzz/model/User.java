@@ -162,12 +162,11 @@ public class User extends Entitys implements Serializable {
         this.roles = roles;
     }
 
-    /*
-        public Student getStudent() { return student; }
-        public void setStudent(Student student) { this.student = student; }
-        */
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+    public Student getStudent() {
+        return this.student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }

@@ -29,9 +29,9 @@ public class Department extends Entitys implements Serializable {
     private Integer department_id;
     @Column(nullable = false, unique = true)
     private String name;
-    @OneToMany(mappedBy = "s_department")
+    @OneToMany(mappedBy = "s_department", cascade = CascadeType.ALL)
     private Set<Student> students;
-    @OneToMany(mappedBy = "c_department")
+    @OneToMany(mappedBy = "c_department", cascade = CascadeType.ALL)
     private Set<Course> courses;
 
     public Department() {
@@ -72,7 +72,4 @@ public class Department extends Entitys implements Serializable {
     public void setCourses(Set<Course> courses) {
         this.courses = courses;
     }
-
-    @Override
-    public String toString() { return ToStringBuilder.reflectionToString(this); }
 }

@@ -26,7 +26,7 @@ public class CourseController extends BaseController {
         ModelAndView mav = new ModelAndView("courses");
         mav.addObject("course", course);
 
-        return "mav";
+        return mav;
     }
 
     @RequestMapping(value = "/courses", method = RequestMethod.GET)
@@ -37,7 +37,7 @@ public class CourseController extends BaseController {
         ModelAndView mav = new ModelAndView("courses");
         mav.addObject("courses", courses);
 
-        return "mav";
+        return mav;
     }
 
 }
