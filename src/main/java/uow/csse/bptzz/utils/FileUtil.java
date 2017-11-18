@@ -42,7 +42,7 @@ public class FileUtil {
         if(!targetFile.exists()){    
             targetFile.mkdirs();    
         }       
-        FileOutputStream out = new FileOutputStream(filePath+fileName);
+        FileOutputStream out = new FileOutputStream(filePath + fileName);
         out.write(fileBytes);
         out.flush();
         out.close();

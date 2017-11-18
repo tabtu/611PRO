@@ -5,15 +5,16 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import uow.csse.bptzz.config.Const;
 import uow.csse.bptzz.model.User;
 import uow.csse.bptzz.service.UserService;
+import uow.csse.bptzz.utils.FileUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.*;
 
 /**
  * Main Controller
@@ -59,6 +60,30 @@ public class MainController {
         return "/error/403";
     }
 
+    @GetMapping("/upload")
+    public String uploadpage() {
+        return "/test";
+    }
+
+    @RequestMapping(value="/upload", method = RequestMethod.POST)
+    public @ResponseBody
+    String uploadfile(@RequestParam("file") MultipartFile file) {
+        String fileName = System.currentTimeMillis() + "." +
+                FileUtil.getFileExtName(file.getOriginalFilename());
+        String filePath = Const.UPLOAD_PATH;
+        try {
+            FileUtil.uploadFile(file.getBytes(), filePath, fileName);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return "uploadimg success";
+    }
+
+
+
+
+
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(Model model, String error, String logout) {
         if (error != null) {
@@ -97,12 +122,6 @@ public class MainController {
         usrserv.saveUser(usr);
         return "/login";
     }
-
-    @GetMapping("/game")
-    public String game() { return "/demo/game"; }
-
-    @GetMapping("/capture")
-    public String capture() { return "/demo/capture"; }
 
     // customize the error message
     private String getErrorMessage(HttpServletRequest request, String key) {
