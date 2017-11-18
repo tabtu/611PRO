@@ -45,6 +45,16 @@ public class UserServiceImpl implements UserService {
     public User findUserByEmail(String email) { return userRepo.findByEmail(email); }
 
     @Override
+    public List<Student> findStudentByUserIsUsing(boolean enable) {
+        List<Student> result = new ArrayList<>();
+        List<User> tmp = userRepo.findByEnabled(true);
+        for(User t : tmp) {
+            if(t.getStudent() != null) result.add(t.getStudent());
+        }
+        return result;
+    }
+
+    @Override
     public void saveStudent(Student student) {
         studRepo.save(student);
     }

@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+import uow.csse.bptzz.model.User;
 import uow.csse.bptzz.service.SecurityService;
 
 @Service
@@ -41,5 +42,10 @@ public class SecurityServiceImpl implements SecurityService {
             SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             logger.debug(String.format("Auto login %s successfully!", username));
         }
+    }
+
+    @Override
+    public User faceIdentify(String file) {
+        return null;
     }
 }

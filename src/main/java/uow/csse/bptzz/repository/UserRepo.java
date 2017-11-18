@@ -18,6 +18,8 @@ public interface UserRepo extends JpaRepository<User, Long> {
 
     User findByEmail(String email);
 
+    List<User> findByEnabled(boolean enabled);
+
 //    @Transactional
 //    @Modifying
 //    @Query("UPDATE bptzz_user SET username=?2, password=?3, email=?4 WHERE user_id=?1")

@@ -66,7 +66,7 @@ function getAudioType(element) {
 
 // Photo
 function getPhoto() {
-    context1.drawImage(video, 0, 0,120,90); //将video对象内指定的区域捕捉绘制到画布上指定的区域，实现拍照。
+    context1.drawImage(video, 0, 0, 400, 300); //将video对象内指定的区域捕捉绘制到画布上指定的区域，实现拍照。
 }
 
 // Video
