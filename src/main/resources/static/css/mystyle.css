@@ -16,6 +16,7 @@
 }
 .header{
 	background-color: #191919;
+    height: 30px;
 	
 }
 .header .container{
@@ -27,7 +28,6 @@ list-style-type: none;
 display: inline-block;
 margin: 0px;
 padding-left: 11.2%;
- 
 }
 .socialicon>li{
 float: left;
@@ -60,9 +60,8 @@ text-decoration: none;
  .logreg{
  	list-style-type: none;
  	display: inline-block;
- 	
 	font-family: 'BebasNeue Regular';
-	font-size: 9pt;
+	font-size: 11pt;
 	color: #E7E7E7;
 	margin-bottom: 0px;
 	padding-left: 23%;
@@ -107,6 +106,7 @@ padding-left: 5%;
 	font-size: 11px;
 }
 .logreg{
+    margin-top: 5px;
 		padding-left: 8%;
 		font-size: 11px;
 }
@@ -148,16 +148,20 @@ padding-left: 5%;
   font-family: "BebasNeue Regular";
     src: url(../../static/css/source/fonts/BebasNeue-Regular.otf) format("truetype");
 }
+
+  #navbarontop > li {
+      margin-left: 34px;
+  }
   #navbarontop > li > a {
   	font-family: 'BebasNeue Regular';
   	font-size: 17px;
   	color: #313943;
     padding-top: 5px;
     padding-bottom: 6px;
-    margin-bottom: 22px;
+    /*margin-bottom: 22px;*/
  	padding-left: 10px;
     padding-right: 10px!important;
-    margin-left: 34px;
+    /*margin-left: 34px;*/
     border-bottom: 2px solid rgba(0,0,0,.0);
 
   }
@@ -168,7 +172,8 @@ padding-left: 5%;
   }
  
 
- #navbarontop>button{
+ #navbarontop li.button{
+     position: inherit;
  	background: none;
  	background-color: none;
  	border: 2px solid #C59E47;
@@ -176,15 +181,21 @@ padding-left: 5%;
  	margin-left: 60px;
   	font-size: 16.99px;
   	color: #313943;
-  	padding-left: 19px;
-  	padding-right: 19px;
-  	padding-top: -2px;
-  	padding-bottom:-2px;
+  	/*padding-left: 19px;*/
+  	/*padding-right: 19px;*/
+     margin-bottom: 25px;
+     border-radius: 10px;
+     height: 35px;
  }
- #navbarontop>button:hover{
+ #navbarontop li.button:hover{
  	background-color: #C59E47;
  	color: #fff;
  }
+ #navbarontop  li.button.log:hover {
+     background-color: none !important;
+     background: none !important;
+ }
+
  .dropdowncostume{
  	margin-left: 0px;
  }
@@ -258,13 +269,13 @@ padding-left: 5%;
 	margin-bottom: 10px;
 
 }
- #navbarontop>button{
- 	margin-left:50px;
+ /*#navbarontop>button{*/
+ 	/*margin-left:50px;*/
  
- }
+ /*}*/
 .navbar-default .navbar-nav .open .dropdowncostume > li > a {
-	text-align: left;
-	margin-left: 40px;
+	text-align: center;
+	/*margin-left: 40px;*/
 }
 #upmenu{
 	margin-bottom: 15px;
@@ -277,10 +288,7 @@ padding-left: 5%;
 .toggle-costume{
 float: right;
 }
- #navbarontop>button{
- 	margin-left:50px;
- 
- }
+
 .logo{
 	position: absolute;
 	top:10px;
@@ -303,6 +311,8 @@ float: right;
 	margin-bottom: 10px;
 
 }
+
+#navbarontop .d
 .navbar-default .navbar-nav .open .dropdowncostume > li > a {
 	text-align: left;
 	margin-left: 40px;
