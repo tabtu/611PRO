@@ -31,9 +31,10 @@ public class QuizController extends BaseController {
 
     @RequestMapping(value = "/quiz", method = RequestMethod.POST)
     public ModelAndView postQuiz(List<Question> questions) {
-//        String course_id = request.getParameter("course_id");
-//        List<Question> questions = questionv.getQuestionsByCourseId(course_id);
-        String username = "";
+//
+        //it is better to use session("username") to display the username on webpage by front-end,
+        //not necessary to return by controller
+        //String username = "";
         int correctnum = 0;
         int incorrectnum = 0;
         double score = 0.0;
@@ -51,7 +52,9 @@ public class QuizController extends BaseController {
         }
 
         ModelAndView mav = new ModelAndView("assessment");
-        mav.addObject("username", username);
+        //it is better to use session("username") to display the username on webpage,
+        //not necessary to return by controller
+        //mav.addObject("username", username);
         mav.addObject("correctnum", correctnum);
         mav.addObject("incorrectnum", incorrectnum);
         mav.addObject("score", score);

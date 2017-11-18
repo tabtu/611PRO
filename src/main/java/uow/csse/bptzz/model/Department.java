@@ -1,5 +1,8 @@
 package uow.csse.bptzz.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -28,8 +31,10 @@ public class Department extends Entitys implements Serializable {
     @Column(nullable = false, unique = true)
     private String name;
     @OneToMany(mappedBy = "s_department", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Student> students;
     @OneToMany(mappedBy = "c_department", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Course> courses;
 
     public Department() {

@@ -1,5 +1,7 @@
 package uow.csse.bptzz.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 /**
@@ -31,6 +33,7 @@ public class Question {
     private String answer;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="question_course")
+    @JsonManagedReference
     private Course course;
 
     public Question() {

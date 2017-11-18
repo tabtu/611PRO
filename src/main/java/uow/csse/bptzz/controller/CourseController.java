@@ -29,7 +29,7 @@ public class CourseController extends BaseController {
         return mav;
     }
 
-    @RequestMapping(value = "/courses", method = RequestMethod.GET)
+    @RequestMapping(value = "/courses{username}", method = RequestMethod.GET)
     public ModelAndView getCourses(HttpServletRequest request) {
         String username = request.getParameter("username");
         List<Course> courses = coursev.findCoursesByUsername(username);

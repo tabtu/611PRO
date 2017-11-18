@@ -1,5 +1,8 @@
 package uow.csse.bptzz.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -42,6 +45,7 @@ public class Student extends Entitys implements Serializable {
     private float overallGPA;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="student_department")
+    @JsonManagedReference
     private Department s_department;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "bptzz_student_course", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
