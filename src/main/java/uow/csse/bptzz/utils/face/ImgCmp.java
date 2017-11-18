@@ -15,11 +15,18 @@ import java.awt.image.DataBufferByte;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
+/**
+ * Compare Images
+ * @Author Tab Tu
+ * @Created Oct.27 2017
+ * @Updated Nov.15 2017
+ * @Description Include Detect Faces and So On.
+ */
 public class ImgCmp {
 
     /**
-     *
-     * @return
+     * Youtu face API
+     * @return the similarity fo these two pictures.
      */
     public static double compare(byte[] source, byte[] target) {
         double result = 0;

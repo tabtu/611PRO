@@ -1,10 +1,7 @@
 package uow.csse.bptzz.model;
 
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Create the Entity
@@ -32,19 +29,19 @@ public class Course {
     @Column(nullable = false)
     private int credits;
     //used for searching
-    private int StartTime;  //using 24 hours format, 0-23, start from at the beginning of an hour, easy to process
-    private int EndTime;    //using 24 hours format, 0-23, EndTime > StartTime
-    private String Day;     //using multiple choice list, "MONDAY;TUESDAY;WEDNESDAY;THURSDAY;FRIDAY"
+    private int startTime;  //using 24 hours format, 0-23, start from at the beginning of an hour, easy to process
+    private int endTime;    //using 24 hours format, 0-23, EndTime > StartTime
+    private String day;     //using multiple choice list, "MONDAY;TUESDAY;WEDNESDAY;THURSDAY;FRIDAY"
     private String textbook;
     private String refTextbook;
     private String courseLink;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="course_department")
     private Department c_department;
-    @ManyToMany(mappedBy = "courses")
-    private Set<Student> students;
-    @OneToMany(mappedBy = "course")
-    private Set<Question> questions;
+    @ManyToMany(mappedBy = "courses", cascade = CascadeType.ALL)
+    private List<Student> students;
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    private List<Question> questions;
 
     public Course() {
     }
@@ -90,27 +87,27 @@ public class Course {
     }
 
     public int getStartTime() {
-        return StartTime;
+        return startTime;
     }
 
     public void setStartTime(int startTime) {
-        StartTime = startTime;
+        this.startTime = startTime;
     }
 
     public int getEndTime() {
-        return EndTime;
+        return endTime;
     }
 
     public void setEndTime(int endTime) {
-        EndTime = endTime;
+        this.endTime = endTime;
     }
 
     public String getDay() {
-        return Day;
+        return day;
     }
 
     public void setDay(String day) {
-        Day = day;
+        this.day = day;
     }
 
     public String getTextbook() {
@@ -145,22 +142,19 @@ public class Course {
         this.c_department = c_department;
     }
 
-    public Set<Student> getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(Set<Student> students) {
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
 
-    public Set<Question> getQuestions() {
+    public List<Question> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(Set<Question> questions) {
+    public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
-
-    @Override
-    public String toString() { return ToStringBuilder.reflectionToString(this); }
 }
