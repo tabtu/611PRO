@@ -1,6 +1,8 @@
 package uow.csse.bptzz.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
@@ -40,10 +42,12 @@ public class Course {
     private String courseLink;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="course_department")
+    @JsonManagedReference
     private Department c_department;
     @ManyToMany(mappedBy = "courses", cascade = CascadeType.ALL)
     private Set<Student> students;
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @JsonBackReference
     private Set<Question> questions;
 
     public Course() {
