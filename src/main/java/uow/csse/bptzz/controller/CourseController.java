@@ -32,7 +32,7 @@ public class CourseController extends BaseController {
     @RequestMapping(value = "/courses{username}", method = RequestMethod.GET)
     public ModelAndView getCourses(HttpServletRequest request) {
         String username = request.getParameter("username");
-        List<Course> courses = coursev.findCourseByUsername(username);
+        List<Course> courses = coursev.findCoursesByUsername(username);
 
         ModelAndView mav = new ModelAndView("courses");
         mav.addObject("courses", courses);

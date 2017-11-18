@@ -13,10 +13,7 @@ import uow.csse.bptzz.model.Question;
 import uow.csse.bptzz.model.User;
 import uow.csse.bptzz.model.result.ExceptionMsg;
 import uow.csse.bptzz.model.result.Response;
-import uow.csse.bptzz.repository.CourseRepo;
-import uow.csse.bptzz.repository.DepartmentRepo;
-import uow.csse.bptzz.repository.QuestionRepo;
-import uow.csse.bptzz.repository.UserRepo;
+import uow.csse.bptzz.repository.*;
 import uow.csse.bptzz.service.CourseService;
 import uow.csse.bptzz.service.QuizService;
 import uow.csse.bptzz.service.UserService;
@@ -51,59 +48,42 @@ public class UserController extends BaseController {
     @Autowired
     private UserRepo usrpo;
 
+    @Autowired
+    private StudentRepo studrepo;
+
     @GetMapping("/getuser")
     public User getUser() {
-        return usrserv.findByUsername("tabtu");
+        return usrserv.findUserByUsername("tabtu");
     }
 
     @GetMapping("/test")
     public void test() {
         User user = new User("test", "123", "i@tabtu.cn");
-        usrserv.save(user);
+        usrserv.saveUser(user);
     }
 
-    @GetMapping("/dpt-cors")
+    @GetMapping("/tt")
     public String dptcors() {
-        return corsserv.findCourseByDepartmentId(1).size() + "";
+        List<Course> ss = corsserv.findCoursesByUsername("tabtu");
+//        return studrepo.findOne(1).getS_department().getName();
+        //return corsserv.findCourseByDepartmentId(1).size() + "";
+        //return qustrepo.findByCourse(corpo.findOne("CS1002")).size() + "";
+        return ss.get(0).getCourseName();
     }
 
     @GetMapping("/getquestions")
     public String getquestion() {
-        return usrpo.findByStudent_Gender(true).get(0).getUsername();
+        //return qustrepo.findByCourse(corpo.findOne("CS1002")).get(0).getContent();
+        return quizserv.get10RandomQuestions("CS1002")[0].getContent();
         //return qustrepo.findByCourse_Course_id("CS1002").size() + "";
+        //return qustrepo.findByCourse_Day("FRIDAY").getTotalPages() + "";
     }
 
     @GetMapping("/initdepartment")
     public void initdepartment() {
         Department dept = new Department("Business");
 
-        corsserv.saveDepartment(dept);
-    }
-
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public Response create(User user) {
-        try {
-            User registUser = usrserv.findByEmail(user.getEmail());
-            if (null != registUser) {
-                return result(ExceptionMsg.EmailUsed);
-            }
-            User userNameUser = usrserv.findByUsername(user.getUsername());
-            if (null != userNameUser) {
-                return result(ExceptionMsg.UserNameUsed);
-            }
-            user.setPassword(getPwd(user.getPassword()));
-            user.setCreateTime(DateUtils.getCurrentTime());
-            user.setLastModifyTime(DateUtils.getCurrentTime());
-            user.setProfilePicture("");
-            user.setValidataCode("");
-            user.setIntroduction("");
-            usrserv.save(user);
-            getSession().setAttribute(Const.LOGIN_SESSION_KEY, user);
-        } catch (Exception e) {
-            logger.error("create user failed, ", e);
-            return result(ExceptionMsg.FAILED);
-        }
-        return result();
+        usrserv.saveDepartment(dept);
     }
 
     protected String getPwd(String password){

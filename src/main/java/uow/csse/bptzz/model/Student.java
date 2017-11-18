@@ -6,15 +6,15 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Create the Entity
  *
  * @author 	Eason Pan
  * @date	2017-10-16
- * @update  Tab Tu on Nov.1 2017
- * @since	1.1
+ * @update  Tab Tu on Nov.17 2017
+ * @since	1.2
  *
  * Database: pro611db
  * Username: bfa57f3b0eddae
@@ -43,16 +43,13 @@ public class Student extends Entitys implements Serializable {
     @Column(nullable = false)
     private int yearEnrolled;
     private float overallGPA;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="student_department")
     @JsonManagedReference
     private Department s_department;
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "bptzz_student_course", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private Set<Course> courses;
-
-    public Student() {
-    }
+    private List<Course> courses;
 
     public Student(String firstname, String lastname, Boolean gender, Date dob, Department s_department) {
         this.firstname = firstname;
@@ -150,11 +147,11 @@ public class Student extends Entitys implements Serializable {
         this.s_department = s_department;
     }
 
-    public Set<Course> getCourses() {
+    public List<Course> getCourses() {
         return courses;
     }
 
-    public void setCourses(Set<Course> courses) {
+    public void setCourses(List<Course> courses) {
         this.courses = courses;
     }
 }

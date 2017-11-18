@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uow.csse.bptzz.model.Course;
 import uow.csse.bptzz.model.Department;
+import uow.csse.bptzz.model.Question;
 import uow.csse.bptzz.model.User;
 import uow.csse.bptzz.repository.CourseRepo;
 import uow.csse.bptzz.repository.DepartmentRepo;
+import uow.csse.bptzz.repository.QuestionRepo;
 import uow.csse.bptzz.repository.UserRepo;
 import uow.csse.bptzz.service.CourseService;
 import uow.csse.bptzz.utils.IterableUtil;
@@ -24,8 +26,7 @@ public class CourseServiceImpl implements CourseService {
     private CourseRepo cursRepo;
 
     @Autowired
-    private DepartmentRepo deptRepo;
-
+    private QuestionRepo qustRepo;
 
     @Override
     public Course findCourseById(String corid) {
@@ -33,8 +34,8 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> findCourseByName(String name) {
-        return IterableUtil.makeList(cursRepo.findByCourseName(name));
+    public List<Course> findCoursesByName(String name) {
+        return cursRepo.findByCourseName(name);
     }
 
     @Override
@@ -43,20 +44,18 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void saveDepartment(Department department) {
-        deptRepo.save(department);
+    public void saveQuestion(Question question) {
+        qustRepo.save(question);
     }
 
     @Override
-    public List<Course> findCourseByUsername(String username) {
+    public List<Course> findCoursesByUsername(String username) {
         User user = userRepo.findByUsername(username);
-        Set<Course> courses = user.getStudent().getCourses();
-        return new ArrayList<>(courses);
+        return user.getStudent().getCourses();
     }
 
     @Override
-    public List<Course> findCourseByDepartmentId(int department_id) {
-
-        return null; //cursRepo.fin(deptRepo.findOne(department_id));
+    public List<Course> findCoursesByDepartmentId(int department_id) {
+        return null;//return cursRepo.fin(deptRepo.findOne(department_id));
     }
 }
