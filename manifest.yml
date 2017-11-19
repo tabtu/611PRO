@@ -1,6 +1,6 @@
   applications:
-   - name: GetStartedJava
+   - name: FaceRecognizer
      random-route: true
-     path: target/GetStartedJava.war
-     memory: 512M
+     path: target/FaceRecognizer.war
+     memory: 1G
      instances: 1
