@@ -30,8 +30,9 @@ public class QuizController extends BaseController {
     }
 
     @RequestMapping(value = "/quiz", method = RequestMethod.POST)
-    public ModelAndView postQuiz(List<Question> questions) {
-//
+    public ModelAndView postQuiz(HttpServletRequest request) {
+
+        String[] qStrings= request.getParameter("quizString").split("\\s{1,}");
         //it is better to use session("username") to display the username on webpage by front-end,
         //not necessary to return by controller
         //String username = "";
@@ -39,8 +40,21 @@ public class QuizController extends BaseController {
         int incorrectnum = 0;
         double score = 0.0;
 
-        for (Question question : questions) {
-            if (question.getAnswer() == questionv.getQuestionById(question.getQuestion_id()).getAnswer() )
+//        List<Question> questions
+//        for (Question question : questions) {
+//            if (question.getAnswer() == questionv.getQuestionById(question.getQuestion_id()).getAnswer() )
+//            {
+//                correctnum += 1;
+//                score += 10.0;
+//
+//            } else {
+//                incorrectnum += 1;
+//            }
+//
+//        }
+
+        for (int i = 0; i < qStrings.length(); i+=2 ) {
+            if (qStrings[i+1] == questionv.getQuestionById(Integer.parseInt(qStrings[i])).getAnswer())
             {
                 correctnum += 1;
                 score += 10.0;
@@ -49,7 +63,9 @@ public class QuizController extends BaseController {
                 incorrectnum += 1;
             }
 
+
         }
+
 
         ModelAndView mav = new ModelAndView("assessment");
         //it is better to use session("username") to display the username on webpage,
