@@ -38,6 +38,7 @@ public class Department extends Entitys implements Serializable {
     private List<Course> courses;
 
     public Department() {
+
     }
 
     public Department(String name) {

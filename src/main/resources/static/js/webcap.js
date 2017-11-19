@@ -42,27 +42,3 @@ function getPhoto() {
 function getVedio() {
     drawVideoAtCanvas(video, context2);
 }
-
-function submitForm() {
-    var fileImg = context1.toDataURL();
-    // $("#registerForm").attr("enctype", "multipart/form-data");
-    // var formData = new FormData($("#registerForm")[0]);
-    //formData.append("imgBase64", encodeURIComponent("testtesttest"));//
-    formData.append("file", encodeURIComponent(fileImg));//
-    // formData.append("fileFileName", "photo.jpg");
-    $.ajax({
-        url: "/identify",
-        type: 'GET',
-        data: fileImg,
-        timeout: 10000, //超时时间设置，单位毫秒
-        async: true,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function (result) {
-        },
-        error: function () {
-            alert('上传图片出错');
-        }
-    });
-}

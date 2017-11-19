@@ -32,6 +32,10 @@ public class Role extends Entitys implements Serializable {
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
+    public Role() {
+
+    }
+
     public Role(String name) { this.name = name; }
 
     public Long getRole_id() { return role_id; }

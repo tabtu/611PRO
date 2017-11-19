@@ -1,7 +1,5 @@
 package uow.csse.bptzz.utils.youtu;
 
-import org.springframework.util.Base64Utils;
-
 import java.util.Random;
 
 public class YoutuSign {
@@ -43,7 +41,7 @@ public class YoutuSign {
         System.arraycopy(bin, 0, all, 0, bin.length);
         System.arraycopy(plain_text.getBytes(), 0, all, bin.length, plain_text.getBytes().length);
 
-        mySign.append(Base64Utils.encode(all));
+        mySign.append(Base64Util.encode(all));
 
         return 0;
 	}

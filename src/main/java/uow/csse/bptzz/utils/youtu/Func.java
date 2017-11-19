@@ -2,7 +2,6 @@ package uow.csse.bptzz.utils.youtu;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.util.Base64Utils;
 
 import javax.net.ssl.*;
 import java.io.*;
@@ -131,7 +130,7 @@ public class Func {
 			byte data[] = new byte[(int) imageFile.length()]; // 创建合适文件大小的数组
 			in.read(data); // 读取文件中的内容到b[]数组
 			in.close();
-			base64.append(Base64Utils.encode(data));
+			base64.append(Base64Util.encode(data));
 
 		} else {
 			throw new FileNotFoundException(filePath + " not exist");
@@ -331,8 +330,8 @@ public class Func {
 	public JSONObject FaceCompare(byte[] image_a, byte[] image_b)
 			throws IOException, JSONException, KeyManagementException, NoSuchAlgorithmException {
 		JSONObject data = new JSONObject();
-		data.put("imageA", Base64Utils.encode(image_a));
-		data.put("imageB", Base64Utils.encode(image_b));
+		data.put("imageA", Base64Util.encode(image_a));
+		data.put("imageB", Base64Util.encode(image_b));
 		JSONObject respose =m_not_use_https?SendHttpRequest(data, "api/facecompare"):SendHttpsRequest(data, "api/facecompare");
 
 		return respose;

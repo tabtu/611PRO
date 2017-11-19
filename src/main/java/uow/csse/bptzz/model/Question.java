@@ -37,6 +37,7 @@ public class Question {
     private Course course;
 
     public Question() {
+
     }
 
     public Question(String content, String optiona, String optionb, String optionc, String optiond, String answer) {

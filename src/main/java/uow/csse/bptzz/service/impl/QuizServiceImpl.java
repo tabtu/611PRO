@@ -9,6 +9,7 @@ import uow.csse.bptzz.service.QuizService;
 import uow.csse.bptzz.utils.IterableUtil;
 import uow.csse.bptzz.utils.RandomUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,14 +19,16 @@ public class QuizServiceImpl implements QuizService {
     private QuestionRepo qustrepo;
 
     @Override
-    public Question[] get10RandomQuestions(String corsid) {
-        Question[] result = new Question[10];
+    public List<Question> getTop10Questions(String corsid) {
         List<Question> alq = qustrepo.findByCourse_Course_id(corsid);
-        int[] qn = RandomUtil.randomCommon(0, alq.size(), 10);
-        for (int i = 0; i < 10; i++) {
-            result[i] = alq.get(qn[i]);
+        if (alq.size() > 10) {
+            List<Question> bc = new ArrayList<>();
+            for (int i = 0; i < 10; i++) {
+                bc.add(alq.get(i));
+            }
+            return bc;
         }
-        return result;
+        return alq;
     }
 
     @Override

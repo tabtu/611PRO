@@ -35,7 +35,7 @@ public class ImgCmp {
             JSONObject respose = faceYoutu.FaceCompare(source, target);
             result = (double) respose.get("similarity");
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             return -1;
         }
         return result;

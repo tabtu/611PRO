@@ -97,13 +97,13 @@
 
         function submitForm() {
             fileImg = canvas1.toDataURL('image/jpg');
-            $("#registerForm").attr("enctype", "multipart/form-data");
-            var formData = new FormData($("#registerForm")[0]);
-            //formData.append("imgBase64", encodeURIComponent("testtesttest"));//
-            formData.append("imgBase64", encodeURIComponent(fileImg));//
-            formData.append("fileFileName", "photo.jpg");
+
+            var formData = new FormData();
+            var usr = $("#httpServletRequest.remoteUser");
+            formData.append("usr", usr);
+            formData.append("pic", encodeURIComponent(fileImg));
             $.ajax({
-                url: "/testpic",
+                url: "/identify0",
                 type: 'POST',
                 data: formData,
                 timeout: 10000, //超时时间设置，单位毫秒
@@ -111,9 +111,11 @@
                 cache: false,
                 contentType: false,
                 processData: false,
-                success: function (result) {
+                success: function (String) {
+                    alert("1");
                 },
                 error: function (returndata) {
+                    alert("error");
                 }
             });
         }
