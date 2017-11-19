@@ -21,7 +21,7 @@ public class QuizController extends BaseController {
     @RequestMapping(value = "/quiz{course_id}", method = RequestMethod.GET)
     public ModelAndView getQuiz(HttpServletRequest request) {
         String course_id = request.getParameter("course_id");
-        Question[] questions = questionv.get10Questions(course_id);
+        Question[] questions = questionv.get10RandomQuestions(course_id);
 
         ModelAndView mav = new ModelAndView("quiz");
         mav.addObject("questions", questions);

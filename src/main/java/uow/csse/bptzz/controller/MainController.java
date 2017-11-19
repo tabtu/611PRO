@@ -94,7 +94,7 @@ public class MainController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String postRegister(HttpServletRequest request) {
         User usr = new User(request.getParameter("username"), request.getParameter("password"), request.getParameter("email"));
-        usrserv.save(usr);
+        usrserv.saveUser(usr);
         return "/login";
     }
 
