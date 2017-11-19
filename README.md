@@ -15,4 +15,4 @@ redmine：https://redmine.cs.uwindsor.ca/projects/team_4p1
 
 github：https://github.com/tabtu/611PRO
 
-<a href="https://bluemix.net/deploy?repository=<git_repository_URL>&branch=<git_branch>"><img src="https://bluemix.net/deploy/button.png" alt="部署到 Bluemix"></a>
+<a href="https://bluemix.net/deploy?repository=<https://github.com/tabtu/611PRO>&branch=<master>"><img src="https://bluemix.net/deploy/button_x2.png" alt="Deploy to Bluemix"></a>
