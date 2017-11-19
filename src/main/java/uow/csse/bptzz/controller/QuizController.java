@@ -53,7 +53,7 @@ public class QuizController extends BaseController {
 //
 //        }
 
-        for (int i = 0; i < qStrings.length(); i+=2 ) {
+        for (int i = 0; i < qStrings.length; i+=2 ) {
             if (qStrings[i+1] == questionv.getQuestionById(Integer.parseInt(qStrings[i])).getAnswer())
             {
                 correctnum += 1;

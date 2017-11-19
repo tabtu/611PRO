@@ -5,6 +5,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,15 +13,16 @@ import uow.csse.bptzz.config.Const;
 import uow.csse.bptzz.model.User;
 import uow.csse.bptzz.service.UserService;
 import uow.csse.bptzz.utils.FileUtil;
+import uow.csse.bptzz.utils.face.ImgCmp;
+import uow.csse.bptzz.utils.face.ImgFace;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.*;
 
 /**
  * Main Controller
  *
  * @author 	Tab Tu
- * @date	Oct.17 2017
+ * @date	Nov.18 2017
  * @version	1.0
  */
 
@@ -65,7 +67,33 @@ public class MainController {
         return "/test";
     }
 
-    @RequestMapping(value="/upload", method = RequestMethod.POST)
+
+
+    @GetMapping("/demo")
+    public String demo() { return "/demo/capture"; };
+
+    /**
+     * check the similarity
+     * @param username username in String
+     * @param picture capture picture after Base64 encode
+     * @return the similarity
+     */
+    @RequestMapping(value = "/identify", method = RequestMethod.POST)
+    public @ResponseBody String identify(@RequestParam("usr") String username,
+                                         @RequestParam("pic") String picture) {
+        ImgFace pic1 = new ImgFace(Base64Utils.decodeFromString(picture));
+        int faces = pic1.dectface();
+        if (faces > 0) {
+            String profile = usrserv.findStudentByUsername(username).getProfilepic();
+            ImgFace pic0 = new ImgFace(Const.PROFILE_PATH + profile);
+            double result = ImgCmp.compare(pic0.getImgbytes(), pic1.getImgbytes());
+            return result + "";
+        } else {
+            return "nofaces";
+        }
+    }
+
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public @ResponseBody
     String uploadfile(@RequestParam("file") MultipartFile file) {
         String fileName = System.currentTimeMillis() + "." +
@@ -78,11 +106,6 @@ public class MainController {
         }
         return "uploadimg success";
     }
-
-
-
-
-
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(Model model, String error, String logout) {

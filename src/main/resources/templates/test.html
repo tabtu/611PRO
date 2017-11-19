@@ -96,14 +96,14 @@
         });
 
         function submitForm() {
-            //context1.drawImage(video, 0, 0, 400, 300);
-            fileImg = context1.toDataURL('image/jpg');
+            fileImg = canvas1.toDataURL('image/jpg');
             $("#registerForm").attr("enctype", "multipart/form-data");
             var formData = new FormData($("#registerForm")[0]);
+            //formData.append("imgBase64", encodeURIComponent("testtesttest"));//
             formData.append("imgBase64", encodeURIComponent(fileImg));//
             formData.append("fileFileName", "photo.jpg");
             $.ajax({
-                url: "/upload",
+                url: "/testpic",
                 type: 'POST',
                 data: formData,
                 timeout: 10000, //超时时间设置，单位毫秒
