@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+   <title>Regeister</title>
+   <div th:replace="fragments/header :: header-css"/>
+   <link rel="stylesheet" th:href="@{/css/style.css}"
+         href="../../css/style.css"/>
+
+   <link rel="stylesheet" th:href="@{/css/media/css/bootstrap.css}" id="bscss" />
+   <link rel="stylesheet" th:href="@{/css/media/css/app.css}" id="maincss" />
+   <link rel="stylesheet" th:href="@{/css/media/css/theme-i.css}" id="maincss" />
+</head>
+<body>
+
+<div class="container">
+   <div class="wrapper">
+      <div class="block-center mt-xl wd-xl">
+         <div class="panel panel-dark panel-flat">
+            <div class="panel-heading text-center">
+               <a th:href="@{/home}">
+                  <img th:src="@{/img/logo/logo3.png}" alt="logo" class="block-center img-rounded"/>
+               </a>
+            </div>
+            <div class="panel-body" id="registPage">
+               <p class="text-center pv">Registration</p>
+               <form id="form" method="post" action="@{/register}" th:action="@{/register}">
+                  <div class="form-group has-feedback">
+                     <!--<label for="signupInputEmail1" class="text-muted">email</label>-->
+                     <input type="email" id="signupInputEmail1" placeholder="Your Email Address" name="email" class="form-control" />
+                     <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                  </div>
+                  <div class="form-group has-feedback">
+                     <!--<label for="signupInputEmail1" class="text-muted">username</label>-->
+                     <input type="text" id="signupInputEmail2" class="form-control" placeholder="Your Username" name="username" />
+                     <span class="fa fa-user form-control-feedback text-muted"></span>
+                  </div>
+                  <div class="form-group has-feedback">
+                     <!--<label for="signupInputPassword" class="text-muted">password</label>-->
+                     <input type="password" id="signupInputPassword" class="form-control" placeholder="Your Password" name="password"/>
+                     <span class="fa fa-lock form-control-feedback text-muted"></span>
+                  </div>
+                   <input type="submit" class="btn btn-block btn-primary mt-lg" value="Creat Account"/>
+                  <!--<button v-on:click="register" class="btn btn-block btn-primary mt-lg">Create Account</button>-->
+               </form>
+               <p></p>
+               <div id="errorMsg" class="alert alert-danger text-center" style="display:none;"></div>
+               <p class="pt-lg text-center">Have Already Registed?</p>
+               <a th:href="@{/login}" class="btn btn-block btn-default">Login</a>
+            </div>
+         </div>
+         <div class="p-lg text-center">
+            <span>&copy;</span>
+            <span>2017</span>
+            <span>-</span>
+            <span>2018</span>
+            <br/>
+            <span>MAC 60-611 PROJECT</span>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>
