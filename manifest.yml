@@ -1,6 +1,5 @@
   applications:
-   - name: FaceRecognizer
+   - name: FaceQuiz
      random-route: true
-     path: target/FaceRecognizer.war
      memory: 1G
      instances: 1
