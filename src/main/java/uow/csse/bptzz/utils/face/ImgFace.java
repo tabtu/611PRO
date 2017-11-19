@@ -4,6 +4,7 @@ import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
+import uow.csse.bptzz.utils.Base64;
 
 /**
  * OpenCV Operation
@@ -20,13 +21,18 @@ public class ImgFace {
     public static String datafile = "src/main/resources/static/data/haarcascades/haarcascade_frontalface_alt.xml";
     //private final static String IMG_PATH = Const.PFIMG_PATH;
 
-    private final static int WIDTH = 300;
+    private final static int WIDTH = 500;
 
-    private final static int HEIGHT = 300;
+    private final static int HEIGHT = 500;
 
     private Mat source;
 
     private String sourceEXT;
+
+    public ImgFace(byte[] data) {
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        source =  Imgcodecs.imdecode(new MatOfByte(data), Imgcodecs.CV_LOAD_IMAGE_UNCHANGED);
+    }
 
     public ImgFace(String sourcefilename) {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
@@ -81,6 +87,18 @@ public class ImgFace {
         } else {
             return 0;
         }
+
+        // 扩大裁剪边界并修正。
+        if (rec.y > rec.height / 4) rec.y -= (rec.height / 4);
+        else rec.y = 0;
+        if (rec.x > rec.width / 4) rec.x -= (rec.width / 4);
+        else rec.x = 0;
+        if (rec.y + rec.height * 1.5 < source.height()) rec.height *= 1.5;
+        else rec.height = source.height() - rec.y;
+        if (rec.x + rec.width * 1.5 < source.width()) rec.width *= 1.5;
+        else rec.width = source.width() - rec.x;
+
+        // 裁剪图片并重新输出图片，大小定义为WIDTH*HEIGHT
         Size size = new Size(WIDTH, HEIGHT);
         Imgproc.resize(source.submat(rec), source, size);
         return 1;

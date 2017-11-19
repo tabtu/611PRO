@@ -1,3 +1,6 @@
+var exArray = [];
+var context1 = canvas1.getContext('2d');
+
 function getMedia() {
     if (navigator.getUserMedia) {
         navigator.getUserMedia({
@@ -15,23 +18,12 @@ function getMedia() {
 }
 
 function successFunc(stream) {
-    //alert('Succeed to get media!');
     if (video.mozSrcObject !== undefined) {
         // In Firefox, video.mozSrcObject will initial to null, not uninitial
         video.mozSrcObject = stream;
     }
     else {
         video.src = window.URL && window.URL.createObjectURL(stream) || stream;
-    }
-
-    //video.play();
-
-    // Audio
-    audio = new Audio();
-    audioType = getAudioType(audio);
-    if (audioType) {
-        audio.src = 'polaroid.' + audioType;
-        audio.play();
     }
 }
 
@@ -40,36 +32,37 @@ function errorFunc(e) {
     alert('Error！'+e);
 }
 
-// draw video to Canvas, 60ms change every frame
-function drawVideoAtCanvas(video,context) {
-    window.setInterval(function () {
-        context.drawImage(video, 0, 0,90,120);
-    }, 60);
-}
-
-// AudioType
-function getAudioType(element) {
-    if (element.canPlayType) {
-        if (element.canPlayType('audio/mp4; codecs="mp4a.40.5"') !== '') {
-            return ('aac');
-        } else if (element.canPlayType('audio/ogg; codecs="vorbis"') !== '') {
-            return ("ogg");
-        }
-    }
-    return false;
-}
-
-// draw video to canvas
-//        video.addEventListener('play', function () {
-//            drawVideoAtCanvas(video, context2);
-//        }, false);
-
 // Photo
 function getPhoto() {
-    context1.drawImage(video, 0, 0, 400, 300); //将video对象内指定的区域捕捉绘制到画布上指定的区域，实现拍照。
+    context1.drawImage(video, 0, 0, canvas1.width, canvas1.height);
+    canvas1.height()
 }
 
 // Video
 function getVedio() {
     drawVideoAtCanvas(video, context2);
+}
+
+function submitForm() {
+    var fileImg = context1.toDataURL();
+    // $("#registerForm").attr("enctype", "multipart/form-data");
+    // var formData = new FormData($("#registerForm")[0]);
+    //formData.append("imgBase64", encodeURIComponent("testtesttest"));//
+    formData.append("file", encodeURIComponent(fileImg));//
+    // formData.append("fileFileName", "photo.jpg");
+    $.ajax({
+        url: "/identify",
+        type: 'GET',
+        data: fileImg,
+        timeout: 10000, //超时时间设置，单位毫秒
+        async: true,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (result) {
+        },
+        error: function () {
+            alert('上传图片出错');
+        }
+    });
 }

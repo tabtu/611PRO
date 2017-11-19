@@ -15,6 +15,8 @@ public interface UserService {
 
     List<Student> findStudentByUserIsUsing(boolean enable);
 
+    Student findStudentByUsername(String username);
+
     void saveUser(User user);
 
     void saveStudent(Student student);

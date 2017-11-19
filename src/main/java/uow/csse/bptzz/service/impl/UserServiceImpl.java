@@ -55,6 +55,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Student findStudentByUsername(String username) {
+        return studRepo.findByUserUsername(username);
+    }
+
+    @Override
     public void saveStudent(Student student) {
         studRepo.save(student);
     }
