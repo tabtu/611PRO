@@ -8,7 +8,6 @@ import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.springframework.util.Base64Utils;
-import sun.tools.java.Imports;
 import uow.csse.bptzz.config.Const;
 import uow.csse.bptzz.utils.Base64;
 import uow.csse.bptzz.utils.face.ImgCmp;
