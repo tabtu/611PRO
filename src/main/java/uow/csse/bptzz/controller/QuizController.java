@@ -15,13 +15,14 @@ import java.util.List;
 
 @RestController
 public class QuizController extends BaseController {
+
     @Autowired
     private QuizService questionv;
 
     @RequestMapping(value = "/quiz{course_id}", method = RequestMethod.GET)
     public ModelAndView getQuiz(HttpServletRequest request) {
         String course_id = request.getParameter("course_id");
-        Question[] questions = questionv.get10RandomQuestions(course_id);
+        List<Question> questions = questionv.getTop10Questions(course_id);
 
         ModelAndView mav = new ModelAndView("quiz");
         mav.addObject("questions", questions);

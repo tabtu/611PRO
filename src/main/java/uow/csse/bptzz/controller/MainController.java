@@ -17,6 +17,7 @@ import uow.csse.bptzz.utils.face.ImgCmp;
 import uow.csse.bptzz.utils.face.ImgFace;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 
 /**
  * Main Controller
@@ -68,34 +69,58 @@ public class MainController {
     }
 
 
-
     @GetMapping("/demo")
-    public String demo() { return "/demo/capture"; };
+    public String demo() {
+        return "/demo/capture";
+    }
+
+
+
+
+    @RequestMapping(value = "/identify0", method = RequestMethod.POST)
+    public @ResponseBody String testUploadFile(@RequestParam("usr") String username,
+                      @RequestParam("pic") MultipartFile file) {
+        String profile = usrserv.findStudentByUsername(username).getProfilepic();
+        try {
+            File f1 = new File(Const.PROFILE_PATH + profile);
+            double result = ImgCmp.compare(file.getBytes(), FileUtil.getContent(f1));
+            return result + "";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
 
     /**
      * check the similarity
      * @param username username in String
-     * @param picture capture picture after Base64 encode
+     * @param file capture picture after Base64 encode
      * @return the similarity
      */
     @RequestMapping(value = "/identify", method = RequestMethod.POST)
     public @ResponseBody String identify(@RequestParam("usr") String username,
-                                         @RequestParam("pic") String picture) {
-        ImgFace pic1 = new ImgFace(Base64Utils.decodeFromString(picture));
-        int faces = pic1.dectface();
-        if (faces > 0) {
-            String profile = usrserv.findStudentByUsername(username).getProfilepic();
-            ImgFace pic0 = new ImgFace(Const.PROFILE_PATH + profile);
-            double result = ImgCmp.compare(pic0.getImgbytes(), pic1.getImgbytes());
-            return result + "";
-        } else {
-            return "nofaces";
+                                         @RequestParam("pic") MultipartFile file) {
+        System.out.println(username);
+        try {
+            ImgFace pic1 = new ImgFace(file.getBytes());
+            System.out.println(pic1.getSourceEXT());
+            int faces = pic1.dectface();
+            if (faces > 0) {
+                String profile = usrserv.findStudentByUsername(username).getProfilepic();
+                System.out.println(profile);
+                ImgFace pic0 = new ImgFace(Const.PROFILE_PATH + profile);
+                double result = ImgCmp.compare(pic0.getImgbytes(), pic1.getImgbytes());
+                return result + "";
+            } else {
+                return "nofaces";
+            }
+        } catch (Exception e) {
+
         }
+        return "";
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public @ResponseBody
-    String uploadfile(@RequestParam("file") MultipartFile file) {
+    public @ResponseBody String uploadfile(@RequestParam("file") MultipartFile file) {
         String fileName = System.currentTimeMillis() + "." +
                 FileUtil.getFileExtName(file.getOriginalFilename());
         String filePath = Const.UPLOAD_PATH;
@@ -104,7 +129,7 @@ public class MainController {
         } catch (Exception e) {
             // TODO: handle exception
         }
-        return "uploadimg success";
+        return "Upload Success";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)

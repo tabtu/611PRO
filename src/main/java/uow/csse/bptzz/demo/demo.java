@@ -11,6 +11,7 @@ import org.springframework.util.Base64Utils;
 import sun.tools.java.Imports;
 import uow.csse.bptzz.config.Const;
 import uow.csse.bptzz.utils.Base64;
+import uow.csse.bptzz.utils.FileUtil;
 import uow.csse.bptzz.utils.face.ImgCmp;
 import uow.csse.bptzz.utils.face.ImgFace;
 import uow.csse.bptzz.utils.youtu.Func;
@@ -66,7 +67,7 @@ public class demo {
         for (String e : files) {
             ImgFace i = new ImgFace(PROFILE_PATH + e);
             i.dectface();
-            Imgcodecs.imwrite(PROFILE_PATH + "head:" + e, i.getSource());
+            Imgcodecs.imwrite(PROFILE_PATH + System.currentTimeMillis() + e, i.getSource());
         }
     }
 
@@ -94,11 +95,23 @@ public class demo {
         }
     }
 
+    public static void testcmpfromfile() {
+        try {
+            File f0 = new File(PROFILE_PATH + "TTXY.JPG");
+            File f1 = new File(PROFILE_PATH + "tab.JPG");
+            double result = ImgCmp.compare(FileUtil.getContent(f0), FileUtil.getContent(f1));
+            System.out.println(result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
-//        String[] sname = { "1.JPG", "2.JPG", "3.JPG", "4.JPG", "5.JPG" };
-//        gethead(sname);
+        String[] sname = { "1.JPG"};//, "2.JPG", "3.JPG", "4.JPG", "5.JPG" };
+        gethead(sname);
 //        testcmp();
-        testbytebase64();
+//        testbytebase64();
+//        testcmpfromfile();
 //        int who = login(Const.UPLOAD_PATH + "1511030426997.jpg");
 //        if (who >= 0) System.out.println(names[who]);
 //        else System.out.println("unknown");

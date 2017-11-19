@@ -37,7 +37,7 @@ public class Const {
 	public void setDataCVPath(@Value("${bptzz.data.cv.path}")String dataCVPath) { Const.DATACV_PATH = dataCVPath; }
 
 	@Autowired
-	public void setProfilePath(@Value("${bptzz.profile.path}")String profilePath) { Const.DATACV_PATH = profilePath; }
+	public void setProfilePath(@Value("${bptzz.profile.path}")String profilePath) { Const.PROFILE_PATH = profilePath; }
 
 	@Autowired
 	public void setUploadPath(@Value("${bptzz.upload.path}")String uploadPath) { Const.UPLOAD_PATH = uploadPath; }

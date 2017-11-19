@@ -94,8 +94,39 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <!--<groupId>org.apache.maven.plugins</groupId>-->
+        <!--<artifactId>maven-war-plugin</artifactId>-->
+        <!--<configuration>-->
+          <!--<webResources>-->
+            <!--<resource>-->
+              <!--<directory>lib</directory>-->
+              <!--<targetPath>WEB-INF/lib/</targetPath>-->
+              <!--<includes>-->
+                <!--<include>**/*.jar</include>-->
+                <!--<include>**/*.dylib</include>-->
+                <!--<include>**/*.dll</include>-->
+              <!--</includes>-->
+            <!--</resource>-->
+          <!--</webResources>-->
+        <!--</configuration>-->
       </plugin>
     </plugins>
+
+    <!--<resources>-->
+      <!--<resource>-->
+        <!--<directory>src/lib</directory>-->
+        <!--<targetPath>BOOT-INF/lib/</targetPath>-->
+        <!--<includes>-->
+          <!--<include>**/*.jar</include>-->
+          <!--<include>**/*.dylib</include>-->
+          <!--<include>**/*.dll</include>-->
+        <!--</includes>-->
+      <!--</resource>-->
+      <!--<resource>-->
+        <!--<directory>src/main/resources</directory>-->
+        <!--<targetPath>BOOT-INF/classes/</targetPath>-->
+      <!--</resource>-->
+    <!--</resources>-->
   </build>
 
 

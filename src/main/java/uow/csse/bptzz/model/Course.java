@@ -50,6 +50,7 @@ public class Course {
     private List<Question> questions;
   
     public Course() {
+
     }
 
     public Course(String course_id, String courseName, String term, int credits, Department c_department) {

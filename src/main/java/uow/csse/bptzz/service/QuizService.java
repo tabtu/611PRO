@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface QuizService {
 
-    Question[] get10RandomQuestions(String corsid);
+    List<Question> getTop10Questions(String corsid);
 
     List<Question> getQuestionsByCourseId(String course_id);
 

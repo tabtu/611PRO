@@ -52,6 +52,7 @@ public class Student extends Entitys implements Serializable {
     private List<Course> courses;
 
     public Student() {
+
     }
 
     public Student(String firstname, String lastname, Boolean gender, Date dob, Department s_department) {
