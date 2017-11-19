@@ -14,3 +14,5 @@ Technology:
 redmine：https://redmine.cs.uwindsor.ca/projects/team_4p1
 
 github：https://github.com/tabtu/611PRO
+
+<a href="https://bluemix.net/deploy?repository=https://github.com/tabtu/611PRO&branch=master"><img src="https://bluemix.net/deploy/button_x2.png" alt="Deploy to Bluemix"></a>
