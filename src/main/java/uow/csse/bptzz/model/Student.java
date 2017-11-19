@@ -51,6 +51,9 @@ public class Student extends Entitys implements Serializable {
     @JoinTable(name = "bptzz_student_course", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
     private List<Course> courses;
 
+    public Student() {
+    }
+
     public Student(String firstname, String lastname, Boolean gender, Date dob, Department s_department) {
         this.firstname = firstname;
         this.lastname = lastname;

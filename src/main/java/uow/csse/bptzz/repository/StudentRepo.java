@@ -3,6 +3,7 @@ package uow.csse.bptzz.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import uow.csse.bptzz.model.Department;
@@ -23,4 +24,6 @@ public interface StudentRepo extends JpaRepository<Student, Long> {
 //    @Modifying
 //    @Query("update bptzz_student set firstname=?2, lastname=?3, profilepic=?4 where student_id=?1")
 //    int updateStudent(long student_id, String firstname, String lastname, String profilepic);
+
+
 }
