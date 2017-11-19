@@ -5,11 +5,16 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.util.Base64Utils;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import uow.csse.bptzz.config.Const;
+import uow.csse.bptzz.model.User;
+import uow.csse.bptzz.service.UserService;
+import uow.csse.bptzz.utils.FileUtil;
+import uow.csse.bptzz.utils.face.ImgCmp;
+import uow.csse.bptzz.utils.face.ImgFace;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,12 +22,15 @@ import javax.servlet.http.HttpServletRequest;
  * Main Controller
  *
  * @author 	Tab Tu
- * @date	Oct.17 2017
+ * @date	Nov.18 2017
  * @version	1.0
  */
 
 @Controller
 public class MainController {
+
+    @Autowired
+    private UserService usrserv;
 
     @GetMapping("/")
     public String home0() {
@@ -54,6 +62,51 @@ public class MainController {
         return "/error/403";
     }
 
+    @GetMapping("/upload")
+    public String uploadpage() {
+        return "/test";
+    }
+
+
+
+    @GetMapping("/demo")
+    public String demo() { return "/demo/capture"; };
+
+    /**
+     * check the similarity
+     * @param username username in String
+     * @param picture capture picture after Base64 encode
+     * @return the similarity
+     */
+    @RequestMapping(value = "/identify", method = RequestMethod.POST)
+    public @ResponseBody String identify(@RequestParam("usr") String username,
+                                         @RequestParam("pic") String picture) {
+        ImgFace pic1 = new ImgFace(Base64Utils.decodeFromString(picture));
+        int faces = pic1.dectface();
+        if (faces > 0) {
+            String profile = usrserv.findStudentByUsername(username).getProfilepic();
+            ImgFace pic0 = new ImgFace(Const.PROFILE_PATH + profile);
+            double result = ImgCmp.compare(pic0.getImgbytes(), pic1.getImgbytes());
+            return result + "";
+        } else {
+            return "nofaces";
+        }
+    }
+
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public @ResponseBody
+    String uploadfile(@RequestParam("file") MultipartFile file) {
+        String fileName = System.currentTimeMillis() + "." +
+                FileUtil.getFileExtName(file.getOriginalFilename());
+        String filePath = Const.UPLOAD_PATH;
+        try {
+            FileUtil.uploadFile(file.getBytes(), filePath, fileName);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return "uploadimg success";
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(Model model, String error, String logout) {
         if (error != null) {
@@ -67,7 +120,8 @@ public class MainController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView lg(@RequestParam(value = "error", required = false) String error,
-                           @RequestParam(value = "logout", required = false) String logout, HttpServletRequest request) {
+                           @RequestParam(value = "logout", required = false) String logout,
+                           HttpServletRequest request) {
         ModelAndView model = new ModelAndView();
         if (error != null) {
             model.addObject("error", getErrorMessage(request, "SPRING_SECURITY_LAST_EXCEPTION"));
@@ -80,17 +134,17 @@ public class MainController {
 
     }
 
-    @GetMapping("/game")
-    public String game() { return "/demo/game"; }
+    @GetMapping("/register")
+    public String getRegister() {
+        return "/register";
+    }
 
-    @GetMapping("/capture")
-    public String capture() { return "/demo/capture"; }
-
-    @GetMapping("/firework")
-    public String firework() { return "/demo/firework"; }
-
-    @GetMapping("/regist")
-    public String showregist() { return "/register"; }
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String postRegister(HttpServletRequest request) {
+        User usr = new User(request.getParameter("username"), request.getParameter("password"), request.getParameter("email"));
+        usrserv.saveUser(usr);
+        return "/login";
+    }
 
     // customize the error message
     private String getErrorMessage(HttpServletRequest request, String key) {
@@ -107,5 +161,6 @@ public class MainController {
         }
 
         return error;
+
     }
 }

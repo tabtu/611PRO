@@ -1,99 +1,81 @@
 package uow.csse.bptzz.utils.face;
 
-import org.json.JSONObject;
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
-import uow.csse.bptzz.config.Const;
-import uow.csse.bptzz.utils.youtu.APIs;
-import uow.csse.bptzz.utils.youtu.Func;
+import uow.csse.bptzz.utils.Base64;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-
+/**
+ * OpenCV Operation
+ * @Author Tab Tu
+ * @Created Oct.21 2017
+ * @Updated Nov.15 2017
+ * @Description Include Detect Faces and So On.
+ */
 public class ImgFace {
 
     /**
      * Front Face Training Data
      */
-    //private final static String datafile = Const.DATA_PATH + "haarcascades/haarcascade_frontalface_alt.xml";
     public static String datafile = "src/main/resources/static/data/haarcascades/haarcascade_frontalface_alt.xml";
-
     //private final static String IMG_PATH = Const.PFIMG_PATH;
 
-    private final static int WIDTH = 300;
+    private final static int WIDTH = 500;
 
-    private final static int HEIGHT = 300;
+    private final static int HEIGHT = 500;
 
     private Mat source;
 
     private String sourceEXT;
 
-    private Mat target;
-
-    private String targetEXT;
-
-    public ImgFace() {
-
+    public ImgFace(byte[] data) {
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        source =  Imgcodecs.imdecode(new MatOfByte(data), Imgcodecs.CV_LOAD_IMAGE_UNCHANGED);
     }
 
-    public ImgFace(String sourcefilename, String targetfilename) {
+    public ImgFace(String sourcefilename) {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         this.source = Imgcodecs.imread(sourcefilename);
-        sourceEXT = sourcefilename.substring(sourcefilename.length() - 4, sourcefilename.length());
-        this.target = Imgcodecs.imread(targetfilename);
-        this.targetEXT = targetfilename.substring(targetfilename.length() - 4, targetfilename.length());
+        this.sourceEXT = sourcefilename.substring(sourcefilename.length() - 4, sourcefilename.length());
     }
 
+    /**
+     * Get Image File Extension Name
+     * @return
+     */
     public String getSourceEXT() {
         return this.sourceEXT;
-    }
-
-    public String getTargetEXT() {
-        return this.targetEXT;
     }
 
     public Mat getSource() {
         return this.source;
     }
 
-    public Mat getTarget() {
-        return this.target;
-    }
-
+    /**
+     * Set the Mat frame with file
+     * @param filename path + filename
+     */
     public void setSource(String filename) {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         this.source = Imgcodecs.imread(filename);
     }
 
-    public void setTarget(String filename) {
-        this.target = detectFace(filename);
-    }
-
-    public byte[] getSource2bytes() {
-        return ImgUtils.Mat2Bytes(this.source, this.sourceEXT);
-    }
-
-    public byte[] getTarget2bytes() {
-        return ImgUtils.Mat2Bytes(this.target, this.targetEXT);
-    }
-
     /**
-     * 检测图片并裁剪到WIDTH*HEIGHT
-     * @param filename
+     * get byte[] type of image
      * @return
      */
-    private Mat detectFace(String filename) {
+    public byte[] getImgbytes() { return ImgUtils.Mat2Bytes(this.source, this.sourceEXT); }
+
+    /**
+     * Detect Faces in Image
+     * @return the number of faces
+     */
+    public int dectface() {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         CascadeClassifier faceDetector = new CascadeClassifier(datafile);
         MatOfRect faceDetections = new MatOfRect();
-        Mat img = Imgcodecs.imread(filename);
-        faceDetector.detectMultiScale(img, faceDetections);
+        faceDetector.detectMultiScale(source, faceDetections);
         Rect rec = new Rect();
         if (faceDetections.toArray().length > 1) {
             int gbestwidth = 0;
@@ -103,11 +85,22 @@ public class ImgFace {
         } else if(faceDetections.toArray().length == 1) {
             rec = faceDetections.toArray()[0];
         } else {
-            return null;
+            return 0;
         }
+
+        // 扩大裁剪边界并修正。
+        if (rec.y > rec.height / 4) rec.y -= (rec.height / 4);
+        else rec.y = 0;
+        if (rec.x > rec.width / 4) rec.x -= (rec.width / 4);
+        else rec.x = 0;
+        if (rec.y + rec.height * 1.5 < source.height()) rec.height *= 1.5;
+        else rec.height = source.height() - rec.y;
+        if (rec.x + rec.width * 1.5 < source.width()) rec.width *= 1.5;
+        else rec.width = source.width() - rec.x;
+
+        // 裁剪图片并重新输出图片，大小定义为WIDTH*HEIGHT
         Size size = new Size(WIDTH, HEIGHT);
-        Mat dst = new Mat();
-        Imgproc.resize(img.submat(rec), dst, size);
-        return dst;
+        Imgproc.resize(source.submat(rec), source, size);
+        return 1;
     }
 }

@@ -1,13 +1,29 @@
 package uow.csse.bptzz.service;
 
+import uow.csse.bptzz.model.Department;
+import uow.csse.bptzz.model.Student;
 import uow.csse.bptzz.model.User;
 
+import java.util.List;
+
 public interface UserService {
-    User findByUsername(String username);
+    User findUserByUsername(String username);
 
-    User findByEmail(String email);
+    User findUserByEmail(String email);
 
-    User findByUsernameOrEmail(String email, String username);
+    User findUserByUsernameOrEmail(String email, String username);
 
-    void save(User user);
+    List<Student> findStudentByUserIsUsing(boolean enable);
+
+    Student findStudentByUsername(String username);
+
+    void saveUser(User user);
+
+    void saveStudent(Student student);
+
+    void saveDepartment(Department dept);
+
+    void updateUser(User user);
+
+    void updateStudent(Student student);
 }

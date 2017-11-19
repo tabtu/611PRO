@@ -1,5 +1,7 @@
 package uow.csse.bptzz.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 /**
@@ -17,7 +19,7 @@ public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long question_id;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, length = 65535, columnDefinition = "Text")
     private String content;
     @Column(nullable = false)
     private String optiona;
@@ -29,8 +31,9 @@ public class Question {
     private String optiond;
     @Column(nullable = false)
     private String answer;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="question_course")
+    @JsonManagedReference
     private Course course;
 
     public Question() {

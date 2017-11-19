@@ -1,19 +1,18 @@
 package uow.csse.bptzz.model;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import uow.csse.bptzz.utils.DateUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Create the Entity
  *
  * @author 	Eason Pan
  * @date	2017-10-16
- * @update  Tab Tu on Nov.1 2017
- * @since	1.2
+ * @update  Tab Tu on Nov.17 2017
+ * @since	1.3
  *
  * Database: pro611db
  * Username: bfa57f3b0eddae
@@ -46,7 +45,7 @@ public class User extends Entitys implements Serializable {
     private String validataCode;
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(name = "bptzz_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    private List<Role> roles;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name="user_student")
     private Student student;
@@ -63,7 +62,7 @@ public class User extends Entitys implements Serializable {
         this.lastModifyTime = DateUtils.getCurrentTime();
     }
 
-    public User(String userName, String passWord, String email, Set<Role> userRole) {
+    public User(String userName, String passWord, String email, List<Role> userRole) {
         super();
         this.email = email;
         this.password = passWord;
@@ -154,20 +153,19 @@ public class User extends Entitys implements Serializable {
         this.validataCode = validataCode;
     }
 
-    public Set<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
-    /*
-        public Student getStudent() { return student; }
-        public void setStudent(Student student) { this.student = student; }
-        */
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+    public Student getStudent() {
+        return this.student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }

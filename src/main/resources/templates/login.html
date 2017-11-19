@@ -26,6 +26,9 @@
 
     <div class="row" style="margin-top:20px">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <input type="button" title="Start Login" value="open camera" onclick="getMedia();" /><br />
+            <video height="240px" autoplay="autoplay"></video><hr />
+
             <form th:action="@{/login}" method="post">
                 <fieldset>
                     <h1>Please Sign In</h1>
@@ -66,6 +69,24 @@
     <script type="text/javascript" th:src="@{/js/supersized.3.2.7.min.js}" src="/static/js/supersized.3.2.7.min.js"></script>
     <script type="text/javascript" th:src="@{/js/supersized-init.js}" src="/static/js/supersized-init.js"></script>
     <script type="text/javascript" th:src="@{/js/scripts.js}" src="/static/js/scripts.js"></script>
+    <script type="text/javascript">
+        var video = document.querySelector('video');
+        var audio, audioType;
+
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+        window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
+
+        var exArray = [];  // device id
+        MediaStreamTrack.getSources(function (sourceInfos) {
+            for (var i = 0; i != sourceInfos.length; ++i) {
+                var sourceInfo = sourceInfos[i];  // Sound Source
+                if (sourceInfo.kind === 'video') {
+                    exArray.push(sourceInfo.id);
+                }
+            }
+        });
+    </script>
+    <script type="text/javascript" th:src="@{/js/webcap.js}" src="/static/js/webcap.js"></script>
 </div>
 
 <div th:replace="fragments/footer :: footer"/>

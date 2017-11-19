@@ -10,18 +10,428 @@
 
 <div th:replace="fragments/header :: header"/>
 
-<div class="container">
+<!--<div class="container">-->
 
-    <div class="starter-template">
-        <h1>Spring Boot Web Thymeleaf + Spring Security</h1>
-        <h2><a th:href="@{/admin}">Admin(Spring Security protected, Need Admin Role)</a></h2>
-        <h2><a th:href="@{/user}">User(Spring Security protected, Need User Role)</a></h2>
-        <h2><a th:href="@{/about}">Normal(not protected)</a></h2>
-    </div>
+    <!--<div class="starter-template">-->
+        <!--<h1>Spring Boot Web Thymeleaf + Spring Security</h1>-->
+        <!--<h2><a th:href="@{/admin}">Admin(Spring Security protected, Need Admin Role)</a></h2>-->
+        <!--<h2><a th:href="@{/user}">User(Spring Security protected, Need User Role)</a></h2>-->
+        <!--<h2><a th:href="@{/about}">Normal(not protected)</a></h2>-->
+    <!--</div>-->
 
-</div>
+<!--</div>-->
 <!-- /.container -->
 
+<nav class="topnavbar navbar-default topnav">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed toggle-costume" data-toggle="collapse" data-target="#upmenu" aria-expanded="false">
+                <span class="sr-only"> Toggle navigaion</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand logo" th:href="@{/home}">
+                <img th:src="@{/img/logo/logo1.png}" src="/static/img/logo/logo1.png" alt="logo" />
+            </a>
+        </div>
+    </div>
+    <div class="collapse navbar-collapse" id="upmenu">
+        <ul class="nav navbar-nav" id="navbarontop">
+            <li class="active"><a th:href="@{/home}">HOME</a> </li>
+            <li class="dropdown">
+                <a th:href="@{/}" class="dropdown-toggle">COURSES<span class="caret"></span></a>
+                <ul class="dropdown-menu dropdowncostume">
+                    <li><a th:href="@{/}">C PROGRAMMING</a></li>
+                    <li><a th:href="@{/}">UNIX</a></li>
+                    <li><a th:href="@{/}">DATABASE SYSTEM</a></li>
+                    <li><a th:href="@{/}">ARTIFICIAL INTELLIGENCE</a></li>
+                    <li><a th:href="@{/}">SYSTEMS ANALYSIS AND DESIGN</a></li>
+                    <li><a th:href="@{/}">NETWORKING</a></li>
+                    <li><a th:href="@{/}">DISK OPERATING SYSTEM</a></li>
+                    <li><a th:href="@{/}">COMPUTER HARDWARE</a></li>
+                </ul>
+            </li>
+            <li class="active"><a th:href="@{/}">QUIZZES</a></li>
+            <li class="active"><a th:href="@{#about}">ABOUT</a>
+            </li>
+            <!--<button><span class="postnewcar">ADD A NEW COURSE</span></button>-->
+        </ul>
+    </div>
+</nav>
+
+<div class="allcontain">
+    <div id="carousel-up" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner " role="listbox">
+            <div class="item active">
+                <img th:src="@{img/bannerbg.jpg}"
+                     src="/static/img/bannerbg.jpg"
+                     alt="Lecture 1" style="width:1403px; height:672px;" />
+                <div class="carousel-caption">
+                    <h2>C PROGRAMMING</h2>
+                    <p>C is a general-purpose, imperative computer <br />
+                        programming language, supporting structured <br />
+                        programming, lexical variable scope and recursion, <br />
+                        while a static type system prevents many unintended <br />
+                        operations. &#10; </p>
+                </div>
+            </div>
+            <div class="item">
+                <img th:src="@{img/menworking.jpg}" alt="Lecture 2" style="width:1403px; height:672px;" />
+                <div class="carousel-caption">
+                    <h2>COMPUTER HARDWARE</h2>
+                    <p>Computer hardware is the physical parts or components <br />
+                        of a computer, such as the monitor, keyboard, computer <br />
+                        data storage, graphic card, sound card and motherboard. &#10; </p>
+                </div>
+            </div>
+            <div class="item">
+                <img th:src="@{img/coworking.jpg}" alt="Lecture 3" style="width:1403px; height:672px;" />
+                <div class="carousel-caption">
+                    <h2>DATABASE SYSTEM</h2>
+                    <p>A database is an organized collection of data. <br />
+                        A relational database, more restrictively,<br />
+                        is a collection of schemas, tables, queries, <br />
+                        reports, views, and other elements.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-default midle-nav">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed textcostume" data-toggle="collapse" data-target="#navbarmidle" aria-expanded="false">
+                    <h1>COURSE SEARCH</h1>
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarmidle">
+                <div class="searchtxt">
+                    <br />
+                    <h1>Take a Quiz and Test Yourself!</h1>
+                    <br />
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<!-- ____________________Featured Section ______________________________-->
+<div class="allcontain">
+    <div class="feturedsection">
+        <h1 class="text-center"><span class="bdots">&bullet;</span>F E A T U R E S<span class="carstxt">C O U R S E S</span>&bullet;</h1>
+    </div>
+</div>
+    <div class="grid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="txthover">
+                    <img th:src="@{/img/lecture1.jpg}" alt="lecture1" style="width: 316.25px; height: 389px;" />
+                    <div class="txtcontent">
+                        <div class="stars">
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                        </div>
+                        <div class="simpletxt">
+                            <h3 class="name">C PROGRAMMING</h3>
+                            <p>"C is a general-purpose, imperative computer programming language,
+                                supporting structured programming, lexical variable scope and recursion,
+                                while a static type system prevents many unintended operations." </p>
+                            <br /><br />
+                            <button th:href="@{/}">READ MORE</button><br />
+                            <div class="wishtxt">
+                                <center>
+                                <!--<p class="paragraph1"> Add to Wishlist <span class="glyphicon glyphicon-heart"></span> </p>-->
+                                <p class="paragraph2">Take the quiz! <a th:href="@{/}"><span class="icon">
+                                    <img th:src="@{/img/logo/compicon.png}" alt="compicon" /></span></a></p>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="stars2">
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="txthover">
+                    <img th:src="@{/img/lecture6.jpg}" alt="lecture1" style="width: 316.25px; height: 389px;" />
+                    <div class="txtcontent">
+                        <div class="stars">
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                        </div>
+                        <div class="simpletxt">
+                            <h3 class="name">UNIX</h3>
+                            <p>"Unix is a family of multitasking, multiuser computer operating
+                                systems, development starting in the 1970s at the Bell Labs
+                                research center by Ken Thompson, Dennis Ritchie, and others." </p>
+                            <br />
+                            <button th:href="@{/}">READ MORE</button><br />
+                            <div class="wishtxt">
+                                <center>
+                                    <!--<p class="paragraph1"> Add to Wishlist <span class="glyphicon glyphicon-heart"></span> </p>-->
+                                    <p class="paragraph2">Take the quiz! <a th:href="@{/}"><span class="icon">
+                                    <img th:src="@{/img/logo/compicon.png}" alt="compicon" /></span></a></p>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="stars2">
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="txthover">
+                    <img th:src="@{/img/lecture3.jpg}" alt="lecture1" style="width: 316.25px; height: 391px;" />
+                    <div class="txtcontent">
+                        <div class="stars">
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                        </div>
+                        <div class="simpletxt">
+                            <h3 class="name">DATABASE SYSTEM</h3>
+                            <p>"A database is an organized collection of data.
+                                A relational database, more restrictively, is a collection of schemas,
+                                tables, queries, reports, views, and other elements." </p>
+                            <br /><br /><br />
+                            <button th:href="@{/}">READ MORE</button><br />
+                            <div class="wishtxt">
+                                <center>
+                                    <!--<p class="paragraph1"> Add to Wishlist <span class="glyphicon glyphicon-heart"></span> </p>-->
+                                    <p class="paragraph2">Take the quiz! <a th:href="@{/}"><span class="icon">
+                                    <img th:src="@{/img/logo/compicon.png}" alt="compicon" /></span></a></p>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="stars2">
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="txthover">
+                    <img th:src="@{/img/lecture8.jpg}" alt="lecture1" style="width: 316.25px; height: 391px;" />
+                    <div class="txtcontent">
+                        <div class="stars">
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                        </div>
+                        <div class="simpletxt">
+                            <h3 class="name">ARTIFICIAL INTELLIGENCE</h3>
+                            <p>"Artificial intelligence (AI) is Intelligence displayed by machines.
+                                In computer science AI research is defined as the study of "intelligent agents":
+                                any device that perceives its environment and takes actions that maximize its chance of success at some goal." </p>
+                            <br /><br />
+                            <button th:href="@{/}">READ MORE</button><br />
+                            <div class="wishtxt">
+                                <center>
+                                    <!--<p class="paragraph1"> Add to Wishlist <span class="glyphicon glyphicon-heart"></span> </p>-->
+                                    <p class="paragraph2">Take the quiz! <a th:href="@{/}"><span class="icon">
+                                    <img th:src="@{/img/logo/compicon.png}" alt="compicon" /></span></a></p>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="stars2">
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="txthover">
+                    <img th:src="@{/img/lecture4.jpg}" alt="lecture1" style="width: 316.25px; height: 391px;" />
+                    <div class="txtcontent">
+                        <div class="stars">
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                        </div>
+                        <div class="simpletxt">
+                            <h3 class="name">SYSTEMS ANALYSIS AND DESIGN</h3>
+                            <p>"Systems analysis and design the process of defining the architecture, components,
+                                and data of a system to satisfy specified requirements" </p>
+                            <br /><br /><br />
+                            <button th:href="@{/}">READ MORE</button><br />
+                            <div class="wishtxt">
+                                <center>
+                                    <!--<p class="paragraph1"> Add to Wishlist <span class="glyphicon glyphicon-heart"></span> </p>-->
+                                    <p class="paragraph2">Take the quiz! <a th:href="@{/}"><span class="icon">
+                                    <img th:src="@{/img/logo/compicon.png}" alt="compicon" /></span></a></p>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="stars2">
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="txthover">
+                    <img th:src="@{/img/lecture2.jpg}" alt="lecture1" style="width: 316.25px; height: 391px;" />
+                    <div class="txtcontent">
+                        <div class="stars">
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                        </div>
+                        <div class="simpletxt">
+                            <h3 class="name">NETWORKING</h3>
+                            <p>"A computer network or data network is a digital telecommunications network
+                                which allows nodes to share resources. In computer networks, networked computing
+                                devices exchange data with each other using a data link. The connections between
+                                nodes are established using either cable media or wireless media." </p>
+                            <br />
+                            <button th:href="@{/}">READ MORE</button><br />
+                            <div class="wishtxt">
+                                <center>
+                                    <!--<p class="paragraph1"> Add to Wishlist <span class="glyphicon glyphicon-heart"></span> </p>-->
+                                    <p class="paragraph2">Take the quiz! <a th:href="@{/}"><span class="icon">
+                                    <img th:src="@{/img/logo/compicon.png}" alt="compicon" /></span></a></p>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="stars2">
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="txthover">
+                    <img th:src="@{/img/lecture7.jpg}" alt="lecture1" style="width: 316.25px; height: 391px;" />
+                    <div class="txtcontent">
+                        <div class="stars">
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                        </div>
+                        <div class="simpletxt">
+                            <h3 class="name">DISK OPERATING SYSTEM</h3>
+                            <p>"A disk operating system (abbreviated DOS) is a computer operating system
+                                that can use a disk storage device, such as a floppy disk, hard disk drive,
+                                or optical disc. " </p>
+                            <br /><br />
+                            <button th:href="@{/}">READ MORE</button><br />
+                            <div class="wishtxt">
+                                <center>
+                                    <!--<p class="paragraph1"> Add to Wishlist <span class="glyphicon glyphicon-heart"></span> </p>-->
+                                    <p class="paragraph2">Take the quiz! <a th:href="@{/}"><span class="icon">
+                                    <img th:src="@{/img/logo/compicon.png}" alt="compicon" /></span></a></p>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="stars2">
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="txthover">
+                    <img th:src="@{/img/lecture5.jpg}" alt="lecture1" style="width: 316.25px; height: 391px;" />
+                    <div class="txtcontent">
+                        <div class="stars">
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                        </div>
+                        <div class="simpletxt">
+                            <h3 class="name">COMPUTER HARDWARE</h3>
+                            <p>"Computer hardware is the physical parts or components of a computer,
+                                such as the monitor, keyboard, computer data storage, graphic card,
+                                sound card and motherboard." </p>
+                            <br /><br />
+                            <button th:href="@{/}">READ MORE</button><br />
+                            <div class="wishtxt">
+                                <center>
+                                    <!--<p class="paragraph1"> Add to Wishlist <span class="glyphicon glyphicon-heart"></span> </p>-->
+                                    <p class="paragraph2">Take the quiz! <a th:href="@{/}"><span class="icon">
+                                    <img th:src="@{/img/logo/compicon.png}" alt="compicon" /></span></a></p>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="stars2">
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                            <div class="glyphicon glyphicon-star"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<br /><br /><br />
+<div class="aboutus" id="about">
+    <div class="context">
+        <h1>About Us</h1>
+        <br /><br />
+        <p>
+            We are students from MAC, University of Windsor.<br /><br />
+            This is the project for course 60-611.
+        </p>
+    </div>
+</div>
+
+
+
+<!-- ____________________End Featured Section ______________________________-->
+<!-- ____________________Contact form section____________________-->
+
+<div class="contactform">
+    <section id="contact" class="content-section text-center">
+        <div class="contact-section">
+            <div class="container">
+                <h2>Contact Us</h2><br />
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <form id="form" class="form-horizontal">
+                            <div class="form-group">
+                                <label for="exampleInputName2" class="contactlabel">Name</label>
+                                <input type="text" class="form-control" id="exampleInputName2" placeholder="Name" />
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail2" class="contactlabel">Email</label>
+                                <input type="email" class="form-control" id="exampleInputEmail2" placeholder="uwindsor@example.com" />
+                            </div>
+                            <div class="form-group">
+                                <label class="contactlabel">Your Message</label>
+                                <textarea  class="form-control" placeholder="Description"></textarea>
+                            </div>
+                            <br />
+                            <input type="submit" class="btn btn-block btn-primary mt-lg" value="Send Message" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- ____________________End Contact form section____________________-->
 <div th:replace="fragments/footer :: footer"/>
 
 </body>
