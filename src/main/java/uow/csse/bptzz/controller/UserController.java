@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import uow.csse.bptzz.config.Const;
-import uow.csse.bptzz.model.Course;
-import uow.csse.bptzz.model.Department;
-import uow.csse.bptzz.model.Question;
-import uow.csse.bptzz.model.User;
+import uow.csse.bptzz.model.*;
 import uow.csse.bptzz.model.result.ExceptionMsg;
 import uow.csse.bptzz.model.result.Response;
 import uow.csse.bptzz.repository.*;
@@ -84,6 +81,17 @@ public class UserController extends BaseController {
         Department dept = new Department("Business");
 
         usrserv.saveDepartment(dept);
+    }
+
+    @GetMapping("/getstudent")
+    public String getstudent() {
+
+//        Student student = studrepo.findOne((long) 1);
+
+        Student student = studrepo.findByUserUsername("tabtu");
+        System.out.println(student.getFirstname());
+
+        return  student.getFirstname();
     }
 
     protected String getPwd(String password){
