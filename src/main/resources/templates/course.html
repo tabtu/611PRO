@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>BPTZZ</title>
+    <title>Online Quiz</title>
 
     <div th:replace="fragments/header :: header-css"/>
 
@@ -9,58 +9,29 @@
 <body>
 
 <div th:replace="fragments/header :: header"/>
-<nav class="topnavbar navbar-default topnav">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed toggle-costume" data-toggle="collapse" data-target="#upmenu" aria-expanded="false">
-                <span class="sr-only"> Toggle navigaion</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand logo" th:href="@{/home}">
-                <img th:src="@{/img/logo/logo1.png}" src="/static/img/logo/logo1.png" alt="logo" />
-            </a>
-        </div>
-    </div>
-    <div class="collapse navbar-collapse" id="upmenu">
-        <ul class="nav navbar-nav" id="navbarontop">
-            <li class="active"><a th:href="@{/home}">HOME</a> </li>
-            <li class="dropdown">
-                <a th:href="@{/}" class="dropdown-toggle">COURSES<span class="caret"></span></a>
-                <ul class="dropdown-menu dropdowncostume">
-                    <li><a th:href="@{/}">C PROGRAMMING</a></li>
-                    <li><a th:href="@{/}">UNIX</a></li>
-                    <li><a th:href="@{/}">DATABASE SYSTEM</a></li>
-                    <li><a th:href="@{/}">ARTIFICIAL INTELLIGENCE</a></li>
-                    <li><a th:href="@{/}">SYSTEMS ANALYSIS AND DESIGN</a></li>
-                    <li><a th:href="@{/}">NETWORKING</a></li>
-                    <li><a th:href="@{/}">DISK OPERATING SYSTEM</a></li>
-                    <li><a th:href="@{/}">COMPUTER HARDWARE</a></li>
-                </ul>
-            </li>
-            <li class="active"><a th:href="@{/}">QUIZZES</a></li>
-            <li class="active"><a th:href="@{#about}">ABOUT</a>
-            </li>
-            <!--<button><span class="postnewcar">ADD A NEW COURSE</span></button>-->
-        </ul>
-    </div>
-</nav>
+
 
 <div class="allcontain">
     <div id="carousel-up" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner " role="listbox">
             <div class="item active">
-                <img th:src="@{img/course.jpg}"
-                     src="/static/img/course.jpg"
-                     alt="Lecture 1" style="width:1403px; height:600px;" />
+                <img th:src="@{img/menworking.jpg}" alt="Lecture 2" style="width:1403px; height:672px;" />
                 <div class="carousel-caption">
-                    <h2>COURSES</h2>
+                    <h2 th:text="${course.id}"></h2><br /><br />
+                    <h3 th:text="${course.courseName}"></h3><br /><br />
+                    <p>Term: </p><p th:text="${course.term}"></p><br />
+                    <p>Credits: </p><p th:text="${course.credits}"></p><br />
+                    <p>Start Time: </p><p th:text="${course.startTime}"></p><br /><br />
+                    <p>Day: </p><p th:text="${course.day}"></p><br /><br />
+                    <p>Testbook: </p><p th:text="${course.textbook}"></p><br /><br />
+                    <p>Reference: </p><p th:text="${course.refTextbook}"></p><br /><br />K
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 
 <div th:replace="fragments/footer :: footer"/>
 
