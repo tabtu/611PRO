@@ -1,20 +1,11 @@
 package uow.csse.bptzz.demo;
 
-import org.json.JSONObject;
 import org.opencv.core.Core;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.imgproc.Imgproc;
 import org.springframework.util.Base64Utils;
-import sun.tools.java.Imports;
-import uow.csse.bptzz.config.Const;
-import uow.csse.bptzz.utils.Base64;
 import uow.csse.bptzz.utils.FileUtil;
 import uow.csse.bptzz.utils.face.ImgCmp;
 import uow.csse.bptzz.utils.face.ImgFace;
-import uow.csse.bptzz.utils.youtu.Func;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -65,9 +56,9 @@ public class demo {
     public static void gethead(String[] files) {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         for (String e : files) {
-            ImgFace i = new ImgFace(PROFILE_PATH + e);
+            ImgFace i = new ImgFace(UPLOAD_PATH + e);
             i.dectface();
-            Imgcodecs.imwrite(PROFILE_PATH + System.currentTimeMillis() + e, i.getSource());
+            Imgcodecs.imwrite(UPLOAD_PATH + System.currentTimeMillis() + e, i.getSource());
         }
     }
 

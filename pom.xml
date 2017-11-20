@@ -5,17 +5,17 @@
 
   <groupId>uow.csse</groupId>
   <artifactId>bptzz</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.2</version>
   <packaging>jar</packaging>
 
-  <name>facelogin</name>
+  <name>Online Quiz</name>
   <description>Project for 611 Course</description>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>1.5.8.RELEASE</version>
-    <relativePath/> <!-- lookup parent from repository -->
+    <relativePath/>
   </parent>
 
   <properties>
@@ -87,6 +87,15 @@
       <artifactId>spring-boot-starter-tomcat</artifactId>
     </dependency>
 
+    <!-- import opencv library jar package-->
+    <dependency>
+      <groupId>org.opencv.core</groupId>
+      <artifactId>opencv</artifactId>
+      <version>3.3</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/opencv-330.jar</systemPath>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -94,40 +103,40 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <!--<groupId>org.apache.maven.plugins</groupId>-->
-        <!--<artifactId>maven-war-plugin</artifactId>-->
-        <!--<configuration>-->
-          <!--<webResources>-->
-            <!--<resource>-->
-              <!--<directory>lib</directory>-->
-              <!--<targetPath>WEB-INF/lib/</targetPath>-->
-              <!--<includes>-->
-                <!--<include>**/*.jar</include>-->
-                <!--<include>**/*.dylib</include>-->
-                <!--<include>**/*.dll</include>-->
-              <!--</includes>-->
-            <!--</resource>-->
-          <!--</webResources>-->
-        <!--</configuration>-->
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+          <encoding>UTF-8</encoding>
+          <compilerArguments>
+            <extdirs>${project.basedir}/lib</extdirs>
+          </compilerArguments>
+        </configuration>
       </plugin>
     </plugins>
 
-    <!--<resources>-->
-      <!--<resource>-->
-        <!--<directory>src/lib</directory>-->
-        <!--<targetPath>BOOT-INF/lib/</targetPath>-->
-        <!--<includes>-->
-          <!--<include>**/*.jar</include>-->
-          <!--<include>**/*.dylib</include>-->
-          <!--<include>**/*.dll</include>-->
-        <!--</includes>-->
-      <!--</resource>-->
+    <resources>
       <!--<resource>-->
         <!--<directory>src/main/resources</directory>-->
-        <!--<targetPath>BOOT-INF/classes/</targetPath>-->
+        <!--<targetPath>BOOT-INF/</targetPath>-->
+        <!--<includes>-->
+          <!--<include>**/*.properties</include>-->
+        <!--</includes>-->
       <!--</resource>-->
-    <!--</resources>-->
-  </build>
 
+      <!-- import opencv library jar package-->
+      <resource>
+        <directory>lib</directory>
+        <targetPath>lib/</targetPath>
+        <includes>
+          <include>**/*.jar</include>
+          <include>**/*.dylib</include>
+          <include>**/*.dll</include>
+        </includes>
+      </resource>
+    </resources>
+  </build>
 
 </project>
