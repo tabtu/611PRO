@@ -351,16 +351,18 @@ float: right;
 	font-family: 'OpenSans Semibold';
 	font-size: 25.12pt;
 	text-shadow: 0 0px 0px rgba(0, 0, 0, .0);
-
+}
+.carousel-caption>p{
+    text-align: left;
 }
 @font-face{
 	font-family: "OpenSans Regular";
 	src:url(../../static/css/source/fonts/OpenSans-Regular.ttf) format("truetype");
 }
-.carousel-caption>h2>p{
-font-family: 'OpenSans Regular';
-font-size: 15.88pt;
-}
+/*.carousel-caption>h2>p{*/
+/*font-family: 'OpenSans Regular';*/
+/*font-size: 15.88pt;*/
+/*}*/
 .carousel-caption {
     top: 35%;
     left:13%;
@@ -378,7 +380,7 @@ font-size: 15.88pt;
 }
  
 .carousel-caption>p{
-font-size: 10pt;
+	font-size: 10pt;
 }	
 }
  
@@ -1232,6 +1234,42 @@ padding-left: 0px;
 	color: #fff;
 	margin-bottom: 14px;
 }
+
+.simpletxt .cslink{
+    background: none;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    font-family:"OpenSans Regular";
+    color: #fff;
+    margin-bottom: 14px;
+}
+
+/*#navbarontop li.login{*/
+    /*position: inherit;*/
+    /*background: none;*/
+    /*background-color: none;*/
+    /*border: 2px solid #C59E47;*/
+    /*font-family: 'BebasNeue Regular';*/
+    /*margin-left: 60px;*/
+    /*font-size: 16.99px;*/
+    /*color: #313943;*/
+    /*!*padding-left: 19px;*!*/
+    /*!*padding-right: 19px;*!*/
+    /*margin-bottom: 25px;*/
+    /*border-radius: 10px;*/
+    /*height: 35px;*/
+/*}*/
+/*#navbarontop li.login:hover{*/
+    /*background-color: #C59E47;*/
+    /*color: #fff;*/
+/*}*/
+/*#navbarontop  li.login.log:hover {*/
+    /*background-color: none !important;*/
+    /*background: none !important;*/
+/*}*/
+
+
+
 .wishtxt{
 	padding-bottom: 42px;
 }
@@ -1599,3 +1637,28 @@ height: 30px;
     color: #916f21;
 }
 
+/*-------------------------------------Quiz Page ----------------------------------------------*/
+.quizcontainer{
+    position: relative;
+    border-top: 10px solid #e0e0e0
+
+}
+/*-------------------------------------info box ----------------------------------------------*/
+.infobox{
+    padding-left: 80px;
+    padding-top: 80px;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 350px;
+    height: 650px;
+    border: solid #fff;
+    mso-border-shadow: #e0e0e0;
+}
+
+/*-------------------------------------info box ----------------------------------------------*/
+.quizbox{
+    padding-right: 80px;
+    padding-top: 80px;
+    position: inherit;
+}
