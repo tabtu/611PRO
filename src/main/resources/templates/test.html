@@ -103,7 +103,7 @@
             formData.append("usr", usr);
             formData.append("pic", encodeURIComponent(fileImg));
             $.ajax({
-                url: "/identify0",
+                url: "/identify",
                 type: 'POST',
                 data: formData,
                 timeout: 10000, //超时时间设置，单位毫秒
