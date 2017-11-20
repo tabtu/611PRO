@@ -12,9 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import uow.csse.bptzz.config.Const;
 import uow.csse.bptzz.model.User;
 import uow.csse.bptzz.service.UserService;
-import uow.csse.bptzz.utils.FileUtil;
-import uow.csse.bptzz.utils.face.ImgCmp;
-import uow.csse.bptzz.utils.face.ImgFace;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -78,34 +75,8 @@ public class MainController {
      * @param picture capture picture after Base64 encode
      * @return the similarity
      */
-    @RequestMapping(value = "/identify", method = RequestMethod.POST)
-    public @ResponseBody String identify(@RequestParam("usr") String username,
-                                         @RequestParam("pic") String picture) {
-        ImgFace pic1 = new ImgFace(Base64Utils.decodeFromString(picture));
-        int faces = pic1.dectface();
-        if (faces > 0) {
-            String profile = usrserv.findStudentByUsername(username).getProfilepic();
-            ImgFace pic0 = new ImgFace(Const.PROFILE_PATH + profile);
-            double result = ImgCmp.compare(pic0.getImgbytes(), pic1.getImgbytes());
-            return result + "";
-        } else {
-            return "nofaces";
-        }
-    }
 
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public @ResponseBody
-    String uploadfile(@RequestParam("file") MultipartFile file) {
-        String fileName = System.currentTimeMillis() + "." +
-                FileUtil.getFileExtName(file.getOriginalFilename());
-        String filePath = Const.UPLOAD_PATH;
-        try {
-            FileUtil.uploadFile(file.getBytes(), filePath, fileName);
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-        return "uploadimg success";
-    }
+
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(Model model, String error, String logout) {
