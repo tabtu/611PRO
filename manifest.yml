@@ -1,5 +1,6 @@
-  applications:
-   - name: FaceQuiz
-     random-route: true
-     memory: 1G
-     instances: 1
+---
+buildpack: https://github.com/cloudfoundry/java-buildpack.git
+memory: 1024M
+applications:
+- name: 611FaceDetector
+  path: target/bptzz-0.0.1-SNAPSHOT.jar
