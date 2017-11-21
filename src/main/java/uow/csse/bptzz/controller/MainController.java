@@ -23,8 +23,8 @@ import java.io.File;
  * Main Controller
  *
  * @author 	Tab Tu
- * @date	Nov.18 2017
- * @version	1.0
+ * @update	Nov.20 2017
+ * @version	1.2
  */
 
 @Controller
@@ -68,17 +68,21 @@ public class MainController {
         return "/test";
     }
 
-
     @GetMapping("/demo")
     public String demo() {
         return "/demo/capture";
     }
 
 
-
-
-    @RequestMapping(value = "/identify0", method = RequestMethod.POST)
-    public @ResponseBody String testUploadFile(@RequestParam("usr") String username,
+    /**
+     * check the similarity(youtu API)
+     * POST http://localhost:8080/identify
+     * @param username username in String
+     * @param file capture picture after Base64 encode
+     * @return the similarity
+     */
+    @RequestMapping(value = "/identify", method = RequestMethod.POST)
+    public @ResponseBody String identify(@RequestParam("usr") String username,
                       @RequestParam("pic") MultipartFile file) {
         String profile = usrserv.findStudentByUsername(username).getProfilepic();
         try {
@@ -91,13 +95,14 @@ public class MainController {
     }
 
     /**
-     * check the similarity
+     * check the similarity(with opencv)
+     * POST http://localhost:8080/cvidentify
      * @param username username in String
      * @param file capture picture after Base64 encode
      * @return the similarity
      */
-    @RequestMapping(value = "/identify", method = RequestMethod.POST)
-    public @ResponseBody String identify(@RequestParam("usr") String username,
+    @RequestMapping(value = "/cvidentify", method = RequestMethod.POST)
+    public @ResponseBody String cvidentify(@RequestParam("usr") String username,
                                          @RequestParam("pic") MultipartFile file) {
         System.out.println(username);
         try {
@@ -119,6 +124,12 @@ public class MainController {
         return "";
     }
 
+    /**
+     * upload file, named with timemillsecond string
+     * http://localhost:8080/upload
+     * @param file
+     * @return message
+     */
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public @ResponseBody String uploadfile(@RequestParam("file") MultipartFile file) {
         String fileName = System.currentTimeMillis() + "." +
@@ -132,6 +143,13 @@ public class MainController {
         return "Upload Success";
     }
 
+    /**
+     * login service(POST)
+     * @param model user model
+     * @param error error text
+     * @param logout logout mark
+     * @return error message or page
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(Model model, String error, String logout) {
         if (error != null) {
@@ -143,6 +161,12 @@ public class MainController {
         return "home";
     }
 
+    /**
+     * login service(GET)
+     * @param error error text
+     * @param logout logout mark
+     * @return error message or page
+     */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView lg(@RequestParam(value = "error", required = false) String error,
                            @RequestParam(value = "logout", required = false) String logout,
@@ -159,13 +183,25 @@ public class MainController {
 
     }
 
+    /**
+     *
+     * @return
+     */
     @GetMapping("/register")
     public String getRegister() {
         return "/register";
     }
 
+    /**
+     *
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String postRegister(HttpServletRequest request) {
+        if (usrserv.findUserByUsernameOrEmail(request.getParameter("email"), request.getParameter("username")) != null) {
+            return "Invalid Username or Email";
+        }
         User usr = new User(request.getParameter("username"), request.getParameter("password"), request.getParameter("email"));
         usrserv.saveUser(usr);
         return "/login";
@@ -173,9 +209,7 @@ public class MainController {
 
     // customize the error message
     private String getErrorMessage(HttpServletRequest request, String key) {
-
         Exception exception = (Exception) request.getSession().getAttribute(key);
-
         String error = "";
         if (exception instanceof BadCredentialsException) {
             error = "Invalid username and password!";
@@ -184,8 +218,6 @@ public class MainController {
         } else {
             error = "Invalid username and password!";
         }
-
         return error;
-
     }
 }
