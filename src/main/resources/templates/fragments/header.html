@@ -36,15 +36,6 @@
                 <li><a th:href="@{www.google.ca}"><i class="fa fa-google-plus"></i></a></li>
                 <li><a th:href="@{www.pinterest.ca}"><i class="fa fa-pinterest"></i></a></li>
             </ul>
-            <!--<ul class="logreg">-->
-                <!--<li><a th:href="@{/login}" th:unless="${#httpServletRequest.remoteUser != null}">Login</a>-->
-                    <!--<a th:href="@{/}" th:if="${#httpServletRequest.remoteUser != null}" th:text="${#httpServletRequest.remoteUser}" class="userName"></a>-->
-                <!--</li>-->
-                <!--&lt;!&ndash;<li><a th:href="@{/login}">Login</a> </li>&ndash;&gt;-->
-                <!--<li><a th:href="@{/register}" th:unless="${#httpServletRequest.remoteUser != null}"><span class="register">Register</span></a>-->
-                    <!--<a th:href="@{/logout}" th:if="${#httpServletRequest.remoteUser != null}" class="userName">Logout</a>-->
-                <!--</li>-->
-            <!--</ul>-->
         </div>
     </div>
     <nav class="topnavbar navbar-default topnav">
@@ -64,31 +55,19 @@
         <div class="collapse navbar-collapse" id="upmenu">
             <ul class="nav navbar-nav" id="navbarontop">
                 <li class="active"><a th:href="@{/home}">HOME</a> </li>
-                <li class="dropdown">
-                    <a th:href="@{/}" class="dropdown-toggle">COURSES<span class="caret"></span></a>
-                    <ul class="dropdown-menu dropdowncostume">
-                        <li><a th:href="@{/}">C PROGRAMMING</a></li>
-                        <li><a th:href="@{/}">UNIX</a></li>
-                        <li><a th:href="@{/}">DATABASE SYSTEM</a></li>
-                        <li><a th:href="@{/}">ARTIFICIAL INTELLIGENCE</a></li>
-                        <li><a th:href="@{/}">SYSTEMS ANALYSIS AND DESIGN</a></li>
-                        <li><a th:href="@{/}">NETWORKING</a></li>
-                        <li><a th:href="@{/}">DISK OPERATING SYSTEM</a></li>
-                        <li><a th:href="@{/}">COMPUTER HARDWARE</a></li>
-                    </ul>
-                </li>
-                <li class="active"><a th:href="@{/}">QUIZZES</a></li>
+                <li class="active"><a th:href="@{/coursesearch}">COURSE</a></li>
+                <li class="active"><a th:href="@{/course}">QUIZZES</a></li>
                 <li class="active"><a th:href="@{#about}">ABOUT</a>
                 </li>
-                <li class="button">
+                <li class="login">
                     <a class="log" th:href="@{/login}" th:unless="${#httpServletRequest.remoteUser != null}">
                         Login
                     </a>
                     <a class="log" th:href="@{/}" th:if="${#httpServletRequest.remoteUser != null}"
-                       th:text="${#httpServletRequest.remoteUser}">
+                       th:text="|Welcome: ${#httpServletRequest.remoteUser}|">
                     </a>
                 </li>
-                <li class="button">
+                <li class="login">
                     <a class="log" th:href="@{/register}" th:unless="${#httpServletRequest.remoteUser != null}">Register</a>
                     <a class="log" th:href="@{/logout}" th:if="${#httpServletRequest.remoteUser != null}">Logout</a>
                 </li>
