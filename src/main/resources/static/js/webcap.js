@@ -1,6 +1,3 @@
-var exArray = [];
-var context1 = canvas1.getContext('2d');
-
 function getMedia() {
     if (navigator.getUserMedia) {
         navigator.getUserMedia({
@@ -34,11 +31,32 @@ function errorFunc(e) {
 
 // Photo
 function getPhoto() {
-    context1.drawImage(video, 0, 0, canvas1.width, canvas1.height);
-    canvas1.height()
+    tcontext.drawImage(video, 0, 0, tcanvas.width, tcanvas.height);
+}
+
+function submitForm() {
+    getPhoto();
+    var usrName = document.getElementById('username').value;
+    // alert(usrName);
+    var myImage = tcanvas.toDataURL("image/jpeg");
+    $.ajax({
+        type: "POST",
+        url: '/identify',
+        data: {usr: usrName, data: myImage},
+        timeout: 60000,
+        success: function (msg) {
+            alert(msg);
+            if (parseInt(msg)<50) {
+                self.location = "/logout"
+            }
+        },
+        error: function (msg) {
+            alert(msg);
+        }
+    });
 }
 
 // Video
-function getVedio() {
-    drawVideoAtCanvas(video, context2);
-}
+// function getVedio() {
+//     drawVideoAtCanvas(video, context2);
+// }

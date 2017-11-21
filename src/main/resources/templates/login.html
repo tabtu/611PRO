@@ -27,7 +27,9 @@
     <div class="row" style="margin-top:20px">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
             <input type="button" title="Start Login" value="open camera" onclick="getMedia();" /><br />
-            <video height="240px" autoplay="autoplay"></video><hr />
+            <video height="240px" autoplay="autoplay"></video><br />
+            <canvas id="mycanvas" height="240px" ></canvas><br />
+            <input type="button" title="Face Login" value="Face Login" onclick="submitForm();" /><hr />
 
             <form th:action="@{/login}" method="post">
                 <fieldset>
@@ -71,20 +73,20 @@
     <script type="text/javascript" th:src="@{/js/scripts.js}" src="/static/js/scripts.js"></script>
     <script type="text/javascript">
         var video = document.querySelector('video');
-        var audio, audioType;
-
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-        window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
-
-        var exArray = [];  // device id
+        var tcanvas = document.getElementById('mycanvas');
+        tcanvas.style.display="none";
+        var tcontext = tcanvas.getContext('2d');
+        var exArray = [];
         MediaStreamTrack.getSources(function (sourceInfos) {
             for (var i = 0; i != sourceInfos.length; ++i) {
-                var sourceInfo = sourceInfos[i];  // Sound Source
+                var sourceInfo = sourceInfos[i];
                 if (sourceInfo.kind === 'video') {
                     exArray.push(sourceInfo.id);
                 }
             }
         });
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+        window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
     </script>
     <script type="text/javascript" th:src="@{/js/webcap.js}" src="/static/js/webcap.js"></script>
 </div>
