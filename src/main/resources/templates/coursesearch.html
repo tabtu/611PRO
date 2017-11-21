@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Online Quiz</title>
+
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+
+<div class="allcontain">
+    <div id="carousel-up" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner " role="listbox">
+            <div class="item active">
+                <img th:src="@{img/bannerbg.jpg}"
+                     src="/static/img/bannerbg.jpg"
+                     alt="Lecture 1" style="width:1403px; height:672px;" />
+                <div class="carousel-caption">
+                    <h2>Course Search</h2>
+                    <br />
+                    <form class="navbar-form navbar-left searchformmargin" role="search" action="@{/course}" th:action="@{/course}" method="get">
+                    <div class="form-group">
+                        <input type="text" class="form-control searchform" placeholder="Course Number" />
+                    </div>
+                        <input type="submit" class="searchbutton" value="Search" />
+                        <span class="glyphicon glyphicon-search "></span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>
