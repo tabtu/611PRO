@@ -17,14 +17,21 @@
             <div class="item active">
                 <img th:src="@{img/menworking.jpg}" alt="Lecture 2" style="width:1403px; height:672px;" />
                 <div class="carousel-caption">
-                    <h2 th:text="${course.id}"></h2><br /><br />
+                    <h2 th:text="${course.course_id}"></h2><br />
                     <h3 th:text="${course.courseName}"></h3><br /><br />
-                    <p>Term: </p><p th:text="${course.term}"></p><br />
-                    <p>Credits: </p><p th:text="${course.credits}"></p><br />
-                    <p>Start Time: </p><p th:text="${course.startTime}"></p><br /><br />
-                    <p>Day: </p><p th:text="${course.day}"></p><br /><br />
-                    <p>Testbook: </p><p th:text="${course.textbook}"></p><br /><br />
-                    <p>Reference: </p><p th:text="${course.refTextbook}"></p><br /><br />K
+                    <p th:text="|Term: ${course.term}|"></p><br />
+                    <p th:text="|Credits: ${course.credits}|"></p><br />
+                    <p th:text="|Start Time: ${course.startTime}|"></p><br />
+                    <p th:text="|Day: ${course.day}|"></p><br />
+                    <p th:text="|Testbook: ${course.textbook}|"></p><br />
+                    <p th:text="|Reference: ${course.refTextbook}|"></p><br />
+                    <p>Take the quiz!
+                        <a th:href="@{/course.course_id}">
+                        <span class="icon">
+                        <img th:src="@{/img/logo/compicon.png}" alt="compicon" />
+                        </span>
+                        </a>
+                    </p>
                 </div>
             </div>
         </div>

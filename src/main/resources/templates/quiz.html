@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Online Quiz</title>
+
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+
+<div class="quizcontainer">
+    <div class="infobox">
+        <div class="videobox">
+        </div>
+        <div class="timer1">
+
+        </div>
+        <div class="timer2">
+            <!--<li class="timer2" type="button">Time left = <span id="timer"></span></li>-->
+        </div>
+        <div class="studentinfo">
+            <p>name:</p>
+        </div>
+    </div>
+    <div class="quizbox">
+        1. question 1<br/>
+        <input type="radio" value="11" name="answer1" />option 11
+        <input type="radio" value="12" name="answer1" />option 12
+        <input type="radio" value="13" name="answer1" />option 13
+        <input type="radio" value="14" name="answer1" />option 14
+        <br /><br />
+        2. question 3<br />
+        <input type="radio" value="21" name="answer2" />option 21
+        <input type="radio" value="22" name="answer2" />option 22
+        <input type="radio" value="23" name="answer2" />option 23
+        <input type="radio" value="24" name="answer2" />option 24
+        <br /><br />
+        3. question 3<br />
+        <input type="radio" value="31" name="answer3" />option 31
+        <input type="radio" value="32" name="answer3" />option 32
+        <input type="radio" value="33" name="answer3" />option 33
+        <input type="radio" value="34" name="answer3" />option 34
+        <br /><br />
+        4. question 4<br />
+        <input type="radio" value="41" name="answer4" />option 41
+        <input type="radio" value="42" name="answer4" />option 42
+        <input type="radio" value="43" name="answer4" />option 43
+        <input type="radio" value="44" name="answer4" />option 44
+        <br /><br />
+        5. question 5<br />
+        <input type="radio" value="51" name="answer5" />option 51
+        <input type="radio" value="52" name="answer5" />option 52
+        <input type="radio" value="53" name="answer5" />option 53
+        <input type="radio" value="54" name="answer5" />option 54
+        <br /><br />
+        6. question 6<br />
+        <input type="radio" value="61" name="answer6" />option 61
+        <input type="radio" value="62" name="answer6" />option 62
+        <input type="radio" value="63" name="answer6" />option 63
+        <input type="radio" value="64" name="answer6" />option 64
+        <br /><br />
+        7. question 7<br />
+        <input type="radio" value="71" name="answer7" />option 71
+        <input type="radio" value="72" name="answer7" />option 72
+        <input type="radio" value="73" name="answer7" />option 73
+        <input type="radio" value="74" name="answer7" />option 74
+        <br /><br />
+        8. question 8<br />
+        <input type="radio" value="81" name="answer8" />option 81
+        <input type="radio" value="82" name="answer8" />option 82
+        <input type="radio" value="83" name="answer8" />option 83
+        <input type="radio" value="84" name="answer8" />option 84
+        <br /><br />
+        9. question 9<br />
+        <input type="radio" value="91" name="answer9" />option 91
+        <input type="radio" value="92" name="answer9" />option 92
+        <input type="radio" value="93" name="answer9" />option 93
+        <input type="radio" value="94" name="answer9" />option 94
+        <br /><br />
+        10. question 10<br />
+        <input type="radio" value="101" name="answer10" />option 101
+        <input type="radio" value="102" name="answer10" />option 102
+        <input type="radio" value="103" name="answer10" />option 103
+        <input type="radio" value="104" name="answer10" />option 104
+        <br /><br />
+        <button type="button"> Submit Answers</button>
+    </div>
+
+</div>
+
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+
+<script type="text/javascript" th:src="@{/js/jquery-1.12.4.min.js}" src="/static/js/jquery-1.12.4.min.js"></script>
+<!--<script type="text/javascript" th:inline="javascript">-->
+    <!--document.getElementById('timer').innerHTML =-->
+        <!--10 + ":" + 00;-->
+    <!--startTimer();-->
+
+    <!--function startTimer() {-->
+        <!--var presentTime = document.getElementById('timer').innerHTML;-->
+        <!--var timeArray = presentTime.split(/[:]+/);-->
+        <!--var m = timeArray[0];-->
+        <!--var s = checkSecond((timeArray[1] - 1));-->
+        <!--if(s==59){m=m-1};-->
+        <!--if(m<0){-->
+            <!--alert('Time Out');-->
+            <!--window.location.href="@{/login}?backurl="+window.location.href;-->
+        <!--};-->
+
+        <!--document.getElementById('timer').innerHTML =-->
+            <!--m + ":" + s;-->
+        <!--setTimeout(startTimer, 1000);-->
+    <!--}-->
+
+    <!--function checkSecond(sec) {-->
+        <!--if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10-->
+        <!--if (sec < 0) {sec = "59"};-->
+        <!--return sec;-->
+    <!--};-->
+<!--</script>-->
+
+<!--<script type="text/javascript" th:inline="javascript">-->
+
+    <!--$("button").click(function() {-->
+        <!--var questionCount = 10; // 问题数量，应从后台返回数据中获取，此处暂时写死为3-->
+        <!--var obj = {};-->
+        <!--for (var i = 1; i < (questionCount + 1); i++) {-->
+            <!--var val = $("input:radio[name='answer" + i + "']:checked").val();-->
+            <!--if (val) {-->
+                <!--obj[i] = val;-->
+            <!--}-->
+        <!--}-->
+
+        <!--if(questionCount > Object.getOwnPropertyNames(obj).length) {-->
+            <!--alert("PLEASE FINISH ALL QUETIONS AND SUBMIT");-->
+            <!--return;-->
+        <!--}-->
+
+        <!--// 以下为将所选答案展示至页面，正常情况下应进行网络请求-->
+        <!--// html 在循环中可拼成任意形式-->
+        <!--var html = "";-->
+
+        <!--for (var key in obj) {-->
+            <!--html += "题目" + key + " 答案:" + obj[key] + "<br>";-->
+        <!--}-->
+        <!--$("#display").html(html);-->
+
+    <!--});-->
+<!--</script>-->
+
+</html>
