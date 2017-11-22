@@ -85,9 +85,9 @@ public class TestController extends BaseController {
     }
 
     @GetMapping("/getquestions")
-    public String getquestion() {
+    public List<Question> getquestion() {
         //return qustrepo.findByCourse(corpo.findOne("CS1002")).get(0).getContent();
-        return quizserv.getTop10Questions("CS1002").get(0).getContent();
+        return quizserv.getTop10Questions("CS1002");
         //return qustrepo.findByCourse_Course_id("CS1002").size() + "";
         //return qustrepo.findByCourse_Day("FRIDAY").getTotalPages() + "";
     }

@@ -30,7 +30,7 @@
             <video height="240px" autoplay="autoplay"></video><br />
             <canvas id="canvas1" height="240px" ></canvas><br />
             <input type="button" title="photo" value="photo" onclick="getPhoto();" />
-            <input type="button" title="try" value="try" onclick="submitForm();" /><hr />
+            <input type="button" title="try" value="try" onclick="submitForm('tabtu');" /><hr />
 
             <form enctype="multipart/form-data" method="post" th:action="@{/upload}">
                 图片<input type="file" name="file"/>
@@ -94,31 +94,6 @@
                 }
             }
         });
-
-        function submitForm() {
-            fileImg = canvas1.toDataURL('image/jpg');
-
-            var formData = new FormData();
-            var usr = $("#httpServletRequest.remoteUser");
-            formData.append("usr", usr);
-            formData.append("pic", encodeURIComponent(fileImg));
-            $.ajax({
-                url: "/identify",
-                type: 'POST',
-                data: formData,
-                timeout: 10000, //超时时间设置，单位毫秒
-                async: true,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function (String) {
-                    alert("1");
-                },
-                error: function (returndata) {
-                    alert("error");
-                }
-            });
-        }
     </script>
     <script type="text/javascript" th:src="@{/js/webcap.js}" src="/static/js/webcap.js"></script>
 </div>

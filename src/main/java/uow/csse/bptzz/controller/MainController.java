@@ -17,7 +17,10 @@ import uow.csse.bptzz.utils.face.ImgCmp;
 import uow.csse.bptzz.utils.face.ImgFace;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.InputStream;
+import java.util.UUID;
 
 /**
  * Main Controller
@@ -73,16 +76,82 @@ public class MainController {
         return "/demo/capture";
     }
 
-
     /**
      * check the similarity(youtu API)
      * POST http://localhost:8080/identify
      * @param username username in String
-     * @param file capture picture after Base64 encode
+     * @param basedata capture picture after Base64 encode
      * @return the similarity
      */
     @RequestMapping(value = "/identify", method = RequestMethod.POST)
     public @ResponseBody String identify(@RequestParam("usr") String username,
+                                         @RequestParam("data") String basedata) {
+        try {
+            String profile = usrserv.findStudentByUsername(username).getProfilepic();
+            byte[] k = Base64Utils.decodeFromString(basedata.substring("data:image/jpeg;base64,".length()));
+            File f1 = new File(Const.PROFILE_PATH + profile);
+            double result = ImgCmp.compare(k, FileUtil.getContent(f1));
+            return result + "";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    /**
+     * check the similarity(opencv)
+     * POST http://localhost:8080/cvidentify
+     * @param username username in String
+     * @param basedata capture picture after Base64 encode
+     * @return the similarity
+     */
+    @RequestMapping(value = "/cvidentify", method = RequestMethod.POST)
+    @ResponseBody
+    public String cvidentify(@RequestParam("usr") String username,
+                           @RequestParam("data") String basedata) {
+        try {
+            ImgFace pic1 = new ImgFace(Base64Utils.decodeFromString(basedata.substring("data:image/jpeg;base64,".length())));
+            int faces = pic1.dectface();
+            if (faces > 0) {
+                String profile = usrserv.findStudentByUsername(username).getProfilepic();
+                ImgFace pic0 = new ImgFace(Const.PROFILE_PATH + profile);
+                return ImgCmp.compare(pic0.getImgbytes(), pic1.getImgbytes()) + "";
+            } else {
+                return "nofaces";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    /**
+     * upload image with base64 string
+     * @param data image data base64 code
+     * @return filename
+     */
+    @RequestMapping(value = { "/base64upload" }, method = { RequestMethod.POST })
+    @ResponseBody
+    public String petUpgradeTarget(String data) {
+        try {
+            byte[] k = Base64Utils.decodeFromString(data.substring("data:image/jpeg;base64,".length()));
+            String fileName = UUID.randomUUID().toString() + ".jpeg";
+            String filePath = Const.UPLOAD_PATH;
+            FileUtil.uploadFile(k, filePath, fileName);
+            return fileName;
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    /**
+     * check the similarity(youtu API)
+     * POST http://localhost:8080/whoami
+     * @param username username in String
+     * @param file picture file
+     * @return the similarity
+     */
+    @RequestMapping(value = "/whoami", method = RequestMethod.POST)
+    @ResponseBody
+    public String whoami(@RequestParam("usr") String username,
                       @RequestParam("pic") MultipartFile file) {
         String profile = usrserv.findStudentByUsername(username).getProfilepic();
         try {
@@ -96,32 +165,28 @@ public class MainController {
 
     /**
      * check the similarity(with opencv)
-     * POST http://localhost:8080/cvidentify
+     * POST http://localhost:8080/cvwhoami
      * @param username username in String
-     * @param file capture picture after Base64 encode
+     * @param file picture file
      * @return the similarity
      */
-    @RequestMapping(value = "/cvidentify", method = RequestMethod.POST)
-    public @ResponseBody String cvidentify(@RequestParam("usr") String username,
-                                         @RequestParam("pic") MultipartFile file) {
-        System.out.println(username);
+    @RequestMapping(value = "/cvwhoami", method = RequestMethod.POST)
+    @ResponseBody
+    public String cvwhoami(@RequestParam("usr") String username,
+                           @RequestParam("pic") MultipartFile file) {
         try {
             ImgFace pic1 = new ImgFace(file.getBytes());
-            System.out.println(pic1.getSourceEXT());
             int faces = pic1.dectface();
             if (faces > 0) {
                 String profile = usrserv.findStudentByUsername(username).getProfilepic();
-                System.out.println(profile);
                 ImgFace pic0 = new ImgFace(Const.PROFILE_PATH + profile);
-                double result = ImgCmp.compare(pic0.getImgbytes(), pic1.getImgbytes());
-                return result + "";
+                return ImgCmp.compare(pic0.getImgbytes(), pic1.getImgbytes()) + "";
             } else {
                 return "nofaces";
             }
         } catch (Exception e) {
-
+            return e.getMessage();
         }
-        return "";
     }
 
     /**
@@ -131,8 +196,9 @@ public class MainController {
      * @return message
      */
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public @ResponseBody String uploadfile(@RequestParam("file") MultipartFile file) {
-        String fileName = System.currentTimeMillis() + "." +
+    @ResponseBody
+    public String uploadfile(@RequestParam("file") MultipartFile file) {
+        String fileName = UUID.randomUUID().toString() + "." +
                 FileUtil.getFileExtName(file.getOriginalFilename());
         String filePath = Const.UPLOAD_PATH;
         try {
