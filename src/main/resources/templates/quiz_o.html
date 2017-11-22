@@ -16,14 +16,14 @@
             <div class="videobox">
             </div>
             <div class="timer1">
-                <video height="240px" autoplay="autoplay"></video><br />
-                <canvas id="mycanvas" th:height="240px"></canvas><br />
-                <meta name="usr" th:content="${#httpServletRequest.remoteUser}" />
-                <input type="button" title="Open Camera" value="open camera" onclick="getMedia();" />
-                <input type="button" title="Face Login" value="Face Login" onclick="submitForm();" /><hr />
+                <!--<video height="240px" autoplay="autoplay"></video><br />-->
+                <!--<canvas id="mycanvas" th:height="240px"></canvas><br />-->
+                <!--<meta name="usr" th:content="${#httpServletRequest.remoteUser}" />-->
+                <!--<input type="button" title="Open Camera" value="open camera" onclick="getMedia();" />-->
+                <!--<input type="button" title="Face Login" value="Face Login" onclick="submitForm();" /><hr />-->
             </div>
             <div class="timer2">
-                <li class="timer2" type="button">Quiz Time left = <span id="timer"></span></li>
+                <li class="timer2" th:type="" th:name="tmleft">Quiz Time left = <span id="timer"></span></li>
             </div>
             <div class="studentinfo">
                 <p th:text="|Name: ${#httpServletRequest.remoteUser}|"></p>
@@ -47,17 +47,33 @@
     </div>
 </div>
 <div th:replace="fragments/footer :: footer"/>
-
 </body>
-<script type="text/javascript" th:src="@{/js/webcap.js}" src="/static/js/webcap.js"></script>
+<!--<script type="text/javascript" th:src="@{/js/webcap.js}" src="/static/js/webcap.js"></script>-->
 <script type="text/javascript" th:src="@{/js/jquery-1.12.4.min.js}" src="/static/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" th:inline="javascript">
     /*<![CDATA[*/
-    $("#startQuiz").click(function() {
-        document.getElementById('timer').innerHTML =
-            10 + ":" + 00;
-        startTimer();
+//    var usr = $("meta[name='usr']").attr("content");
+//    var video = document.querySelector('video');
+//    var tcanvas = document.getElementById('mycanvas');
+//    tcanvas.style.display="none";
+//    var tcontext = tcanvas.getContext('2d');
+//    var exArray = [];
+//    MediaStreamTrack.getSources(function (sourceInfos) {
+//        for (var i = 0; i != sourceInfos.length; ++i) {
+//            var sourceInfo = sourceInfos[i];
+//            if (sourceInfo.kind === 'video') {
+//                exArray.push(sourceInfo.id);
+//            }
+//        }
+//    });
+//    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+//    window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
 
+    $("#startQuiz").click(function() {
+        document.getElementById('timer').innerHTML = 10 + ":" + 00;
+        startTimer();
+//        getMedia();
+//        setInterval(submitForm(), 20000);
         $(this).hide(1);
         $("#questionForm").css("display", "block");
     });
@@ -85,23 +101,4 @@
     };
     /*]]>*/
 </script>
-<script type="text/javascript">
-    var usr = $("meta[name='usr']").attr("content");
-        var video = document.querySelector('video');
-        var tcanvas = document.getElementById('mycanvas');
-        tcanvas.style.display="none";
-        var tcontext = tcanvas.getContext('2d');
-        var exArray = [];
-        MediaStreamTrack.getSources(function (sourceInfos) {
-            for (var i = 0; i != sourceInfos.length; ++i) {
-                var sourceInfo = sourceInfos[i];
-                if (sourceInfo.kind === 'video') {
-                    exArray.push(sourceInfo.id);
-                }
-            }
-        });
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-    //    window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
-</script>
-
 </html>
