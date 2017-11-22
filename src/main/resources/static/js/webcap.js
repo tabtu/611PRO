@@ -36,7 +36,7 @@ function getPhoto() {
 
 function submitForm() {
     getPhoto();
-    var usrName = document.getElementById('username').value;
+    var usrName = usr;
     // alert(usrName);
     var myImage = tcanvas.toDataURL("image/jpeg");
     $.ajax({
