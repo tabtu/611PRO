@@ -355,6 +355,9 @@ float: right;
 .carousel-caption>p{
     text-align: left;
 }
+.carousel-caption>h3{
+	text-align: left;
+}
 @font-face{
 	font-family: "OpenSans Regular";
 	src:url(../../static/css/source/fonts/OpenSans-Regular.ttf) format("truetype");
@@ -378,9 +381,14 @@ float: right;
     top: 15%;
 
 }
+.carousel-caption>h3{
+	font-size: 12px;
+	text-align: left;
+}
  
 .carousel-caption>p{
 	font-size: 10pt;
+	text-align: left;
 }	
 }
  
@@ -1614,23 +1622,22 @@ height: 30px;
 /*-------------------------------------Quiz Page ----------------------------------------------*/
 .quizcontainer{
     position: relative;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 10px;
+	grid-auto-rows: minmax(100px, auto);
 }
 /*-------------------------------------info box ----------------------------------------------*/
 .infobox{
-    padding-left: 80px;
-    margin-top: 80px;
-    position: fixed;
-    top: 80px;
-    left: 0;
-    width: 350px;
-    height: 650px;
-    border-bottom: solid #e0e0e0;
-	border-right: solid #e0e0e0;
+	position: fixed;
+	border: solid #0a1115;
+	grid-column: 1;
+	grid-row: 1 / 4;
 }
 /*-------------------------------------info box ----------------------------------------------*/
 .quizbox{
-    float: right;
-    position: inherit;
-    padding-right: 80px;
+	border: solid #0a1115;
+	grid-column: 2 / 4;
+	grid-row: 1 / 5;
 }
 

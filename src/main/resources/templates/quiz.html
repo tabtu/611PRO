@@ -19,26 +19,25 @@
 
             </div>
             <div class="timer2">
-                <li class="timer2" type="button">Time left = <span id="timer"></span></li>
+                <li class="timer2" type="button">Quiz Time left = <span id="timer"></span></li>
             </div>
             <div class="studentinfo">
-                <p>name:</p>
+                <p th:text="|Name: ${#httpServletRequest.remoteUser}|"></p>
             </div>
         </div>
         <div class="quizbox">
-
-            <button> Start Quiz </button>
+            <button type="button" id="startQuiz"> Start Quiz </button>
             <br /><br /><br />
-            <form action="@{/quiz}" th:action="@{/quiz}" method="post">
+            <form id="questionForm" action="@{/quiz}" th:action="@{/quiz}" method="post" style="display:none">
                 <div class="resultItem" th:each="question:${questions}">
-                    <span th:text="|${question.question_id}.${question.content}|"></span>
-                    <input type="radio" th:value="${qusetion.optiona}" name="answer1" /><p th:text="${qusetion.optiona}"></p>
-                    <input type="radio" th:value="${qusetion.optionb}" name="answer1" /><p th:text="${qusetion.optionb}"></p>
-                    <input type="radio" th:value="${qusetion.optionc}" name="answer1" /><p th:text="${qusetion.optionc}"></p>
-                    <input type="radio" th:value="${qusetion.optiond}" name="answer1" /><p th:text="${qusetion.optiond}"></p>
+                    <span th:text="|${question.question_id}.${question.content}|"></span><br />
+                    <input type="radio" value="A" th:name="${question.question_id}" /><span th:text="${question.optiona}"></span><br />
+                    <input type="radio" value="B" th:name="${question.question_id}" /><span th:text="${question.optionb}"></span><br />
+                    <input type="radio" value="C" th:name="${question.question_id}" /><span th:text="${question.optionc}"></span><br />
+                    <input type="radio" value="D" th:name="${question.question_id}" /><span th:text="${question.optiond}"></span><br />
                 </div>
                 <br /><br />
-                <button type="button" id="submitBtn"> Submit Answers</button>
+                <button type="submit" id="submitBtn"> Submit Answers</button>
             </form>
         </div>
     </div>
@@ -50,9 +49,14 @@
 <script type="text/javascript" th:src="@{/js/jquery-1.12.4.min.js}" src="/static/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" th:inline="javascript">
     /*<![CDATA[*/
-    document.getElementById('timer').innerHTML =
-        10 + ":" + 00;
-    startTimer();
+    $("#startQuiz").click(function() {
+        document.getElementById('timer').innerHTML =
+            10 + ":" + 00;
+        startTimer();
+
+        $(this).hide(1);
+        $("#questionForm").css("display", "block");
+    });
 
     function startTimer() {
         var presentTime = document.getElementById('timer').innerHTML;
@@ -75,37 +79,6 @@
         if (sec < 0) {sec = "59"};
         return sec;
     };
-    /*]]>*/
-</script>
-
-
-<script type="text/javascript" th:inline="javascript">
-    /*<![CDATA[*/
-    $("submitBtn").click(function() {
-        var questionCount = 1; // 问题数量，应从后台返回数据中获取，此处暂时写死为3
-        var obj = {};
-        for (var i = 1; i < (questionCount + 1); i++) {
-            var val = $("input:radio[name='answer" + i + "']:checked").val();
-            if (val) {
-                obj[i] = val;
-            }
-        }
-
-        if(questionCount > Object.getOwnPropertyNames(obj).length) {
-            alert("PLEASE FINISH ALL QUETIONS AND SUBMIT");
-            return;
-        }
-
-        // 以下为将所选答案展示至页面，正常情况下应进行网络请求
-        // html 在循环中可拼成任意形式
-        var html = "";
-
-        for (var key in obj) {
-            html += "题目" + key + " 答案:" + obj[key] + "<br>";
-        }
-        $("#display").html(html);
-
-    });
     /*]]>*/
 </script>
 
