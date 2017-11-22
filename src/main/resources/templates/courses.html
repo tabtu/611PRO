@@ -17,39 +17,19 @@
             <div class="item active">
                 <img th:src="@{img/menworking.jpg}" alt="Lecture 2" style="width:1403px; height:672px;" />
                 <div class="carousel-caption">
-
-                    <div th:unless="${#httpServletRequest.remoteUser != null}">
-                    <p>No Selected Course, Please Login</p>
-                        <a th:href="@{/login}"></a>
-                    </div>
-                    <div th:if="${#httpServletRequest.remoteUser != null}">
-                    <p>Selected Courses: </p>
+                    <h2 th:text="|Welcome: ${#httpServletRequest.remoteUser}|"> </h2><br />
+                    <h3>Selected Courses: </h3><br />
                     <div th:each="course: ${courses}">
-                        <p th:text="@{course.coureName}">
+                        <p th:text="${course.courseName}"></p>
                         <p>Take the quiz!
-                            <a th:href="@{/quiz?course_id}">
-                        <span class="icon">
-                        <img th:src="@{/img/logo/compicon.png}" alt="compicon" />
-                        </span>
+                            <a th:href="@{/quiz(course_id=${course.course_id})}">
+                                <span class="icon">
+                                <img th:src="@{/img/logo/compicon.png}" alt="compicon" />
+                                </span>
                             </a>
                         </p>
+                        <br />
                     </div>
-                    </div>
-                    <!--<h2 th:text="${course.course_id}"></h2><br />-->
-                    <!--<h3 th:text="${course.courseName}"></h3><br /><br />-->
-                    <!--<p th:text="|Term: ${course.term}|"></p><br />-->
-                    <!--<p th:text="|Credits: ${course.credits}|"></p><br />-->
-                    <!--<p th:text="|Start Time: ${course.startTime}|"></p><br />-->
-                    <!--<p th:text="|Day: ${course.day}|"></p><br />-->
-                    <!--<p th:text="|Testbook: ${course.textbook}|"></p><br />-->
-                    <!--<p th:text="|Reference: ${course.refTextbook}|"></p><br />-->
-                    <!--<p>Take the quiz!-->
-                        <!--<a th:href="@{/quiz?course_id}">-->
-                        <!--<span class="icon">-->
-                        <!--<img th:src="@{/img/logo/compicon.png}" alt="compicon" />-->
-                        <!--</span>-->
-                        <!--</a>-->
-                    <!--</p>-->
                 </div>
             </div>
         </div>
