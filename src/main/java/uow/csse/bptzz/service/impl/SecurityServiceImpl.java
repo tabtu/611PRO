@@ -10,7 +10,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import uow.csse.bptzz.model.User;
+import uow.csse.bptzz.repository.StudentRepo;
+import uow.csse.bptzz.repository.UserRepo;
 import uow.csse.bptzz.service.SecurityService;
+
+import java.util.List;
 
 @Service
 public class SecurityServiceImpl implements SecurityService {

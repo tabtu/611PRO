@@ -118,18 +118,18 @@
     </plugins>
 
     <resources>
-      <!--<resource>-->
-        <!--<directory>src/main/resources</directory>-->
-        <!--<targetPath>BOOT-INF/</targetPath>-->
-        <!--<includes>-->
-          <!--<include>**/*.properties</include>-->
-        <!--</includes>-->
-      <!--</resource>-->
+      <resource>
+        <directory>src/main</directory>
+        <targetPath>BOOT-INF/</targetPath>
+        <includes>
+          <include>**/*.properties</include>
+        </includes>
+      </resource>
 
       <!-- import opencv library jar package-->
       <resource>
         <directory>lib</directory>
-        <targetPath>lib/</targetPath>
+        <targetPath>BOOT-INF/lib/</targetPath>
         <includes>
           <include>**/*.jar</include>
           <include>**/*.dylib</include>

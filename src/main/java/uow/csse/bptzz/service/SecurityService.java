@@ -8,6 +8,4 @@ public interface SecurityService {
     void autologin(String username, String password);
 
     User faceIdentify(String file);
-
-    //double imageCompare(String f1, String f2);
 }

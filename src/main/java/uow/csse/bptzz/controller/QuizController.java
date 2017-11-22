@@ -12,6 +12,7 @@ import uow.csse.bptzz.service.QuizService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class QuizController extends BaseController {
@@ -33,13 +34,45 @@ public class QuizController extends BaseController {
     @RequestMapping(value = "/quiz", method = RequestMethod.POST)
     public ModelAndView postQuiz(HttpServletRequest request) {
 
-        String[] qStrings= request.getParameter("quizString").split("\\s{1,}");
+        Map<String, String[]> parameterMap = request.getParameterMap();
+
+
+        int correctNum = 0;
+        int incorrectNum = 0;
+        double score = 0.0;
+        for (String key : parameterMap.keySet()) {
+            String[] item = parameterMap.get(key);
+            String answer = questionv.getQuestionById(Integer.parseInt(key)).getAnswer();
+
+            if (null == item || item.length < 1) {
+                continue;
+            }
+
+            if (answer.equalsIgnoreCase(item[0])) {
+                correctNum++;
+                score += 10.0;
+            } else {
+                incorrectNum ++;
+            }
+
+        }
+
+        ModelAndView mav = new ModelAndView("assessment");
+        //it is better to use session("username") to display the username on webpage,
+        //not necessary to return by controller
+        //mav.addObject("username", username);
+        mav.addObject("correctNum", correctNum);
+        mav.addObject("incorrectNum", incorrectNum);
+        mav.addObject("score", score);
+
+
+//        String[] qStrings= request.getParameter("quizString").split("\\s{1,}");
         //it is better to use session("username") to display the username on webpage by front-end,
         //not necessary to return by controller
         //String username = "";
-        int correctnum = 0;
-        int incorrectnum = 0;
-        double score = 0.0;
+//        int correctnum = 0;
+//        int incorrectnum = 0;
+//        double score = 0.0;
 
 //        List<Question> questions
 //        for (Question question : questions) {
@@ -54,27 +87,17 @@ public class QuizController extends BaseController {
 //
 //        }
 
-        for (int i = 0; i < qStrings.length; i+=2 ) {
-            if (qStrings[i+1] == questionv.getQuestionById(Integer.parseInt(qStrings[i])).getAnswer())
-            {
-                correctnum += 1;
-                score += 10.0;
-
-            } else {
-                incorrectnum += 1;
-            }
-
-
-        }
-
-
-        ModelAndView mav = new ModelAndView("assessment");
-        //it is better to use session("username") to display the username on webpage,
-        //not necessary to return by controller
-        //mav.addObject("username", username);
-        mav.addObject("correctnum", correctnum);
-        mav.addObject("incorrectnum", incorrectnum);
-        mav.addObject("score", score);
+//        for (int i = 0; i < qStrings.length; i += 2) {
+//            if (qStrings[i + 1] == questionv.getQuestionById(Integer.parseInt(qStrings[i])).getAnswer()) {
+//                correctnum += 1;
+//                score += 10.0;
+//
+//            } else {
+//                incorrectnum += 1;
+//            }
+//
+//
+//        }
 
         return mav;
     }

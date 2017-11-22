@@ -49,25 +49,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .formLogin()
                     .loginPage("/login")
+                    .defaultSuccessUrl("/home")
                     .permitAll()
                 .and()
                     .logout()
+                    .logoutUrl("/logout")
                     .permitAll()
                 .and()
                     .httpBasic()
                 .and()
-                    .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+                    .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
+                    .accessDeniedPage("/error/403");
     }
 
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
-        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+        auth.eraseCredentials(false).userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
         auth.inMemoryAuthentication()
-                .withUser("tabtu").password("ttxy").roles("USER")
+                .withUser("user").password("ttxy").roles("USER")
                 .and()
-                .withUser("ttxy").password("611pro").roles("ADMIN");
+                .withUser("admin").password("ttxy").roles("ADMIN");
+
     }
 
     @Override
