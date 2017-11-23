@@ -1,14 +1,23 @@
 package uow.csse.bptzz.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 import uow.csse.bptzz.config.Const;
 import uow.csse.bptzz.model.User;
 import uow.csse.bptzz.service.SecurityService;
@@ -19,6 +28,7 @@ import uow.csse.bptzz.utils.face.ImgFace;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -38,12 +48,39 @@ public class LoginController {
     @Autowired
     private UserService userserv;
 
+    @Autowired
+//    @Qualifier("org.springframework.security.authenticationManager")
+    protected AuthenticationManager authenticationManager;
 
-    @GetMapping("/autologin")
-    public String test() {
-        User tmp = userserv.findUserByUsername("tabtu");
-        secuserv.autologin(tmp.getUsername(), tmp.getPassword());
-        return "/home";
+    @RequestMapping(value = "/autologin", method = RequestMethod.POST)
+    public ModelAndView autologin(HttpServletRequest request)
+    {
+        System.out.println("register user");
+        String username = request.getParameter("usr");
+        String basedata = request.getParameter("data");
+
+        try{
+            byte[] k = Base64Utils.decodeFromString(basedata.substring("data:image/jpeg;base64,".length()));
+            String profile = userserv.findUserByUsername(username).getStudent().getProfilepic();
+            File f1 = new File(Const.PROFILE_PATH + profile);
+            double result = ImgCmp.compare(k, FileUtil.getContent(f1));
+            if (result > 80) {
+                User tmp = userserv.findUserByUsername(username);
+                UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(tmp.getUsername(), tmp.getPassword());
+                token.setDetails(new WebAuthenticationDetails(request));
+                Authentication authenticatedUser = authenticationManager.authenticate(token);
+                SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
+                request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
+            } else {
+                System.out.println("Authentication failed");
+                return new ModelAndView(new RedirectView("/register"));
+            }
+
+            } catch( Exception e ){
+            System.out.println("Authentication failed: " + e.getMessage());
+            return new ModelAndView(new RedirectView("/register"));
+        }
+        return new ModelAndView(new RedirectView(""));
     }
 
     /**
