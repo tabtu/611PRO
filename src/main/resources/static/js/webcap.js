@@ -1,3 +1,17 @@
+/**
+ *
+ * @Author Tab Tu
+ * @Updated Nov.22 2017
+ * @Since 1.1
+ *
+ * var tag_identify = 0;
+ * var usr = $("meta[name='usr']").attr("content");
+ * var video = document.querySelector('video');
+ * var tcanvas = document.getElementById('mycanvas');
+ * var tcontext = tcanvas.getContext('2d');
+ * var exArray = [];
+ */
+
 function getMedia() {
     if (navigator.getUserMedia) {
         navigator.getUserMedia({
@@ -45,18 +59,62 @@ function submitForm() {
         data: {usr: usrName, data: myImage},
         timeout: 60000,
         success: function (msg) {
-            alert(msg);
-            if (parseInt(msg)<50) {
-                self.location = "/logout"
+            var similarity = parseInt(msg);
+            if (similarity < 50) {
+                alert("We are forced to log out since you are not " + usr);
+                self.location = "/logout";
+            } else if (similarity < 80) {
+                if (tag_identify > 2) {
+                    alert("We are forced to log out since you are not doing the quiz by yourself " + usr);
+                    self.location = "/logout"
+                } else {
+                    alert("Please finish the quiz by your self alone " + usr);
+                    tag_identify++;
+                }
+            } else {
+                tag_identify = 0;
             }
         },
         error: function (msg) {
-            alert(msg);
+            alert("Sorry that we've got some proble on this page. " + msg);
+            self.location = "/logout";
+        }
+    });
+}
+
+function autoLogin() {
+    getPhoto();
+    var myImage = tcanvas.toDataURL("image/jpeg");
+    $.ajax({
+        type: "POST",
+        url: '/identify',
+        data: {usr: usnm, data: myImage},
+        timeout: 60000,
+        success: function (msg) {
+            var similarity = parseInt(msg);
+            if (similarity < 50) {
+                alert("We are forced to log out since you are not " + usr);
+                self.location = "/logout";
+            } else if (similarity < 80) {
+                if (tag_identify > 2) {
+                    alert("We are forced to log out since you are not doing the quiz by yourself " + usr);
+                    self.location = "/logout"
+                } else {
+                    alert("Please finish the quiz by your self alone " + usr);
+                    tag_identify++;
+                }
+            } else {
+                tag_identify = 0;
+            }
+        },
+        error: function (msg) {
+            alert("Sorry that we've got some proble on this page. " + msg);
+            self.location = "/logout";
         }
     });
 }
 
 // Video
 // function getVedio() {
-//     drawVideoAtCanvas(video, context2);
+//     drawVideoAtCanvas(video, tcontext);
 // }
