@@ -84,6 +84,7 @@ function submitForm() {
 
 function autoLogin() {
     getPhoto();
+    alert(usnm);
     var myImage = tcanvas.toDataURL("image/jpeg");
     $.ajax({
         type: "POST",

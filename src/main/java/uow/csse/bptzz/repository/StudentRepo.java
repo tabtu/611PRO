@@ -12,6 +12,13 @@ import uow.csse.bptzz.model.Student;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * @author 	Tab Tu
+ * @update	Nov.20 2017
+ * @version	1.0
+ */
+
+
 @Repository
 public interface StudentRepo extends JpaRepository<Student, Long> {
 

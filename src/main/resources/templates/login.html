@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 >
 <head>
-    <title>Spring Security Example </title>
+    <title>Online Quiz</title>
     <div th:replace="fragments/header :: header-css"/>
     <!--<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"-->
     <!--href="../../css/bootstrap.min.css"/>-->
@@ -27,9 +27,9 @@
     <div class="row" style="margin-top:20px">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
             <!--<input type="button" title="Start Login" value="open camera" onclick="getMedia();" /><br />-->
-            <!--<video height="240px" autoplay="autoplay"></video><br />-->
-            <!--<canvas id="mycanvas" height="240px" ></canvas><br />-->
-            <!--<input type="button" title="Face Login" value="Face Login" onclick="autoLogin();" /><hr />-->
+            <video height="240px" autoplay="autoplay"></video><br />
+            <canvas id="mycanvas" height="240px" ></canvas><br />
+            <input type="button" title="Face Login" value="Face Login" onclick="autoLogin();" /><hr />
 
             <form th:action="@{/login}" method="post">
                 <fieldset>
@@ -88,6 +88,9 @@
         });
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
         window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
+    </script>
+    <script>
+        getMedia();
     </script>
     <script type="text/javascript" th:src="@{/js/webcap.js}" src="/static/js/webcap.js"></script>
 </div>

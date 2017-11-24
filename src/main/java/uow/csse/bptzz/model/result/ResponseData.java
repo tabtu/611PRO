@@ -1,5 +1,13 @@
 package uow.csse.bptzz.model.result;
 
+/**
+ * Reponse Data Format
+ *
+ * @author 	Tab Tu
+ * @update	Oct.11 2017
+ * @version	1.0
+ */
+
 public class ResponseData extends Response{
     private Object data;
 

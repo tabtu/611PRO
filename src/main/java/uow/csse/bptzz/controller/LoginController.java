@@ -1,5 +1,6 @@
 package uow.csse.bptzz.controller;
 
+import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,11 +29,12 @@ import uow.csse.bptzz.utils.face.ImgFace;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.util.Calendar;
 import java.util.Locale;
 import java.util.UUID;
 
 /**
- * Main Controller
+ * Login Controller
  *
  * @author 	Tab Tu
  * @update	Nov.21 2017
@@ -48,41 +50,6 @@ public class LoginController {
     @Autowired
     private UserService userserv;
 
-    @Autowired
-//    @Qualifier("org.springframework.security.authenticationManager")
-    protected AuthenticationManager authenticationManager;
-
-    @RequestMapping(value = "/autologin", method = RequestMethod.POST)
-    public ModelAndView autologin(HttpServletRequest request)
-    {
-        System.out.println("register user");
-        String username = request.getParameter("usr");
-        String basedata = request.getParameter("data");
-
-        try{
-            byte[] k = Base64Utils.decodeFromString(basedata.substring("data:image/jpeg;base64,".length()));
-            String profile = userserv.findUserByUsername(username).getStudent().getProfilepic();
-            File f1 = new File(Const.PROFILE_PATH + profile);
-            double result = ImgCmp.compare(k, FileUtil.getContent(f1));
-            if (result > 80) {
-                User tmp = userserv.findUserByUsername(username);
-                UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(tmp.getUsername(), tmp.getPassword());
-                token.setDetails(new WebAuthenticationDetails(request));
-                Authentication authenticatedUser = authenticationManager.authenticate(token);
-                SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
-                request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
-            } else {
-                System.out.println("Authentication failed");
-                return new ModelAndView(new RedirectView("/register"));
-            }
-
-            } catch( Exception e ){
-            System.out.println("Authentication failed: " + e.getMessage());
-            return new ModelAndView(new RedirectView("/register"));
-        }
-        return new ModelAndView(new RedirectView(""));
-    }
-
     /**
      * check the similarity(youtu API)
      * POST http://localhost:8080/identify
@@ -91,7 +58,6 @@ public class LoginController {
      * @return the similarity
      */
     @RequestMapping(value = "/identify", method = RequestMethod.POST)
-    @ResponseBody
     public String identify(@RequestParam("usr") String username,
                            @RequestParam("data") String basedata) {
         try {
@@ -99,32 +65,11 @@ public class LoginController {
             byte[] k = Base64Utils.decodeFromString(basedata.substring("data:image/jpeg;base64,".length()));
             File f1 = new File(Const.PROFILE_PATH + profile);
             double result = ImgCmp.compare(k, FileUtil.getContent(f1));
-            return result + "";
-        } catch (Exception e) {
-            return e.getMessage();
-        }
-    }
-
-    /**
-     * check the similarity(opencv)
-     * POST http://localhost:8080/cvidentify
-     * @param username username in String
-     * @param basedata capture picture after Base64 encode
-     * @return the similarity
-     */
-    @RequestMapping(value = "/cvidentify", method = RequestMethod.POST)
-    @ResponseBody
-    public String cvidentify(@RequestParam("usr") String username,
-                             @RequestParam("data") String basedata) {
-        try {
-            ImgFace pic1 = new ImgFace(Base64Utils.decodeFromString(basedata.substring("data:image/jpeg;base64,".length())));
-            int faces = pic1.dectface();
-            if (faces > 0) {
-                String profile = userserv.findUserByUsername(username).getStudent().getProfilepic();
-                ImgFace pic0 = new ImgFace(Const.PROFILE_PATH + profile);
-                return ImgCmp.compare(pic0.getImgbytes(), pic1.getImgbytes()) + "";
+            if (result > 90) {
+                secuserv.autologin(username, "123456");
+                return "/home";
             } else {
-                return "nofaces";
+                return "/login";
             }
         } catch (Exception e) {
             return e.getMessage();
@@ -145,6 +90,24 @@ public class LoginController {
             String filePath = Const.UPLOAD_PATH;
             FileUtil.uploadFile(k, filePath, fileName);
             return fileName;
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    /**
+     * compare the similarity between two person
+     * @param f1 first file
+     * @param f2 second file
+     * @return the similarity
+     */
+    @RequestMapping(value = "/compare", method = RequestMethod.POST)
+    @ResponseBody
+    public String whoami(@RequestParam("pic1") MultipartFile f1,
+                         @RequestParam("pic2") MultipartFile f2) {
+        try {
+            double result = ImgCmp.compare(f1.getBytes(), f2.getBytes());
+            return result + "";
         } catch (Exception e) {
             return e.getMessage();
         }

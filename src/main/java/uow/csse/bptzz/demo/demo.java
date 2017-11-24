@@ -14,6 +14,14 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 
+/**
+ * Opencv test class, using for testing
+ *
+ * @author 	Tab Tu
+ * @update	Nov.20 2017
+ * @version	1.0
+ */
+
 public class demo {
     private static String PROFILE_PATH = "src/main/resources/static/profile/";
     private static String UPLOAD_PATH = "src/main/resources/static/upload/";

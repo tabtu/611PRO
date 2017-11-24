@@ -17,6 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @author 	Tab Tu
+ * @update	Nov.1 2017
+ * @version	1.0
+ */
+
 @Service
 public class CourseServiceImpl implements CourseService {
     @Autowired

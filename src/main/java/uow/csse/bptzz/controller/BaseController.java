@@ -16,6 +16,14 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Base Controller
+ * include looger and session management
+ *
+ * @Author Tab Tu
+ * @Update Oct.23 2017
+ */
+
 @Controller
 public class BaseController {
 

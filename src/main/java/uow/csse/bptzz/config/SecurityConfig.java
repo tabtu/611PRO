@@ -14,6 +14,14 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.session.web.http.HeaderHttpSessionStrategy;
 import org.springframework.session.web.http.HttpSessionStrategy;
 
+/**
+ * Springboot Security Configuration
+ *
+ * @Author Tab Tu
+ * @Update Oct.27 2017
+ * @Since 1.0
+ */
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {

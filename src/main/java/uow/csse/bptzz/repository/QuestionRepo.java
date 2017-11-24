@@ -8,6 +8,12 @@ import uow.csse.bptzz.model.Question;
 
 import java.util.List;
 
+/**
+ * @author 	Tab Tu
+ * @update	Nov.15 2017
+ * @version	1.0
+ */
+
 @Repository
 public interface QuestionRepo extends JpaRepository<Question, Long> {
 
