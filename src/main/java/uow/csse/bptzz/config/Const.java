@@ -4,6 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+/**
+ * Environment Configuration
+ *
+ * @Author Tab Tu
+ * @Update Oct.13 2017
+ * @Since 1.0
+ */
+
 @Component
 public class Const {
 	

@@ -1,11 +1,20 @@
 package uow.csse.bptzz.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 import uow.csse.bptzz.config.Const;
 import uow.csse.bptzz.model.*;
 import uow.csse.bptzz.model.result.ExceptionMsg;
@@ -13,6 +22,7 @@ import uow.csse.bptzz.model.result.Response;
 import uow.csse.bptzz.repository.*;
 import uow.csse.bptzz.service.CourseService;
 import uow.csse.bptzz.service.QuizService;
+import uow.csse.bptzz.service.SecurityService;
 import uow.csse.bptzz.service.UserService;
 import uow.csse.bptzz.utils.FileUtil;
 import uow.csse.bptzz.utils.MD5Util;
@@ -22,6 +32,13 @@ import uow.csse.bptzz.utils.face.ImgCmp;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.List;
+
+/**
+ * Use for testing
+ *
+ * @Author Tab Tu
+ * @Update Nov.24 2017
+ */
 
 //@Controller
 @RestController
@@ -36,6 +53,34 @@ public class TestController extends BaseController {
 
     @Autowired
     private QuizService quizserv;
+
+    @Autowired
+    private SecurityService secuserv;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+//    @Qualifier("org.springframework.security.authenticationManager")
+    private AuthenticationManager authenticationManager;
+
+    @GetMapping(value = "/tal")
+    public String testal() {
+//        String password = bCryptPasswordEncoder.encode("123456");
+        secuserv.autologin("tabtu", "123456");
+        return "/home";
+    }
+
+    @RequestMapping(value = "/autologin", method = RequestMethod.POST)
+    public ModelAndView testautologin(HttpServletRequest request) {
+        User tmp = usrserv.findUserByUsername("tabtu");
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(tmp.getUsername(), tmp.getPassword());
+        token.setDetails(new WebAuthenticationDetails(request));
+        Authentication authenticatedUser = authenticationManager.authenticate(token);
+        SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
+        request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
+        return new ModelAndView(new RedirectView("home"));
+    }
 
     @RequestMapping(value = "/getstudent{username}", method = RequestMethod.GET)
     public Student getStudent(HttpServletRequest request) {

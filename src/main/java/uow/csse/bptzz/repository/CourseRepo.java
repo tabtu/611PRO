@@ -8,6 +8,12 @@ import uow.csse.bptzz.model.Department;
 
 import java.util.List;
 
+/**
+ * @author 	Tab Tu
+ * @update	Nov.19 2017
+ * @version	1.0
+ */
+
 @Repository
 public interface CourseRepo extends JpaRepository<Course, String> {
 

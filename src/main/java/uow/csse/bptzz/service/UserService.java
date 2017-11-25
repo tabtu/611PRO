@@ -6,6 +6,12 @@ import uow.csse.bptzz.model.User;
 
 import java.util.List;
 
+/**
+ * @author 	Tab Tu
+ * @update	Nov.20 2017
+ * @version	1.0
+ */
+
 public interface UserService {
     User findUserByUsername(String username);
 

@@ -12,6 +12,13 @@ import org.webjars.WebJarAssetLocator;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * @Download Tab Tu
+ * @Author anonymous
+ * @Update Oct.11 2017
+ * @Since 1.0
+ */
+
 @Controller
 public class WebJarController {
     private final WebJarAssetLocator assetLocator = new WebJarAssetLocator();

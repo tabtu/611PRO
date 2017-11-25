@@ -16,6 +16,13 @@ import uow.csse.bptzz.service.SecurityService;
 
 import java.util.List;
 
+/**
+ * @author 	Tab Tu
+ * @update	Nov.4 2017
+ * @version	1.0
+ */
+
+
 @Service
 public class SecurityServiceImpl implements SecurityService {
     @Autowired
@@ -39,9 +46,7 @@ public class SecurityServiceImpl implements SecurityService {
     public void autologin(String username, String password) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
-
         authenticationManager.authenticate(usernamePasswordAuthenticationToken);
-
         if (usernamePasswordAuthenticationToken.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             logger.debug(String.format("Auto login %s successfully!", username));

@@ -1,5 +1,13 @@
 package uow.csse.bptzz.model.result;
 
+/**
+ * Response Code and Message
+ *
+ * @author 	Tab Tu
+ * @update	Oct.11 2017
+ * @version	1.0
+ */
+
 public class Response {
 	/** Return Code **/
 	private String rspCode="000000";

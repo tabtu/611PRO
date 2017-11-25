@@ -4,6 +4,8 @@
  * @Updated Nov.22 2017
  * @Since 1.1
  *
+ * var fclgusr = document.getElementById('usnm');
+ *
  * var tag_identify = 0;
  * var usr = $("meta[name='usr']").attr("content");
  * var video = document.querySelector('video');
@@ -50,14 +52,12 @@ function getPhoto() {
 
 function submitForm() {
     getPhoto();
-    var usrName = usr;
-    // alert(usrName);
     var myImage = tcanvas.toDataURL("image/jpeg");
     $.ajax({
         type: "POST",
         url: '/identify',
-        data: {usr: usrName, data: myImage},
-        timeout: 60000,
+        data: {usr: usr, data: myImage},
+        timeout: 15000,
         success: function (msg) {
             var similarity = parseInt(msg);
             if (similarity < 50) {
@@ -84,27 +84,21 @@ function submitForm() {
 
 function autoLogin() {
     getPhoto();
+    var flusr = fclgusr.value;
     var myImage = tcanvas.toDataURL("image/jpeg");
     $.ajax({
         type: "POST",
-        url: '/identify',
-        data: {usr: usnm, data: myImage},
-        timeout: 60000,
+        url: '/autologin',
+        data: {usr: flusr, data: myImage},
+        timeout: 15000,
         success: function (msg) {
             var similarity = parseInt(msg);
-            if (similarity < 50) {
-                alert("We are forced to log out since you are not " + usr);
-                self.location = "/logout";
-            } else if (similarity < 80) {
-                if (tag_identify > 2) {
-                    alert("We are forced to log out since you are not doing the quiz by yourself " + usr);
-                    self.location = "/logout"
-                } else {
-                    alert("Please finish the quiz by your self alone " + usr);
-                    tag_identify++;
-                }
+            if (similarity > 90) {
+                alert("Welcome " + flusr);
+                self.location = "/home";
             } else {
-                tag_identify = 0;
+                alert("Sorry! you are not " + flusr + ". Please login again.");
+                self.location = "/login";
             }
         },
         error: function (msg) {

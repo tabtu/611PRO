@@ -1,6 +1,5 @@
 package uow.csse.bptzz.service.impl;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,6 +17,13 @@ import uow.csse.bptzz.service.UserService;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+
+/**
+ * @author 	Tab Tu
+ * @update	Nov.20 2017
+ * @version	1.1
+ */
+
 
 @Service
 public class UserServiceImpl implements UserService {
