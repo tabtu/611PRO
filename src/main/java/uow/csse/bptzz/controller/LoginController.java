@@ -50,6 +50,13 @@ public class LoginController {
     @Autowired
     private UserService userserv;
 
+
+    @RequestMapping(value = "/auto{user}", method = RequestMethod.GET)
+    public String atlg(HttpServletRequest request) {
+        String username = request.getParameter("user");
+        secuserv.autologin(username, "123456");
+        return "/home";
+    }
     /**
      * check the similarity(youtu API)
      * POST http://localhost:8080/identify
@@ -58,6 +65,7 @@ public class LoginController {
      * @return the similarity
      */
     @RequestMapping(value = "/identify", method = RequestMethod.POST)
+    @ResponseBody
     public String identify(@RequestParam("usr") String username,
                            @RequestParam("data") String basedata) {
         try {
@@ -65,12 +73,34 @@ public class LoginController {
             byte[] k = Base64Utils.decodeFromString(basedata.substring("data:image/jpeg;base64,".length()));
             File f1 = new File(Const.PROFILE_PATH + profile);
             double result = ImgCmp.compare(k, FileUtil.getContent(f1));
+            return result + "";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    /**
+     * check the similarity and auto login with username(youtu API)
+     * POST http://localhost:8080/autologin
+     * @param username username in String
+     * @param basedata capture picture after Base64 encode
+     * @return the similarity
+     */
+    @RequestMapping(value = "/autologin", method = RequestMethod.POST)
+    @ResponseBody
+    public String autologin(@RequestParam("usr") String username,
+                           @RequestParam("data") String basedata) {
+
+        try {
+            String profile = userserv.findUserByUsername(username).getStudent().getProfilepic();
+            byte[] k = Base64Utils.decodeFromString(basedata.substring("data:image/jpeg;base64,".length()));
+            File f1 = new File(Const.PROFILE_PATH + profile);
+            double result = ImgCmp.compare(k, FileUtil.getContent(f1));
             if (result > 90) {
+                System.out.println(username);
                 secuserv.autologin(username, "123456");
-                return "/home";
-            } else {
-                return "/login";
             }
+            return result + "";
         } catch (Exception e) {
             return e.getMessage();
         }

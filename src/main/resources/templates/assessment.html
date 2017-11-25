@@ -10,9 +10,9 @@
 
 <div th:replace="fragments/header :: header"/>
 
-<p th:text="|correct: ${correctNum}|"></p>
+<p th:text="|correct: "${correctNum}|"></p>
 <p th:text="|incorrect: "${incorrectNum}|"></p>
-<p th:text="|score: ${score}|"></p>
+<p th:text="|score: "${score}|"></p>
 
 <div th:replace="fragments/footer :: footer"/>
 

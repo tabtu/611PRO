@@ -26,12 +26,13 @@
 
     <div class="row" style="margin-top:20px">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <!--<input type="button" title="Start Login" value="open camera" onclick="getMedia();" /><br />-->
-            <video height="240px" autoplay="autoplay"></video><br />
-            <canvas id="mycanvas" height="240px" ></canvas><br />
-            <input type="button" title="Face Login" value="Face Login" onclick="autoLogin();" /><hr />
+            <video id="myvideo" height="240px" autoplay="autoplay"></video>
+            <canvas id="mycanvas" height="240px" ></canvas><hr />
 
-            <form th:action="@{/login}" method="post">
+            <input type="text" name="username" id="usnm" placeholder="UserName" autofocus="true"/><br />
+            <input id="lgbtn" type="button" title="Face Login" value="Login" onclick="autoLogin();" />
+            <input id="startface" type="button" title="Start Login" value="Face Login" onclick="faceLogin();" /><br />
+            <form id="loginform" th:action="@{/login}" method="post">
                 <fieldset>
                     <h1>Please Sign In</h1>
 
@@ -72,12 +73,15 @@
     <script type="text/javascript" th:src="@{/js/supersized-init.js}" src="/static/js/supersized-init.js"></script>
     <script type="text/javascript" th:src="@{/js/scripts.js}" src="/static/js/scripts.js"></script>
     <script type="text/javascript">
-        var usnm = document.getElementById('username');
+        var fclgusr = document.getElementById('usnm');
         var video = document.querySelector('video');
         var tcanvas = document.getElementById('mycanvas');
         tcanvas.style.display="none";
         var tcontext = tcanvas.getContext('2d');
         var exArray = [];
+        document.getElementById("lgbtn").style.display = "none";
+        document.getElementById("myvideo").style.display = "none";
+        document.getElementById("usnm").style.display="none";
         MediaStreamTrack.getSources(function (sourceInfos) {
             for (var i = 0; i != sourceInfos.length; ++i) {
                 var sourceInfo = sourceInfos[i];
@@ -88,9 +92,15 @@
         });
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
         window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
-    </script>
-    <script>
-        getMedia();
+
+        function faceLogin() {
+            getMedia();
+            document.getElementById("loginform").style.display="none";
+            document.getElementById("lgbtn").style.display="";
+            document.getElementById("myvideo").style.display="";
+            document.getElementById("usnm").style.display="";
+            document.getElementById("startface").style.display="none";
+        }
     </script>
     <script type="text/javascript" th:src="@{/js/webcap.js}" src="/static/js/webcap.js"></script>
 </div>
