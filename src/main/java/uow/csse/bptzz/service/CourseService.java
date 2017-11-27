@@ -6,6 +6,12 @@ import uow.csse.bptzz.model.Question;
 
 import java.util.List;
 
+/**
+ * @author 	Tab Tu
+ * @update	Nov.12 2017
+ * @version	1.0
+ */
+
 public interface CourseService {
 
     Course findCourseById(String corid);

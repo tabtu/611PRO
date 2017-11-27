@@ -12,7 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-// handle 403 page
+/**
+ * handle 403 page
+ *
+ * @Author Tab Tu
+ * @Update Oct.23 2017
+ * @Since 1.0
+ */
+
 @Component
 public class AccessDeniedHandler implements org.springframework.security.web.access.AccessDeniedHandler {
 

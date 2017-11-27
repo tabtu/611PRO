@@ -1,7 +1,10 @@
 package uow.csse.bptzz.demo;
 
 import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.imgproc.Imgproc;
 import org.springframework.util.Base64Utils;
 import uow.csse.bptzz.utils.FileUtil;
 import uow.csse.bptzz.utils.face.ImgCmp;
@@ -11,15 +14,24 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 
+/**
+ * Opencv test class, using for testing
+ *
+ * @author 	Tab Tu
+ * @update	Nov.20 2017
+ * @version	1.0
+ */
+
 public class demo {
     private static String PROFILE_PATH = "src/main/resources/static/profile/";
     private static String UPLOAD_PATH = "src/main/resources/static/upload/";
 
-    private static String[] faces = { "byp.png", "pzc.png", "ttxy.png", "zh.png", "zc.png" };
-    private static String[] names = { "白云鹏", "潘志成", "涂螣霄尧", "周航", "张潮" };
     private final static int PROSIBILITY = 90;
 
     public static int login(String loginimage) {
+        String[] faces = { "byp.png", "pzc.png", "ttxy.png", "zh.png", "zc.png" };
+        String[] names = { "白云鹏", "潘志成", "涂螣霄尧", "周航", "张潮" };
+
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         double result;
         long total = 0;
@@ -53,12 +65,12 @@ public class demo {
      *
      * @param files
      */
-    public static void gethead(String[] files) {
+    public static void createprofile(String[] files) {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         for (String e : files) {
-            ImgFace i = new ImgFace(UPLOAD_PATH + e);
+            ImgFace i = new ImgFace(PROFILE_PATH + e);
             i.dectface();
-            Imgcodecs.imwrite(UPLOAD_PATH + System.currentTimeMillis() + e, i.getSource());
+            Imgcodecs.imwrite(PROFILE_PATH + System.currentTimeMillis() + e, i.getSource());
         }
     }
 
@@ -97,9 +109,22 @@ public class demo {
         }
     }
 
+    public static void resize(String[] fn) {
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        for (String e : fn) {
+            ImgFace i = new ImgFace(UPLOAD_PATH + e);
+
+            Mat dst = new Mat();
+            Size size = new Size(500, 500);
+            Imgproc.resize(i.getSource(), dst, size);
+            Imgcodecs.imwrite(UPLOAD_PATH + System.currentTimeMillis() + e, dst);
+        }
+    }
+
     public static void main(String[] args) {
-        String[] sname = { "1.JPG"};//, "2.JPG", "3.JPG", "4.JPG", "5.JPG" };
-        gethead(sname);
+        String[] sname = { "1.JPG", "2.JPG"};//, "2.JPG", "3.JPG", "4.JPG", "5.JPG" };
+//        resize(sname);
+        createprofile(sname);
 //        testcmp();
 //        testbytebase64();
 //        testcmpfromfile();

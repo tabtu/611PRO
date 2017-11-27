@@ -55,12 +55,12 @@
         <div class="collapse navbar-collapse" id="upmenu">
             <ul class="nav navbar-nav" id="navbarontop">
                 <li class="active"><a th:href="@{/home}">HOME</a> </li>
-                <li class="active"><a th:href="@{/coursesearch}">COURSE</a></li>
+                <li class="active"><a th:href="@{/home#course}">COURSE</a></li>
                 <li class="active">
                     <a th:href="@{/login}" th:unless="${#httpServletRequest.remoteUser != null}">QUIZZES</a>
                     <a th:href="@{/courses(username=${#httpServletRequest.remoteUser})}" th:if="${#httpServletRequest.remoteUser != null}">QUIZZES</a>
                 </li>
-                <li class="active"><a th:href="@{#about}">ABOUT</a>
+                <li class="active"><a th:href="@{/home#about}">ABOUT</a>
                 </li>
                 <li class="login">
                     <a class="log" th:href="@{/login}" th:unless="${#httpServletRequest.remoteUser != null}">

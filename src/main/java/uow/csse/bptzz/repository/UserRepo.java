@@ -10,6 +10,13 @@ import uow.csse.bptzz.model.User;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * @author 	Tab Tu
+ * @update	Nov.23 2017
+ * @version	1.0
+ */
+
+
 @Repository
 public interface UserRepo extends JpaRepository<User, Long> {
 

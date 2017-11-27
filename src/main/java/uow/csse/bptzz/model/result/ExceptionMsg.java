@@ -1,6 +1,14 @@
 
 package uow.csse.bptzz.model.result;
 
+/**
+ * Exception Message and Code
+ *
+ * @author 	Tab Tu
+ * @update	Oct.11 2017
+ * @version	1.0
+ */
+
 public enum ExceptionMsg {
 	SUCCESS("000000", "Operation Succed"),
 	FAILED("999999","Operation Failed"),
