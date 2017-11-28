@@ -122,7 +122,7 @@ public class demo {
     }
 
     public static void main(String[] args) {
-        String[] sname = { "1.JPG", "2.JPG"};//, "2.JPG", "3.JPG", "4.JPG", "5.JPG" };
+        String[] sname = { "1.jpg" };//, "2.JPG", "3.JPG", "4.JPG", "5.JPG" };
 //        resize(sname);
         createprofile(sname);
 //        testcmp();
