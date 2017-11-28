@@ -13,34 +13,45 @@
 <div class="container">
     <div class="quizcontainer">
         <div class="infobox">
-            <div class="videobox">
-            </div>
-            <div class="timer1">
-                <video height="240px" autoplay="autoplay"></video><br />
-                <canvas id="mycanvas" th:height="240px"></canvas><br />
-                <meta name="usr" th:content="${#httpServletRequest.remoteUser}" />
-            </div>
-            <div class="timer2">
-                <li class="timer2" type="button">Quiz Time left = <span id="timer"></span></li>
-            </div>
+            <center>
+                <div class="videobox">
+                    <video height="240px" autoplay="autoplay"></video><br />
+                    <canvas id="mycanvas" th:height="240px"></canvas><br />
+                    <meta name="usr" th:content="${#httpServletRequest.remoteUser}" />
+                </div>
+            </center>
             <div class="studentinfo">
-                <p th:text="|Name: ${#httpServletRequest.remoteUser}|"></p>
+                <span th:text="|Student Name: ${#httpServletRequest.remoteUser}|"></span><br />
+                <span class="timer2" type="button">Time left: <span id="timer"></span></span>
             </div>
         </div>
         <div class="quizbox">
-            <button type="button" id="startQuiz"> Start Quiz </button>
-            <br /><br /><br />
-            <form id="questionForm" action="@{/quiz}" th:action="@{/quiz}" method="post" style="display:none">
-                <div class="resultItem" th:each="question:${questions}">
-                    <span th:text="|${question.question_id}.${question.content}|"></span><br />
-                    <input type="radio" value="A" th:name="${question.question_id}" /><span th:text="${question.optiona}"></span><br />
-                    <input type="radio" value="B" th:name="${question.question_id}" /><span th:text="${question.optionb}"></span><br />
-                    <input type="radio" value="C" th:name="${question.question_id}" /><span th:text="${question.optionc}"></span><br />
-                    <input type="radio" value="D" th:name="${question.question_id}" /><span th:text="${question.optiond}"></span><br />
-                </div>
-                <br /><br />
-                <button type="submit" id="submitBtn"> Submit Answers</button>
-            </form>
+            <div class="quizbox1">
+                <center>
+                    <p id="hint" style="display: block">
+                        There are 10 questions and are worth 10 points each.<br /><br />
+                        There is 10 minutes limit.<br /><br />
+                        When you click the next button the quiz will begin.<br /><br />
+                        Good Luck!<br /><br /><br />
+                    </p>
+                    <button type="button" id="startQuiz" class="btn btn-block btn-primary mt-lg"> Start Quiz </button>
+                </center>
+            </div>
+            <div class="quizbox2">
+                <form id="questionForm" action="@{/quiz}" th:action="@{/quiz}" method="post" style="display:none">
+                    <div class="resultItem" th:each="question,iterationStatus:${questions}">
+                        <span th:text="|${iterationStatus.count}.${question.content}|"></span><br />
+                        <input type="radio" value="A" th:name="${question.question_id}" /><span th:text="${question.optiona}"></span><br />
+                        <input type="radio" value="B" th:name="${question.question_id}" /><span th:text="${question.optionb}"></span><br />
+                        <input type="radio" value="C" th:name="${question.question_id}" /><span th:text="${question.optionc}"></span><br />
+                        <input type="radio" value="D" th:name="${question.question_id}" /><span th:text="${question.optiond}"></span><br /><br />
+                    </div>
+                    <br /><br />
+                    <center>
+                        <button type="submit" id="submitBtn" class="btn btn-block btn-primary mt-lg"> Submit Answers</button>
+                    </center>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -58,6 +69,7 @@
 
         $(this).hide(1);
         $("#questionForm").css("display", "block");
+        $("#hint").css("display","none");
     });
 
     function startTimer() {
@@ -106,5 +118,6 @@
     getMedia();
     window.setInterval(submitForm, 15000);
 </script>
+
 
 </html>

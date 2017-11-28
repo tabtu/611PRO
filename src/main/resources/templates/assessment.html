@@ -1,5 +1,5 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>Online Quiz</title>
 
@@ -10,11 +10,64 @@
 
 <div th:replace="fragments/header :: header"/>
 
-<p th:text="|correct: "${correctNum}|"></p>
-<p th:text="|incorrect: "${incorrectNum}|"></p>
-<p th:text="|score: "${score}|"></p>
+<div class="container">
+    <div class="quizcontainer">
+        <div class="infobox">
+            <center>
+                <div class="videobox">
+                    <video height="180px" autoplay="autoplay"></video><br />
+                    <canvas id="mycanvas" th:height="240px"></canvas><br />
+                    <meta name="usr" th:content="${#httpServletRequest.remoteUser}" />
+                </div>
+            </center>
+            <div class="timer1">
+
+            </div>
+            <div class="studentinfo">
+                <span th:text="|Student Name: ${#httpServletRequest.remoteUser}|"></span><br />
+            </div>
+        </div>
+        <div class="quizbox">
+            <div class="quizbox3">
+                <center>
+                    <h2 class="text-center pv" th:text="|Congratulation ${#httpServletRequest.remoteUser}|" ></h2><br />
+                    <p>You have finished the quiz!</p><br />
+                    <p th:text="|The number of correct: ${correctNum}|"></p><br />
+                    <p th:text="|The number of incorrect: ${incorrectNum}|"></p><br />
+                    <p th:text="|Your score: ${score}|"></p>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div th:replace="fragments/footer :: footer"/>
 
 </body>
+
+<script type="text/javascript" th:src="@{/js/webcap.js}" src="/static/js/webcap.js"></script>
+<script type="text/javascript">
+    var tag_identify = 0;
+    var usr = $("meta[name='usr']").attr("content");
+    var video = document.querySelector('video');
+    var tcanvas = document.getElementById('mycanvas');
+    tcanvas.style.display="none";
+    var tcontext = tcanvas.getContext('2d');
+    var exArray = [];
+    MediaStreamTrack.getSources(function (sourceInfos) {
+        for (var i = 0; i != sourceInfos.length; ++i) {
+            var sourceInfo = sourceInfos[i];
+            if (sourceInfo.kind === 'video') {
+                exArray.push(sourceInfo.id);
+            }
+        }
+    });
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+    window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
+</script>
+<script>
+    getMedia();
+    window.setInterval(submitForm, 15000);
+</script>
+
 </html>

@@ -1626,18 +1626,49 @@ height: 30px;
 	grid-template-columns: repeat(3, 1fr);
 	grid-gap: 10px;
 	grid-auto-rows: minmax(100px, auto);
+	font-family: 'BebasNeue Regular';
 }
 /*-------------------------------------info box ----------------------------------------------*/
 .infobox{
+	width: 240px;
+	/*background-color: #d4d4d4;*/
 	position: fixed;
-	border: solid #0a1115;
+	/*border: solid #0a1115;*/
 	grid-column: 1;
 	grid-row: 1 / 4;
 }
+
+.videobox{
+	float: inherit;
+}
 /*-------------------------------------info box ----------------------------------------------*/
 .quizbox{
-	border: solid #0a1115;
+	background-color: #f5f5f5;
+	/*border: solid #0a1115;*/
 	grid-column: 2 / 4;
-	grid-row: 1 / 5;
+	grid-row: 1 / 12;
 }
 
+.quizbox1, .quizbox2, .quizbox3{
+	position: absolute;
+}
+
+.quizbox1{
+	padding-top: 180px;
+	padding-left: 15%;
+}
+
+.quizbox2{
+	padding-top: 20px;
+	padding-left: 20px;
+}
+
+.quizbox3{
+	padding-top: 180px;
+	padding-left: 250px;
+}
+
+.quizbox3 h2{
+	font-size: 13pt;
+	text-shadow: 0 0px 0px rgba(0, 0, 0, .0);
+}
