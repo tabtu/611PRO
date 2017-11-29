@@ -8,12 +8,13 @@ import javax.persistence.*;
  * Create the Entity
  *
  * @author 	Eason Pan
+ * @updated Tab Tu, fix Entity name
  * @date	2017-11-11
- * @since	1.1
+ * @since	1.2
  *
  */
 
-@Entity(name = "Course")
+@Entity(name = "Question")
 @Table(name = "bptzz_question")
 public class Question {
     @Id
