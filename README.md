@@ -9,7 +9,7 @@ MySql 5.7,
 Connector 6.0.6, 
 Hibernate(Jpa), <br />
 Thymeleaf, Jquery, AJAX, <br />
-Spring Security, Redis, <br />
+Spring Security, Redis. <br />
 
 redmine：https://redmine.cs.uwindsor.ca/projects/team_4p1
 <br />
