@@ -1,7 +1,17 @@
-Advanced Software Engineering Project This project is an simple that use general software method on developing.
+Advanced Software Engineering Project.<br />
+This project is an sample that use general software method on developing.
 
 Technology: <br />
-Java 8, Spring 4.3.11(MVC Version), OpenCV 3.3, Spring Boot 1.5.8, MySql 5.7, Connector 6.0.6, Jpa, Thymeleaf, Spring Security, Redis;
+
+Java 8, OpenCV 3.3, <br />
+Spring 4.3.11(MVC Branch), 
+Spring Boot 1.5.8, <br />
+MySql 5.7, 
+Connector 6.0.6, 
+Hibernate(Jpa), <br />
+Thymeleaf, Jquery, AJAX, <br />
+Spring Security, Redis. <br />
+
 
 redmine：https://redmine.cs.uwindsor.ca/projects/team_4p1
 <br />
