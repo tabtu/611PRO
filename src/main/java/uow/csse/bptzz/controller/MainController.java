@@ -1,26 +1,10 @@
 package uow.csse.bptzz.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.LockedException;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-import uow.csse.bptzz.config.Const;
-import uow.csse.bptzz.model.User;
-import uow.csse.bptzz.service.UserService;
-import uow.csse.bptzz.utils.FileUtil;
-import uow.csse.bptzz.utils.face.ImgCmp;
-import uow.csse.bptzz.utils.face.ImgFace;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.InputStream;
-import java.util.UUID;
+import uow.csse.bptzz.service.UserService;
 
 /**
  * Main Controller

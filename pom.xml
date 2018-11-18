@@ -1,144 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>uow.csse</groupId>
-  <artifactId>bptzz</artifactId>
-  <version>1.2</version>
-  <packaging>jar</packaging>
+    <groupId>uow.csse</groupId>
+    <artifactId>bptzz</artifactId>
+    <version>1.2</version>
+    <!--<packaging>jar</packaging>-->
+    <packaging>war</packaging>
 
-  <name>Online Quiz</name>
-  <description>Project for 611 Course</description>
+    <name>Online Quiz</name>
+    <description>Project for 611 Course</description>
 
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.5.8.RELEASE</version>
-    <relativePath/>
-  </parent>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <java.version>1.8</java.version>
-  </properties>
-
-  <dependencies>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-thymeleaf</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-security</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-tomcat</artifactId>
-      <!-- mvn clean package -->
-      <!--<scope>provided</scope>-->
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-devtools</artifactId>
-      <scope>debug</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.session</groupId>
-      <artifactId>spring-session-data-redis</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-mail</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.json</groupId>
-      <artifactId>json</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.webjars</groupId>
-      <artifactId>webjars-locator</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.webjars</groupId>
-      <artifactId>bootstrap</artifactId>
-      <version>3.3.7</version>
-    </dependency>
-
-    <!-- import opencv library jar package-->
-    <!--<dependency>-->
-      <!--<groupId>org.opencv.core</groupId>-->
-      <!--<artifactId>opencv</artifactId>-->
-      <!--<version>3.3</version>-->
-      <!--<scope>system</scope>-->
-      <!--<systemPath>${project.basedir}/lib/opencv-330.jar</systemPath>-->
-    <!--</dependency>-->
-
-  </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
+    <parent>
         <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-      <!--<plugin>-->
-        <!--<artifactId>maven-compiler-plugin</artifactId>-->
-        <!--<configuration>-->
-          <!--<source>1.8</source>-->
-          <!--<target>1.8</target>-->
-          <!--<encoding>UTF-8</encoding>-->
-          <!--<compilerArguments>-->
-            <!--<extdirs>${project.basedir}/lib</extdirs>-->
-          <!--</compilerArguments>-->
-        <!--</configuration>-->
-      <!--</plugin>-->
-    </plugins>
-    <finalName>equiz</finalName>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.8.RELEASE</version>
+        <relativePath/>
+    </parent>
 
-    <!--<resources>-->
-      <!--<resource>-->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <!-- mvn clean package -->
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>debug</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>3.3.7</version>
+        </dependency>
+
+        <!-- import opencv library jar package-->
+        <!--<dependency>-->
+        <!--<groupId>org.opencv.core</groupId>-->
+        <!--<artifactId>opencv</artifactId>-->
+        <!--<version>3.3</version>-->
+        <!--<scope>system</scope>-->
+        <!--<systemPath>${project.basedir}/lib/opencv-330.jar</systemPath>-->
+        <!--</dependency>-->
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!--<plugin>-->
+            <!--<artifactId>maven-compiler-plugin</artifactId>-->
+            <!--<configuration>-->
+            <!--<source>1.8</source>-->
+            <!--<target>1.8</target>-->
+            <!--<encoding>UTF-8</encoding>-->
+            <!--<compilerArguments>-->
+            <!--<extdirs>${project.basedir}/lib</extdirs>-->
+            <!--</compilerArguments>-->
+            <!--</configuration>-->
+            <!--</plugin>-->
+        </plugins>
+        <finalName>equiz</finalName>
+
+        <!--<resources>-->
+        <!--<resource>-->
         <!--<directory>src/main</directory>-->
         <!--<targetPath>BOOT-INF/</targetPath>-->
         <!--<includes>-->
-          <!--<include>**/*.properties</include>-->
+        <!--<include>**/*.properties</include>-->
         <!--</includes>-->
-      <!--</resource>-->
+        <!--</resource>-->
 
-      <!-- import opencv library jar package-->
-      <!--<resource>-->
+        <!-- import opencv library jar package-->
+        <!--<resource>-->
         <!--<directory>lib</directory>-->
         <!--<targetPath>BOOT-INF/lib/</targetPath>-->
         <!--<includes>-->
-          <!--<include>**/*.jar</include>-->
-          <!--<include>**/*.dylib</include>-->
-          <!--<include>**/*.dll</include>-->
+        <!--<include>**/*.jar</include>-->
+        <!--<include>**/*.dylib</include>-->
+        <!--<include>**/*.dll</include>-->
         <!--</includes>-->
-      <!--</resource>-->
-    <!--</resources>-->
-  </build>
+        <!--</resource>-->
+        <!--</resources>-->
+    </build>
 
 </project>

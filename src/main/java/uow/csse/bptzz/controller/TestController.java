@@ -17,16 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import uow.csse.bptzz.config.Const;
 import uow.csse.bptzz.model.*;
-import uow.csse.bptzz.model.result.ExceptionMsg;
-import uow.csse.bptzz.model.result.Response;
-import uow.csse.bptzz.repository.*;
 import uow.csse.bptzz.service.CourseService;
 import uow.csse.bptzz.service.QuizService;
 import uow.csse.bptzz.service.SecurityService;
 import uow.csse.bptzz.service.UserService;
 import uow.csse.bptzz.utils.FileUtil;
 import uow.csse.bptzz.utils.MD5Util;
-import uow.csse.bptzz.utils.DateUtils;
 import uow.csse.bptzz.utils.face.ImgCmp;
 
 import javax.servlet.http.HttpServletRequest;

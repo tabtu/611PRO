@@ -1,19 +1,8 @@
 package uow.csse.bptzz.utils.face;
 
 import org.json.JSONObject;
-import org.opencv.core.Core;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfByte;
-import org.opencv.imgcodecs.Imgcodecs;
 import uow.csse.bptzz.utils.youtu.APIs;
 import uow.csse.bptzz.utils.youtu.Func;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 
 /**
  * Compare Images

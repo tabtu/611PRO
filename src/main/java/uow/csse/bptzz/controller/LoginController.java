@@ -1,36 +1,23 @@
 package uow.csse.bptzz.controller;
 
-import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
-import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 import uow.csse.bptzz.config.Const;
 import uow.csse.bptzz.model.User;
 import uow.csse.bptzz.service.SecurityService;
 import uow.csse.bptzz.service.UserService;
 import uow.csse.bptzz.utils.FileUtil;
 import uow.csse.bptzz.utils.face.ImgCmp;
-import uow.csse.bptzz.utils.face.ImgFace;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.util.Calendar;
-import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -171,24 +158,24 @@ public class LoginController {
      * @param file picture file
      * @return the similarity
      */
-    @RequestMapping(value = "/cvwhoami", method = RequestMethod.POST)
-    @ResponseBody
-    public String cvwhoami(@RequestParam("usr") String username,
-                           @RequestParam("pic") MultipartFile file) {
-        try {
-            ImgFace pic1 = new ImgFace(file.getBytes());
-            int faces = pic1.dectface();
-            if (faces > 0) {
-                String profile = userserv.findUserByUsername(username).getStudent().getProfilepic();
-                ImgFace pic0 = new ImgFace(Const.PROFILE_PATH + profile);
-                return ImgCmp.compare(pic0.getImgbytes(), pic1.getImgbytes()) + "";
-            } else {
-                return "nofaces";
-            }
-        } catch (Exception e) {
-            return e.getMessage();
-        }
-    }
+//    @RequestMapping(value = "/cvwhoami", method = RequestMethod.POST)
+//    @ResponseBody
+//    public String cvwhoami(@RequestParam("usr") String username,
+//                           @RequestParam("pic") MultipartFile file) {
+//        try {
+//            ImgFace pic1 = new ImgFace(file.getBytes());
+//            int faces = pic1.dectface();
+//            if (faces > 0) {
+//                String profile = userserv.findUserByUsername(username).getStudent().getProfilepic();
+//                ImgFace pic0 = new ImgFace(Const.PROFILE_PATH + profile);
+//                return ImgCmp.compare(pic0.getImgbytes(), pic1.getImgbytes()) + "";
+//            } else {
+//                return "nofaces";
+//            }
+//        } catch (Exception e) {
+//            return e.getMessage();
+//        }
+//    }
 
     /**
      * upload file, named with timemillsecond string
